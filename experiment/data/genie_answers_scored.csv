@@ -1,0 +1,385 @@
+c,q,run,term,ok,analyst,asked,status,got,own,pct,v
+C1,A1,1,active,False,False,False,COMPLETED,258.0,261.0,-1.1,order|all|tests-included
+C2,A1,1,active,False,False,False,COMPLETED,258.0,261.0,-1.1,order|all|tests-included
+C1,A2,1,active,False,False,False,COMPLETED,73.0,83.0,-12.0,order|all|tests-included
+C2,A2,1,active,False,False,False,COMPLETED,73.0,83.0,-12.0,order|all|tests-included
+C1,A3,1,active,False,False,False,COMPLETED,73.0,nan,nan,order|all|tests-included
+C2,A3,1,active,False,False,False,COMPLETED,73.0,nan,nan,order|all|tests-included
+C1,A4,1,active,False,False,False,COMPLETED,43.0,nan,nan,order|all|tests-excluded; order|all|tests-included
+C2,A4,1,active,False,False,False,COMPLETED,43.0,nan,nan,order|all|tests-excluded; order|all|tests-included
+C1,A5,1,active,True,False,False,COMPLETED,62.0,62.0,nan,invoice|completed|tests-excluded; order|all|tests-included
+C2,A5,1,active,True,False,False,COMPLETED,62.0,62.0,nan,invoice|completed|tests-excluded; order|all|tests-included
+C1,A6,1,active,True,True,False,COMPLETED,73.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C2,A6,1,active,True,True,False,COMPLETED,73.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C1,A7,1,active,False,False,False,COMPLETED,0.0,96.0,-100.0,
+C2,A7,1,active,False,False,False,COMPLETED,98.0,96.0,2.1,order|all|tests-included
+C1,A8,1,active,False,False,False,COMPLETED,65.0,56.0,16.1,invoice|completed|tests-included; order|all|tests-included
+C2,A8,1,active,False,False,False,COMPLETED,65.0,56.0,16.1,invoice|completed|tests-included; order|all|tests-included
+C1,C1,1,churn,False,False,False,COMPLETED,342.0,152.0,125.0,order|all|tests-included|90+
+C2,C1,1,churn,False,False,True,COMPLETED,349.0,152.0,129.6,
+C1,C2,1,churn,False,False,False,COMPLETED,96.0,nan,nan,order|all|tests-included|90+
+C2,C2,1,churn,False,False,False,COMPLETED,96.0,nan,nan,order|all|tests-included|90+
+C1,C3,1,churn,False,False,False,COMPLETED,96.0,38.0,152.6,order|all|tests-included|90+
+C2,C3,1,churn,False,False,False,COMPLETED,96.0,38.0,152.6,order|all|tests-included|90+
+C1,C4,1,churn,False,False,False,COMPLETED,342.0,152.0,125.0,order|all|tests-included|90+
+C2,C4,1,churn,False,False,True,COMPLETED,342.0,152.0,125.0,order|all|tests-included|90+
+C1,C5,1,churn,False,True,False,COMPLETED,96.0,nan,nan,order|completed|tests-excluded|91-180; order|completed|tests-excluded|90+; order
+C2,C5,1,churn,False,True,False,COMPLETED,96.0,nan,nan,order|completed|tests-excluded|91-180; order|completed|tests-excluded|90+; order
+C1,C6,1,churn,False,False,False,COMPLETED,60.0,23.0,160.9,order|all|tests-included|90+
+C2,C6,1,churn,False,False,False,COMPLETED,60.0,23.0,160.9,order|all|tests-included|90+
+C3,A1,1,active,False,True,False,COMPLETED,227.0,261.0,-13.0,order|completed|tests-excluded
+C1,C7,1,churn,False,True,False,COMPLETED,57.0,nan,nan,order|completed|tests-excluded|90+; order|completed|tests-included|90+; order|al
+C4,A1,1,active,True,False,False,COMPLETED,261.0,261.0,nan,invoice|completed|tests-excluded
+C2,C7,1,churn,False,True,True,COMPLETED,56.99999999999999,nan,nan,order|completed|tests-excluded|90+; order|completed|tests-included|90+; order|al
+C3,A2,1,active,False,True,False,COMPLETED,68.0,83.0,-18.1,order|completed|tests-excluded
+C1,C8,1,churn,False,False,False,COMPLETED,89.0,49.0,81.6,order|all|tests-included|90+
+C4,A2,1,active,True,False,False,COMPLETED,83.0,83.0,nan,invoice|completed|tests-excluded
+C3,A3,1,active,False,True,False,COMPLETED,68.0,nan,nan,order|completed|tests-excluded
+C2,C8,1,churn,False,False,False,COMPLETED,89.0,49.0,81.6,order|all|tests-included|90+
+C4,A3,1,active,True,False,False,COMPLETED,83.0,nan,nan,invoice|completed|tests-excluded
+C1,E1,1,enterprise,False,False,False,COMPLETED,158.0,113.0,39.8,
+C3,A4,1,active,False,True,False,COMPLETED,40.46345811051693,nan,nan,order|completed|tests-excluded
+C2,E1,1,enterprise,False,False,False,COMPLETED,157.0,113.0,38.9,
+C4,A4,1,active,True,False,False,COMPLETED,46.52406417112299,nan,nan,invoice|completed|tests-excluded
+C1,E2,1,enterprise,False,False,False,COMPLETED,597.0,nan,nan,
+C3,A5,1,active,False,True,False,COMPLETED,57.0,62.0,-8.1,order|completed|tests-excluded
+C2,E2,1,enterprise,False,False,False,COMPLETED,209016.0,nan,nan,
+C4,A5,1,active,True,False,False,COMPLETED,62.0,62.0,nan,invoice|completed|tests-excluded; order|all|tests-included
+C1,E3,1,enterprise,False,False,False,COMPLETED,38.0,26.0,46.2,
+C3,A6,1,active,True,True,False,COMPLETED,68.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C2,E3,1,enterprise,False,False,False,COMPLETED,38.0,26.0,46.2,
+C4,A6,1,active,True,True,False,COMPLETED,83.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C1,E4,1,enterprise,False,False,False,COMPLETED,34.0,nan,nan,
+C3,A7,1,active,False,True,False,COMPLETED,84.0,96.0,-12.5,order|completed|tests-excluded
+C2,E4,1,enterprise,False,False,False,COMPLETED,34.0,nan,nan,invoice|all|tests-excluded; order|all|tests-excluded
+C4,A7,1,active,True,False,False,COMPLETED,96.0,96.0,nan,invoice|completed|tests-excluded
+C3,A8,1,active,False,True,False,COMPLETED,52.0,56.0,-7.1,order|completed|tests-excluded
+C1,E5,1,enterprise,False,False,False,COMPLETED,84.0,76.0,10.5,order|all|tests-included
+C4,A8,1,active,True,False,False,COMPLETED,56.0,56.0,nan,invoice|completed|tests-excluded
+C2,E5,1,enterprise,False,False,False,COMPLETED,84.0,76.0,10.5,order|all|tests-included
+C3,C1,1,churn,False,False,False,COMPLETED,334.0,152.0,119.7,
+C1,E6,1,enterprise,False,False,False,COMPLETED,0.0,34.0,-100.0,
+C4,C1,1,churn,False,False,False,COMPLETED,140.0,152.0,-7.9,
+C2,E6,1,enterprise,False,False,False,COMPLETED,61.0,34.0,79.4,
+C3,C2,1,churn,False,False,False,COMPLETED,94.0,nan,nan,
+C1,E7,1,enterprise,False,False,False,COMPLETED,26.16666666666667,nan,nan,
+C4,C2,1,churn,False,False,False,COMPLETED,45.0,nan,nan,
+C2,E7,1,enterprise,False,False,False,COMPLETED,28.000000000000004,nan,nan,
+C3,C3,1,churn,False,False,False,COMPLETED,94.0,38.0,147.4,
+C1,E8,1,enterprise,False,False,False,COMPLETED,39.0,29.0,34.5,
+C4,C3,1,churn,False,False,False,COMPLETED,35.0,38.0,-7.9,
+C2,E8,1,enterprise,False,False,False,COMPLETED,39.0,29.0,34.5,
+C3,C4,1,churn,False,False,False,COMPLETED,334.0,152.0,119.7,
+C1,R1,1,revenue,False,False,False,COMPLETED,23595255.0,19129023.0,23.3,order|all|tests-included
+C4,C4,1,churn,False,False,False,COMPLETED,140.0,152.0,-7.9,
+C3,C5,1,churn,False,True,False,COMPLETED,nan,nan,nan,order|completed|tests-excluded|91-180; order|completed|tests-excluded|90+; order
+C4,C5,1,churn,True,False,False,COMPLETED,45.0,nan,nan,invoice|completed|tests-excluded|91-180; invoice|completed|tests-excluded|90+; i
+C3,C6,1,churn,False,False,False,COMPLETED,59.0,23.0,156.5,order|completed|tests-included|90+
+C4,C6,1,churn,False,False,False,COMPLETED,22.0,23.0,-4.3,
+C3,C7,1,churn,False,False,False,COMPLETED,59.53654188948307,nan,nan,
+C4,C7,1,churn,False,False,False,COMPLETED,24.9554367201426,nan,nan,
+C3,C8,1,churn,False,False,False,COMPLETED,89.0,49.0,81.6,order|all|tests-included|90+
+C4,C8,1,churn,False,False,False,COMPLETED,45.0,49.0,-8.2,
+C3,E1,1,enterprise,False,True,False,COMPLETED,112.0,113.0,-0.9,order|completed|tests-excluded
+C4,E1,1,enterprise,True,False,False,COMPLETED,113.0,113.0,nan,invoice|completed|tests-excluded
+C3,E2,1,enterprise,False,True,False,COMPLETED,28.0,nan,nan,order|completed|tests-excluded
+C4,E2,1,enterprise,True,False,False,COMPLETED,28.0,nan,nan,invoice|completed|tests-excluded
+C3,E3,1,enterprise,False,True,False,COMPLETED,25.0,26.0,-3.8,order|completed|tests-excluded
+C4,E3,1,enterprise,True,False,False,COMPLETED,26.0,26.0,nan,invoice|completed|tests-excluded
+C3,E4,1,enterprise,True,True,False,COMPLETED,30.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C4,E4,1,enterprise,True,True,False,COMPLETED,30.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,E5,1,enterprise,False,True,False,COMPLETED,71.0,76.0,-6.6,order|completed|tests-excluded
+C4,E5,1,enterprise,True,False,False,COMPLETED,76.0,76.0,nan,invoice|completed|tests-excluded
+C3,E6,1,enterprise,True,True,False,COMPLETED,34.0,34.0,nan,invoice|completed|tests-excluded; order|completed|tests-excluded
+C4,E6,1,enterprise,True,True,False,COMPLETED,34.0,34.0,nan,invoice|completed|tests-excluded; order|completed|tests-excluded
+C3,E7,1,enterprise,True,True,False,COMPLETED,19.96434937611408,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; order|comple
+C4,E7,1,enterprise,True,True,False,COMPLETED,20.14260249554367,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; order|comple
+C3,E8,1,enterprise,True,True,False,COMPLETED,29.0,29.0,nan,invoice|completed|tests-excluded; order|completed|tests-excluded
+C4,E8,1,enterprise,True,True,False,COMPLETED,29.0,29.0,nan,invoice|completed|tests-excluded; order|completed|tests-excluded
+C3,R1,1,revenue,False,True,False,COMPLETED,18991027.0,19129023.0,-0.7,order|completed|tests-excluded
+C4,R1,1,revenue,False,True,False,COMPLETED,18970048.0,19129023.0,-0.8,order|completed|tests-excluded
+C3,R2,1,revenue,False,True,False,COMPLETED,5034348.0,nan,nan,order|completed|tests-excluded
+C4,R2,1,revenue,False,True,False,COMPLETED,5017392.0,nan,nan,order|completed|tests-excluded
+C3,R3,1,revenue,False,True,False,COMPLETED,5034348.0,5084364.0,-1.0,order|completed|tests-excluded
+C4,R3,1,revenue,False,True,False,COMPLETED,5017392.0,5084364.0,-1.3,order|completed|tests-excluded
+C3,R4,1,revenue,True,True,False,COMPLETED,5034348.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C4,R4,1,revenue,True,True,False,COMPLETED,5084364.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,R5,1,revenue,False,True,False,COMPLETED,9336474.0,9415482.0,-0.8,order|completed|tests-excluded
+C4,R5,1,revenue,True,False,False,COMPLETED,9415482.0,9415482.0,nan,invoice|completed|tests-excluded
+C3,R6,1,revenue,False,True,False,COMPLETED,1502677.0,1664691.0,-9.7,order|completed|tests-excluded
+C4,R6,1,revenue,True,False,False,COMPLETED,1664691.0,1664691.0,nan,invoice|completed|tests-excluded
+C3,R7,1,revenue,True,True,False,COMPLETED,24.098986326543,nan,nan,invoice|completed|tests-excluded; invoice|all|tests-excluded; order|completed|te
+C4,R7,1,revenue,True,True,False,COMPLETED,24.246606844479,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,R8,1,revenue,False,True,False,COMPLETED,18964089.0,19129023.0,-0.9,order|completed|tests-excluded
+C4,R8,1,revenue,True,False,False,COMPLETED,19129023.0,19129023.0,nan,invoice|completed|tests-excluded
+C3,RR1,1,recurring,False,True,False,COMPLETED,7447969.0,10830779.0,-31.2,order|completed|tests-excluded|sub
+C4,RR1,1,recurring,True,False,False,COMPLETED,10830779.0,10830779.0,nan,invoice|completed|tests-excluded|sub+support
+C3,RR2,1,recurring,False,True,False,COMPLETED,1909122.0,nan,nan,order|completed|tests-excluded|sub
+C4,RR2,1,recurring,True,False,False,COMPLETED,2812184.0,nan,nan,invoice|completed|tests-excluded|sub+support
+C3,RR3,1,recurring,False,True,False,COMPLETED,1845752.0,2693735.0,-31.5,order|completed|tests-excluded|sub
+C4,RR3,1,recurring,True,False,False,COMPLETED,2693735.0,2693735.0,nan,invoice|completed|tests-excluded|sub+support
+C3,RR4,1,recurring,False,True,False,COMPLETED,1909122.0,nan,nan,invoice|completed|tests-excluded|sub; invoice|all|tests-excluded|sub+support; in
+C4,RR4,1,recurring,True,False,False,COMPLETED,2812184.0,nan,nan,invoice|completed|tests-excluded|sub+support; order|completed|tests-excluded|sub
+C3,RR5,1,recurring,False,True,False,COMPLETED,39.218358227809,nan,nan,invoice|completed|tests-excluded|sub; invoice|completed|tests-included|sub; orde
+C4,RR5,1,recurring,True,False,False,COMPLETED,56.272851813554,nan,nan,invoice|completed|tests-excluded|sub+support; invoice|completed|tests-included|s
+C3,RR6,1,recurring,False,True,False,COMPLETED,3690768.0,5579766.0,-33.9,order|completed|tests-excluded|sub
+C4,RR6,1,recurring,True,False,False,COMPLETED,5579766.0,5579766.0,nan,invoice|completed|tests-excluded|sub+support; order|completed|tests-excluded|sub
+C3,RR7,1,recurring,False,True,False,COMPLETED,775295.0,1153497.0,-32.8,order|completed|tests-excluded|sub
+C4,RR7,1,recurring,True,False,False,COMPLETED,1153497.0,1153497.0,nan,invoice|completed|tests-excluded|sub+support
+C3,RR8,1,recurring,False,True,False,COMPLETED,1909122.0,2775334.0,-31.2,order|completed|tests-excluded|sub
+C2,R1,1,revenue,False,False,False,COMPLETED,23595255.0,19129023.0,23.3,order|all|tests-included
+C4,RR8,1,recurring,True,False,False,COMPLETED,2775334.0,2775334.0,nan,invoice|completed|tests-excluded|sub+support; order|completed|tests-excluded|sub
+C1,R2,1,revenue,False,False,False,COMPLETED,6428537.0,nan,nan,order|all|tests-included
+C3,F1,1,fiscal,False,False,False,COMPLETED,16825351.0,16666376.0,1.0,
+C2,R2,1,revenue,False,False,False,COMPLETED,6428537.0,nan,nan,order|all|tests-included
+C4,F1,1,fiscal,False,False,False,COMPLETED,16825351.0,16666376.0,1.0,
+C1,R3,1,revenue,False,False,False,COMPLETED,6428537.0,5084364.0,26.4,order|all|tests-included
+C3,F2,1,fiscal,False,False,False,COMPLETED,4323443.0,7981269.0,-45.8,
+C2,R3,1,revenue,False,False,False,COMPLETED,6428537.0,5084364.0,26.4,order|all|tests-included
+C1,R4,1,revenue,True,True,False,COMPLETED,6408828.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C4,F2,1,fiscal,True,False,False,COMPLETED,7981269.0,7981269.0,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C2,R4,1,revenue,True,True,False,COMPLETED,6428537.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,F3,1,fiscal,False,False,False,COMPLETED,4776744.0,nan,nan,order|completed|tests-excluded|fy-jan|sub+support; order|completed|tests-exclude
+C4,F3,1,fiscal,False,False,False,COMPLETED,4687666.0,nan,nan,
+C1,R5,1,revenue,False,False,False,COMPLETED,11687370.0,9415482.0,24.1,order|all|tests-included
+C3,F4,1,fiscal,False,False,False,COMPLETED,4398904.0,4143104.0,6.2,order|completed|tests-excluded|fy-jan|sub+support; order|completed|tests-exclude
+C2,R5,1,revenue,False,False,False,COMPLETED,11687370.0,9415482.0,24.1,order|all|tests-included
+C4,F4,1,fiscal,False,True,False,COMPLETED,4210076.0,4143104.0,1.6,order|completed|tests-excluded|fy-feb|sub+support; order|completed|tests-exclude
+C1,R6,1,revenue,False,False,False,COMPLETED,2101281.0,1664691.0,26.2,invoice|all|tests-included
+C3,F5,1,fiscal,False,False,False,COMPLETED,6817553.0,9302125.0,-26.7,invoice|completed|tests-excluded|fy-jan|sub; order|completed|tests-excluded|fy-j
+C2,R6,1,revenue,False,False,False,COMPLETED,1960804.0,1664691.0,17.8,order|all|tests-included
+C4,F5,1,fiscal,False,False,False,COMPLETED,9457917.0,9302125.0,1.7,order|completed|tests-excluded|fy-feb|sub+support
+C1,R7,1,revenue,True,False,False,COMPLETED,24.628205967683,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,F6,1,fiscal,True,True,False,COMPLETED,4650235.0,nan,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C2,R7,1,revenue,True,False,False,COMPLETED,24.628205967683,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C4,F6,1,fiscal,True,True,False,COMPLETED,4687666.0,nan,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C1,R8,1,revenue,False,False,False,COMPLETED,23595255.0,19129023.0,23.3,order|all|tests-included
+C3,F7,1,fiscal,False,False,False,COMPLETED,4772279.0,3901313.0,22.3,
+C2,R8,1,revenue,False,False,False,COMPLETED,23595255.0,19129023.0,23.3,order|all|tests-included
+C1,RR1,1,recurring,False,False,False,COMPLETED,9441115.0,10830779.0,-12.8,order|all|tests-included|sub
+C4,F7,1,fiscal,True,False,False,COMPLETED,3901313.0,3901313.0,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C2,RR1,1,recurring,False,False,False,COMPLETED,9441115.0,10830779.0,-12.8,order|all|tests-included|sub
+C3,F8,1,fiscal,False,True,False,COMPLETED,8308164.0,8187114.0,1.5,order|completed|tests-excluded|fy-feb|sub+support; order|completed|tests-exclude
+C1,RR2,1,recurring,False,False,False,COMPLETED,2423625.0,nan,nan,
+C4,F8,1,fiscal,False,True,False,COMPLETED,8308164.0,8187114.0,1.5,order|completed|tests-excluded|fy-feb|sub+support; order|completed|tests-exclude
+C2,RR2,1,recurring,False,False,False,COMPLETED,2441793.0,nan,nan,
+C3,A1,2,active,False,True,False,COMPLETED,227.0,261.0,-13.0,order|completed|tests-excluded
+C4,A1,2,active,True,False,False,COMPLETED,261.0,261.0,nan,invoice|completed|tests-excluded
+C1,RR3,1,recurring,False,False,False,COMPLETED,2441793.0,2693735.0,-9.4,
+C3,A2,2,active,False,True,False,COMPLETED,68.0,83.0,-18.1,order|completed|tests-excluded
+C2,RR3,1,recurring,False,False,False,COMPLETED,2441793.0,2693735.0,-9.4,
+C4,A2,2,active,True,False,False,COMPLETED,83.0,83.0,nan,invoice|completed|tests-excluded
+C1,RR4,1,recurring,False,True,False,COMPLETED,2423625.0,nan,nan,invoice|completed|tests-excluded|sub; invoice|all|tests-excluded|sub+support; in
+C3,A3,2,active,False,True,False,COMPLETED,68.0,nan,nan,order|completed|tests-excluded
+C2,RR4,1,recurring,False,True,False,COMPLETED,2423625.0,nan,nan,invoice|completed|tests-excluded|sub; invoice|all|tests-excluded|sub+support; in
+C4,A3,2,active,True,False,False,COMPLETED,83.0,nan,nan,invoice|completed|tests-excluded
+C1,RR5,1,recurring,False,False,False,COMPLETED,40.012769516583,nan,nan,invoice|completed|tests-included|sub; invoice|all|tests-excluded|sub; invoice|al
+C3,A4,2,active,False,True,False,COMPLETED,40.46345811051693,nan,nan,order|completed|tests-excluded
+C2,RR5,1,recurring,False,False,False,COMPLETED,40.012769516583,nan,nan,invoice|completed|tests-included|sub; invoice|all|tests-excluded|sub; invoice|al
+C4,A4,2,active,True,False,False,COMPLETED,46.524064171122994,nan,nan,invoice|completed|tests-excluded
+C1,RR6,1,recurring,False,False,False,COMPLETED,4769496.0,5579766.0,-14.5,order|all|tests-included|sub
+C3,A5,2,active,False,True,False,COMPLETED,57.0,62.0,-8.1,order|completed|tests-excluded
+C2,RR6,1,recurring,False,False,False,COMPLETED,nan,5579766.0,nan,
+C4,A5,2,active,True,False,False,COMPLETED,62.0,62.0,nan,invoice|completed|tests-excluded; order|all|tests-included
+C1,RR7,1,recurring,False,False,False,COMPLETED,919276.0,1153497.0,-20.3,invoice|all|tests-included|sub
+C3,A6,2,active,True,True,False,COMPLETED,68.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C2,RR7,1,recurring,False,False,False,COMPLETED,919276.0,1153497.0,-20.3,invoice|all|tests-included|sub
+C4,A6,2,active,True,True,False,COMPLETED,83.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C1,RR8,1,recurring,False,False,False,COMPLETED,2423625.0,2775334.0,-12.7,order|all|tests-included|sub
+C3,A7,2,active,False,True,False,COMPLETED,84.0,96.0,-12.5,order|completed|tests-excluded
+C4,A7,2,active,True,False,False,COMPLETED,96.0,96.0,nan,invoice|completed|tests-excluded
+C2,RR8,1,recurring,False,False,True,COMPLETED,2423625.0,2775334.0,-12.7,order|all|tests-included|sub
+C3,A8,2,active,False,True,False,COMPLETED,52.0,56.0,-7.1,order|completed|tests-excluded
+C1,F1,1,fiscal,False,False,False,COMPLETED,20840439.0,16666376.0,25.0,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C4,A8,2,active,True,False,False,COMPLETED,56.0,56.0,nan,invoice|completed|tests-excluded
+C2,F1,1,fiscal,False,False,False,COMPLETED,20840439.0,16666376.0,25.0,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C3,C1,2,churn,False,False,False,COMPLETED,334.0,152.0,119.7,
+C1,F2,1,fiscal,False,False,False,COMPLETED,8904142.0,7981269.0,11.6,invoice|all|tests-included|fy-jan|sub+support; invoice|all|tests-included|fy-jan
+C4,C1,2,churn,False,False,False,COMPLETED,140.0,152.0,-7.9,
+C2,F2,1,fiscal,False,False,False,COMPLETED,10215695.0,7981269.0,28.0,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub
+C1,F3,1,fiscal,False,False,False,COMPLETED,5574115.0,nan,nan,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub
+C3,C2,2,churn,False,False,False,COMPLETED,94.0,nan,nan,
+C4,C2,2,churn,False,False,False,COMPLETED,45.0,nan,nan,
+C2,F3,1,fiscal,False,False,False,COMPLETED,5585477.0,nan,nan,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C3,C3,2,churn,False,False,False,COMPLETED,94.0,38.0,147.4,
+C1,F4,1,fiscal,False,False,False,COMPLETED,5508164.0,4143104.0,32.9,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C4,C3,2,churn,True,False,False,COMPLETED,38.0,38.0,nan,invoice|completed|tests-excluded|91-180; invoice|all|tests-excluded|91-180
+C2,F4,1,fiscal,False,False,False,COMPLETED,5508164.0,4143104.0,32.9,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C3,C4,2,churn,False,False,False,COMPLETED,334.0,152.0,119.7,
+C1,F5,1,fiscal,False,False,False,COMPLETED,8317489.0,9302125.0,-10.6,invoice|all|tests-included|fy-feb|sub
+C4,C4,2,churn,False,False,False,COMPLETED,140.0,152.0,-7.9,
+C2,F5,1,fiscal,False,False,True,COMPLETED,8388458.0,9302125.0,-9.8,order|all|tests-included|fy-feb|sub
+C3,C5,2,churn,False,True,False,COMPLETED,94.0,nan,nan,order|completed|tests-excluded|91-180; order|completed|tests-excluded|90+; order
+C1,F6,1,fiscal,True,True,False,COMPLETED,5574115.0,nan,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C2,F6,1,fiscal,True,True,False,COMPLETED,5574115.0,nan,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C4,C5,2,churn,True,False,False,COMPLETED,49.0,nan,nan,invoice|completed|tests-excluded|91-180; invoice|completed|tests-excluded|90+; i
+C3,C6,2,churn,False,False,False,COMPLETED,59.0,23.0,156.5,order|completed|tests-included|90+
+C1,F7,1,fiscal,False,False,False,COMPLETED,4877516.0,3901313.0,25.0,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C4,C6,2,churn,True,False,False,COMPLETED,23.0,23.0,nan,invoice|completed|tests-excluded|91-180; invoice|all|tests-excluded|91-180
+C2,F7,1,fiscal,False,False,False,COMPLETED,5153035.0,3901313.0,32.1,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub
+C3,C7,2,churn,False,False,False,COMPLETED,59.53654188948307,nan,nan,
+C1,F8,1,fiscal,False,False,False,COMPLETED,10458324.0,8187114.0,27.7,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub
+C4,C7,2,churn,False,False,False,COMPLETED,24.9554367201426,nan,nan,
+C2,F8,1,fiscal,False,False,False,COMPLETED,10458324.0,8187114.0,27.7,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub
+C3,C8,2,churn,False,False,False,COMPLETED,89.0,49.0,81.6,order|all|tests-included|90+
+C1,A1,2,active,False,False,False,COMPLETED,258.0,261.0,-1.1,order|all|tests-included
+C4,C8,2,churn,False,False,False,COMPLETED,45.0,49.0,-8.2,
+C2,A1,2,active,False,False,False,COMPLETED,258.0,261.0,-1.1,order|all|tests-included
+C3,E1,2,enterprise,False,True,False,COMPLETED,112.0,113.0,-0.9,order|completed|tests-excluded
+C4,E1,2,enterprise,True,False,False,COMPLETED,113.0,113.0,nan,invoice|completed|tests-excluded
+C1,A2,2,active,False,False,False,COMPLETED,73.0,83.0,-12.0,order|all|tests-included
+C2,A2,2,active,False,False,False,COMPLETED,73.0,83.0,-12.0,order|all|tests-included
+C3,E2,2,enterprise,False,True,False,COMPLETED,28.0,nan,nan,order|completed|tests-excluded
+C1,A3,2,active,False,False,False,COMPLETED,73.0,nan,nan,order|all|tests-included
+C4,E2,2,enterprise,True,False,False,COMPLETED,30.0,nan,nan,invoice|completed|tests-excluded
+C2,A3,2,active,False,False,False,COMPLETED,73.0,nan,nan,order|all|tests-included
+C3,E3,2,enterprise,False,True,False,COMPLETED,25.0,26.0,-3.8,order|completed|tests-excluded
+C4,E3,2,enterprise,True,False,False,COMPLETED,26.0,26.0,nan,invoice|completed|tests-excluded
+C1,A4,2,active,False,False,False,COMPLETED,43.0,nan,nan,order|all|tests-excluded; order|all|tests-included
+C2,A4,2,active,False,False,False,COMPLETED,43.0,nan,nan,order|all|tests-excluded; order|all|tests-included
+C3,E4,2,enterprise,True,True,False,COMPLETED,30.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C1,A5,2,active,True,False,False,COMPLETED,62.0,62.0,nan,invoice|completed|tests-excluded; order|all|tests-included
+C4,E4,2,enterprise,True,True,False,COMPLETED,30.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C2,A5,2,active,True,False,False,COMPLETED,62.0,62.0,nan,invoice|completed|tests-excluded; order|all|tests-included
+C3,E5,2,enterprise,False,True,False,COMPLETED,71.0,76.0,-6.6,order|completed|tests-excluded
+C1,A6,2,active,True,True,False,COMPLETED,73.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C4,E5,2,enterprise,True,False,False,COMPLETED,76.0,76.0,nan,invoice|completed|tests-excluded
+C2,A6,2,active,True,True,False,COMPLETED,73.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,E6,2,enterprise,True,True,False,COMPLETED,34.0,34.0,nan,invoice|completed|tests-excluded; order|completed|tests-excluded
+C1,A7,2,active,False,False,False,COMPLETED,98.0,96.0,2.1,order|all|tests-included
+C4,E6,2,enterprise,True,True,False,COMPLETED,34.0,34.0,nan,invoice|completed|tests-excluded; order|completed|tests-excluded
+C2,A7,2,active,False,False,False,COMPLETED,98.0,96.0,2.1,order|all|tests-included
+C3,E7,2,enterprise,True,True,False,COMPLETED,19.96434937611408,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; order|comple
+C1,A8,2,active,False,False,False,COMPLETED,65.0,56.0,16.1,invoice|completed|tests-included; order|all|tests-included
+C4,E7,2,enterprise,True,True,False,COMPLETED,20.14260249554367,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; order|comple
+C2,A8,2,active,False,False,False,COMPLETED,65.0,56.0,16.1,invoice|completed|tests-included; order|all|tests-included
+C3,E8,2,enterprise,True,True,False,COMPLETED,29.0,29.0,nan,invoice|completed|tests-excluded; order|completed|tests-excluded
+C1,C1,2,churn,False,False,False,COMPLETED,342.0,152.0,125.0,order|all|tests-included|90+
+C4,E8,2,enterprise,True,True,False,COMPLETED,29.0,29.0,nan,invoice|completed|tests-excluded; order|completed|tests-excluded
+C3,R1,2,revenue,False,True,False,COMPLETED,18991027.0,19129023.0,-0.7,order|completed|tests-excluded
+C2,C1,2,churn,False,False,False,COMPLETED,342.0,152.0,125.0,order|all|tests-included|90+
+C4,R1,2,revenue,False,True,False,COMPLETED,18970048.0,19129023.0,-0.8,order|completed|tests-excluded
+C1,C2,2,churn,False,False,False,COMPLETED,73.0,nan,nan,order|all|tests-included|90+
+C2,C2,2,churn,False,False,False,COMPLETED,73.0,nan,nan,order|all|tests-included|90+
+C3,R2,2,revenue,False,True,False,COMPLETED,5034348.0,nan,nan,order|completed|tests-excluded
+C1,C3,2,churn,False,False,False,COMPLETED,96.0,38.0,152.6,order|all|tests-included|90+
+C4,R2,2,revenue,False,True,False,COMPLETED,4574454.0,nan,nan,order|completed|tests-excluded
+C3,R3,2,revenue,False,True,False,COMPLETED,5034348.0,5084364.0,-1.0,order|completed|tests-excluded
+C2,C3,2,churn,False,False,False,COMPLETED,96.0,38.0,152.6,order|all|tests-included|90+
+C4,R3,2,revenue,True,False,False,COMPLETED,5084364.0,5084364.0,nan,invoice|completed|tests-excluded
+C1,C4,2,churn,False,False,False,COMPLETED,342.0,152.0,125.0,order|all|tests-included|90+
+C3,R4,2,revenue,True,True,False,COMPLETED,5034348.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C2,C4,2,churn,False,False,True,COMPLETED,342.0,152.0,125.0,order|all|tests-included|90+
+C4,R4,2,revenue,True,True,False,COMPLETED,5084364.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C1,C5,2,churn,False,True,False,COMPLETED,96.0,nan,nan,order|completed|tests-excluded|91-180; order|completed|tests-excluded|90+; order
+C3,R5,2,revenue,False,True,False,COMPLETED,9336474.0,9415482.0,-0.8,order|completed|tests-excluded
+C2,C5,2,churn,False,True,False,COMPLETED,96.0,nan,nan,order|completed|tests-excluded|91-180; order|completed|tests-excluded|90+; order
+C4,R5,2,revenue,True,False,False,COMPLETED,9415482.0,9415482.0,nan,invoice|completed|tests-excluded
+C1,C6,2,churn,False,False,False,COMPLETED,60.0,23.0,160.9,order|all|tests-included|90+
+C3,R6,2,revenue,False,True,False,COMPLETED,1502677.0,1664691.0,-9.7,order|completed|tests-excluded
+C2,C6,2,churn,False,False,False,COMPLETED,60.0,23.0,160.9,order|all|tests-included|90+
+C4,R6,2,revenue,True,False,False,COMPLETED,1664691.0,1664691.0,nan,invoice|completed|tests-excluded
+C1,C7,2,churn,False,True,False,COMPLETED,57.0,nan,nan,order|completed|tests-excluded|90+; order|completed|tests-included|90+; order|al
+C3,R7,2,revenue,True,True,False,COMPLETED,24.034621436337,nan,nan,invoice|completed|tests-excluded; invoice|all|tests-excluded; order|completed|te
+C2,C7,2,churn,False,True,False,COMPLETED,57.0,nan,nan,order|completed|tests-excluded|90+; order|completed|tests-included|90+; order|al
+C4,R7,2,revenue,True,True,False,COMPLETED,24.246606844479,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C1,C8,2,churn,False,False,False,COMPLETED,84.0,49.0,71.4,invoice|all|tests-included|90+; order|all|tests-excluded|90+
+C3,R8,2,revenue,False,True,False,COMPLETED,18991027.0,19129023.0,-0.7,order|completed|tests-excluded
+C2,C8,2,churn,False,False,False,COMPLETED,89.0,49.0,81.6,order|all|tests-included|90+
+C4,R8,2,revenue,False,True,False,COMPLETED,18970048.0,19129023.0,-0.8,order|completed|tests-excluded
+C1,E1,2,enterprise,False,False,False,COMPLETED,157.0,113.0,38.9,
+C3,RR1,2,recurring,False,True,False,COMPLETED,7447969.0,10830779.0,-31.2,order|completed|tests-excluded|sub
+C2,E1,2,enterprise,False,False,False,COMPLETED,157.0,113.0,38.9,
+C4,RR1,2,recurring,True,False,False,COMPLETED,10830779.0,10830779.0,nan,invoice|completed|tests-excluded|sub+support
+C1,E2,2,enterprise,False,False,False,COMPLETED,597.0,nan,nan,
+C3,RR2,2,recurring,False,True,False,COMPLETED,1909122.0,nan,nan,order|completed|tests-excluded|sub
+C2,E2,2,enterprise,False,False,False,COMPLETED,43.0,nan,nan,
+C4,RR2,2,recurring,True,False,False,COMPLETED,2812184.0,nan,nan,invoice|completed|tests-excluded|sub+support
+C1,E3,2,enterprise,False,False,False,COMPLETED,34.0,26.0,30.8,order|all|tests-included
+C3,RR3,2,recurring,False,True,False,COMPLETED,1845752.0,2693735.0,-31.5,order|completed|tests-excluded|sub
+C2,E3,2,enterprise,False,False,False,COMPLETED,38.0,26.0,46.2,
+C4,RR3,2,recurring,True,False,False,COMPLETED,2693735.0,2693735.0,nan,invoice|completed|tests-excluded|sub+support
+C1,E4,2,enterprise,True,True,False,COMPLETED,43.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,RR4,2,recurring,False,True,False,COMPLETED,1909122.0,nan,nan,invoice|completed|tests-excluded|sub; invoice|all|tests-excluded|sub+support; in
+C2,E4,2,enterprise,True,True,False,COMPLETED,47.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C4,RR4,2,recurring,True,False,False,COMPLETED,2812184.0,nan,nan,invoice|completed|tests-excluded|sub+support; order|completed|tests-excluded|sub
+C1,E5,2,enterprise,False,False,False,COMPLETED,84.0,76.0,10.5,order|all|tests-included
+C3,RR5,2,recurring,False,True,False,COMPLETED,39.218358227809,nan,nan,invoice|completed|tests-excluded|sub; invoice|completed|tests-included|sub; orde
+C2,E5,2,enterprise,False,False,False,COMPLETED,84.0,76.0,10.5,order|all|tests-included
+C4,RR5,2,recurring,True,False,False,COMPLETED,56.272851813554,nan,nan,invoice|completed|tests-excluded|sub+support; invoice|completed|tests-included|s
+C1,E6,2,enterprise,False,False,False,COMPLETED,0.0,34.0,-100.0,
+C3,RR6,2,recurring,False,True,False,COMPLETED,3690768.0,5579766.0,-33.9,order|completed|tests-excluded|sub
+C4,RR6,2,recurring,True,False,False,COMPLETED,5579766.0,5579766.0,nan,invoice|completed|tests-excluded|sub+support; order|completed|tests-excluded|sub
+C2,E6,2,enterprise,False,False,False,COMPLETED,59.0,34.0,73.5,
+C3,RR7,2,recurring,False,True,False,COMPLETED,775295.0,1153497.0,-32.8,order|completed|tests-excluded|sub
+C1,E7,2,enterprise,False,False,False,COMPLETED,22.0,nan,nan,
+C4,RR7,2,recurring,True,False,False,COMPLETED,1153497.0,1153497.0,nan,invoice|completed|tests-excluded|sub+support
+C2,E7,2,enterprise,False,False,False,COMPLETED,23.66666666666667,nan,nan,invoice|all|tests-excluded; invoice|all|tests-included; order|all|tests-excluded
+C3,RR8,2,recurring,False,True,False,COMPLETED,1909122.0,2775334.0,-31.2,order|completed|tests-excluded|sub
+C1,E8,2,enterprise,False,False,False,COMPLETED,39.0,29.0,34.5,
+C4,RR8,2,recurring,True,False,False,COMPLETED,2775334.0,2775334.0,nan,invoice|completed|tests-excluded|sub+support; order|completed|tests-excluded|sub
+C2,E8,2,enterprise,False,False,False,COMPLETED,39.0,29.0,34.5,
+C3,F1,2,fiscal,True,True,False,COMPLETED,16722185.0,16666376.0,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C1,R1,2,revenue,False,False,False,COMPLETED,23595255.0,19129023.0,23.3,order|all|tests-included
+C4,F1,2,fiscal,False,False,False,COMPLETED,16825351.0,16666376.0,1.0,
+C2,R1,2,revenue,False,False,False,COMPLETED,23595255.0,19129023.0,23.3,order|all|tests-included
+C3,F2,2,fiscal,False,True,False,COMPLETED,8308388.0,7981269.0,4.1,order|completed|tests-excluded|fy-feb|sub+support; order|completed|tests-exclude
+C1,R2,2,revenue,False,False,False,COMPLETED,6428537.0,nan,nan,order|all|tests-included
+C4,F2,2,fiscal,False,False,False,COMPLETED,4858326.0,7981269.0,-39.1,
+C2,R2,2,revenue,False,False,False,COMPLETED,6428537.0,nan,nan,order|all|tests-included
+C3,F3,2,fiscal,False,False,False,COMPLETED,4776744.0,nan,nan,order|completed|tests-excluded|fy-jan|sub+support; order|completed|tests-exclude
+C1,R3,2,revenue,False,False,False,COMPLETED,6428537.0,5084364.0,26.4,order|all|tests-included
+C4,F3,2,fiscal,False,False,False,COMPLETED,4022673.0,nan,nan,
+C2,R3,2,revenue,False,False,False,COMPLETED,6428537.0,5084364.0,26.4,order|all|tests-included
+C3,F4,2,fiscal,False,True,False,COMPLETED,4190486.0,4143104.0,1.1,order|completed|tests-excluded|fy-feb|sub+support; order|completed|tests-exclude
+C1,R4,2,revenue,True,True,False,COMPLETED,6428537.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C4,F4,2,fiscal,False,True,False,COMPLETED,4210076.0,4143104.0,1.6,order|completed|tests-excluded|fy-feb|sub+support; order|completed|tests-exclude
+C2,R4,2,revenue,True,True,False,COMPLETED,6428537.0,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,F5,2,fiscal,False,False,False,COMPLETED,6511098.0,9302125.0,-30.0,invoice|completed|tests-excluded|fy-feb|sub
+C1,R5,2,revenue,False,False,False,COMPLETED,11687370.0,9415482.0,24.1,order|all|tests-included
+C4,F5,2,fiscal,False,False,False,COMPLETED,9457917.0,9302125.0,1.7,order|completed|tests-excluded|fy-feb|sub+support
+C2,R5,2,revenue,False,False,False,COMPLETED,11687370.0,9415482.0,24.1,order|all|tests-included
+C3,F6,2,fiscal,True,True,False,COMPLETED,4650235.0,nan,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C1,R6,2,revenue,False,False,False,COMPLETED,2101281.0,1664691.0,26.2,invoice|all|tests-included
+C4,F6,2,fiscal,True,True,False,COMPLETED,4687666.0,nan,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C2,R6,2,revenue,False,False,False,COMPLETED,1960804.0,1664691.0,17.8,order|all|tests-included
+C3,F7,2,fiscal,False,False,False,COMPLETED,3208267.0,3901313.0,-17.8,invoice|completed|tests-excluded|fy-jan|sub+support; invoice|completed|tests-exc
+C1,R7,2,revenue,True,False,False,COMPLETED,24.673271361224,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C4,F7,2,fiscal,True,False,False,COMPLETED,3901313.0,3901313.0,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C2,R7,2,revenue,True,False,False,COMPLETED,24.673271361224,nan,nan,invoice|completed|tests-excluded; invoice|completed|tests-included; invoice|all|
+C3,F8,2,fiscal,False,False,False,COMPLETED,8584908.0,8187114.0,4.9,invoice|completed|tests-excluded|fy-jan|sub+support; invoice|completed|tests-exc
+C1,R8,2,revenue,False,False,False,COMPLETED,23595255.0,19129023.0,23.3,order|all|tests-included
+C4,F8,2,fiscal,False,True,False,COMPLETED,8308164.0,8187114.0,1.5,order|completed|tests-excluded|fy-feb|sub+support; order|completed|tests-exclude
+C2,R8,2,revenue,False,False,False,COMPLETED,23595255.0,19129023.0,23.3,order|all|tests-included
+C1,RR1,2,recurring,False,False,False,COMPLETED,9459813.0,10830779.0,-12.7,order|all|tests-included|sub
+C2,RR1,2,recurring,False,False,False,COMPLETED,nan,10830779.0,nan,
+C1,RR2,2,recurring,False,False,False,COMPLETED,2423625.0,nan,nan,
+C2,RR2,2,recurring,False,False,True,COMPLETED,2423625.0,nan,nan,
+C1,RR3,2,recurring,False,False,False,COMPLETED,2417555.0,2693735.0,-10.3,order|all|tests-included|sub
+C2,RR3,2,recurring,False,False,False,COMPLETED,2417555.0,2693735.0,-10.3,order|all|tests-included|sub
+C1,RR4,2,recurring,False,True,False,COMPLETED,2423625.0,nan,nan,invoice|completed|tests-excluded|sub; invoice|all|tests-excluded|sub+support; in
+C2,RR4,2,recurring,False,False,True,COMPLETED,2444546.0,nan,nan,invoice|completed|tests-included|sub+support; invoice|completed|tests-included|s
+C1,RR5,2,recurring,False,False,False,COMPLETED,40.012769516583,nan,nan,invoice|completed|tests-included|sub; invoice|all|tests-excluded|sub; invoice|al
+C2,RR5,2,recurring,False,False,False,COMPLETED,40.012769516583,nan,nan,invoice|completed|tests-included|sub; invoice|all|tests-excluded|sub; invoice|al
+C1,RR6,2,recurring,False,False,False,COMPLETED,4769496.0,5579766.0,-14.5,order|all|tests-included|sub
+C2,RR6,2,recurring,False,False,False,COMPLETED,nan,5579766.0,nan,
+C1,RR7,2,recurring,False,False,False,COMPLETED,919276.0,1153497.0,-20.3,invoice|all|tests-included|sub
+C2,RR7,2,recurring,False,False,False,COMPLETED,919276.0,1153497.0,-20.3,invoice|all|tests-included|sub
+C1,RR8,2,recurring,False,False,False,COMPLETED,2423625.0,2775334.0,-12.7,order|all|tests-included|sub
+C2,RR8,2,recurring,False,False,False,COMPLETED,2423625.0,2775334.0,-12.7,order|all|tests-included|sub
+C1,F1,2,fiscal,False,False,False,COMPLETED,20840439.0,16666376.0,25.0,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C2,F1,2,fiscal,False,False,False,COMPLETED,20840439.0,16666376.0,25.0,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C1,F2,2,fiscal,False,False,False,COMPLETED,6850756.0,7981269.0,-14.2,
+C2,F2,2,fiscal,False,False,False,COMPLETED,97653834.0,7981269.0,1123.5,
+C1,F3,2,fiscal,False,False,False,COMPLETED,7638928.0,nan,nan,
+C2,F3,2,fiscal,False,False,False,COMPLETED,5585477.0,nan,nan,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C1,F4,2,fiscal,False,False,False,COMPLETED,5508164.0,4143104.0,32.9,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C2,F4,2,fiscal,False,False,False,COMPLETED,5508164.0,4143104.0,32.9,invoice|all|tests-included|fy-feb|sub+support; invoice|all|tests-included|fy-feb
+C1,F5,2,fiscal,False,False,False,COMPLETED,8317489.0,9302125.0,-10.6,invoice|all|tests-included|fy-feb|sub
+C2,F5,2,fiscal,False,False,False,COMPLETED,8388458.0,9302125.0,-9.8,order|all|tests-included|fy-feb|sub
+C1,F6,2,fiscal,True,True,False,COMPLETED,5574115.0,nan,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C2,F6,2,fiscal,True,True,False,COMPLETED,5574115.0,nan,nan,invoice|completed|tests-excluded|fy-feb|sub+support; invoice|completed|tests-exc
+C1,F7,2,fiscal,False,False,False,COMPLETED,5153035.0,3901313.0,32.1,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub
+C2,F7,2,fiscal,False,False,False,COMPLETED,5153035.0,3901313.0,32.1,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub
+C1,F8,2,fiscal,False,False,False,COMPLETED,10458324.0,8187114.0,27.7,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub
+C2,F8,2,fiscal,False,False,False,COMPLETED,10458324.0,8187114.0,27.7,order|all|tests-included|fy-feb|sub+support; order|all|tests-included|fy-feb|sub

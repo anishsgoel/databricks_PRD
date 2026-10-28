@@ -1,0 +1,705 @@
+qid,term,kind,variant,is_owner,is_analyst,answer
+A1,active,scalar,invoice|completed|tests-excluded,True,False,261
+A1,active,scalar,invoice|completed|tests-included,False,False,284
+A1,active,scalar,invoice|all|tests-excluded,False,False,277
+A1,active,scalar,invoice|all|tests-included,False,False,300
+A1,active,scalar,order|completed|tests-excluded,False,True,227
+A1,active,scalar,order|completed|tests-included,False,False,246
+A1,active,scalar,order|all|tests-excluded,False,False,239
+A1,active,scalar,order|all|tests-included,False,False,258
+A2,active,scalar,invoice|completed|tests-excluded,True,False,83
+A2,active,scalar,invoice|completed|tests-included,False,False,86
+A2,active,scalar,invoice|all|tests-excluded,False,False,86
+A2,active,scalar,invoice|all|tests-included,False,False,89
+A2,active,scalar,order|completed|tests-excluded,False,True,68
+A2,active,scalar,order|completed|tests-included,False,False,71
+A2,active,scalar,order|all|tests-excluded,False,False,70
+A2,active,scalar,order|all|tests-included,False,False,73
+A3,active,by_region,invoice|completed|tests-excluded,True,False,"{""North America"": 62, ""EMEA"": 83, ""APAC"": 56, ""LATAM"": 60}"
+A3,active,by_region,invoice|completed|tests-included,False,False,"{""North America"": 67, ""EMEA"": 86, ""APAC"": 65, ""LATAM"": 66}"
+A3,active,by_region,invoice|all|tests-excluded,False,False,"{""North America"": 66, ""EMEA"": 86, ""APAC"": 61, ""LATAM"": 64}"
+A3,active,by_region,invoice|all|tests-included,False,False,"{""North America"": 71, ""EMEA"": 89, ""APAC"": 70, ""LATAM"": 70}"
+A3,active,by_region,order|completed|tests-excluded,False,True,"{""North America"": 58, ""EMEA"": 68, ""APAC"": 52, ""LATAM"": 49}"
+A3,active,by_region,order|completed|tests-included,False,False,"{""North America"": 62, ""EMEA"": 71, ""APAC"": 60, ""LATAM"": 53}"
+A3,active,by_region,order|all|tests-excluded,False,False,"{""North America"": 60, ""EMEA"": 70, ""APAC"": 57, ""LATAM"": 52}"
+A3,active,by_region,order|all|tests-included,False,False,"{""North America"": 64, ""EMEA"": 73, ""APAC"": 65, ""LATAM"": 56}"
+A4,active,pct,invoice|completed|tests-excluded,True,False,46.52
+A4,active,pct,invoice|completed|tests-included,False,False,47.33
+A4,active,pct,invoice|all|tests-excluded,False,False,49.38
+A4,active,pct,invoice|all|tests-included,False,False,50.0
+A4,active,pct,order|completed|tests-excluded,False,True,40.46
+A4,active,pct,order|completed|tests-included,False,False,41.0
+A4,active,pct,order|all|tests-excluded,False,False,42.6
+A4,active,pct,order|all|tests-included,False,False,43.0
+A5,active,scalar,invoice|completed|tests-excluded,True,False,62
+A5,active,scalar,invoice|completed|tests-included,False,False,65
+A5,active,scalar,invoice|all|tests-excluded,False,False,64
+A5,active,scalar,invoice|all|tests-included,False,False,67
+A5,active,scalar,order|completed|tests-excluded,False,True,57
+A5,active,scalar,order|completed|tests-included,False,False,60
+A5,active,scalar,order|all|tests-excluded,False,False,59
+A5,active,scalar,order|all|tests-included,False,False,62
+A6,active,top_region,invoice|completed|tests-excluded,True,False,"""EMEA"""
+A6,active,top_region,invoice|completed|tests-included,False,False,"""EMEA"""
+A6,active,top_region,invoice|all|tests-excluded,False,False,"""EMEA"""
+A6,active,top_region,invoice|all|tests-included,False,False,"""EMEA"""
+A6,active,top_region,order|completed|tests-excluded,False,True,"""EMEA"""
+A6,active,top_region,order|completed|tests-included,False,False,"""EMEA"""
+A6,active,top_region,order|all|tests-excluded,False,False,"""EMEA"""
+A6,active,top_region,order|all|tests-included,False,False,"""EMEA"""
+A7,active,scalar,invoice|completed|tests-excluded,True,False,96
+A7,active,scalar,invoice|completed|tests-included,False,False,107
+A7,active,scalar,invoice|all|tests-excluded,False,False,103
+A7,active,scalar,invoice|all|tests-included,False,False,114
+A7,active,scalar,order|completed|tests-excluded,False,True,84
+A7,active,scalar,order|completed|tests-included,False,False,93
+A7,active,scalar,order|all|tests-excluded,False,False,89
+A7,active,scalar,order|all|tests-included,False,False,98
+A8,active,scalar,invoice|completed|tests-excluded,True,False,56
+A8,active,scalar,invoice|completed|tests-included,False,False,65
+A8,active,scalar,invoice|all|tests-excluded,False,False,61
+A8,active,scalar,invoice|all|tests-included,False,False,70
+A8,active,scalar,order|completed|tests-excluded,False,True,52
+A8,active,scalar,order|completed|tests-included,False,False,60
+A8,active,scalar,order|all|tests-excluded,False,False,57
+A8,active,scalar,order|all|tests-included,False,False,65
+C1,churn,scalar,invoice|completed|tests-excluded|91-180,True,False,152
+C1,churn,scalar,invoice|completed|tests-excluded|90+,False,False,285
+C1,churn,scalar,invoice|completed|tests-included|91-180,False,False,159
+C1,churn,scalar,invoice|completed|tests-included|90+,False,False,301
+C1,churn,scalar,invoice|all|tests-excluded|91-180,False,False,149
+C1,churn,scalar,invoice|all|tests-excluded|90+,False,False,284
+C1,churn,scalar,invoice|all|tests-included|91-180,False,False,156
+C1,churn,scalar,invoice|all|tests-included|90+,False,False,300
+C1,churn,scalar,order|completed|tests-excluded|91-180,False,False,184
+C1,churn,scalar,order|completed|tests-excluded|90+,False,True,319
+C1,churn,scalar,order|completed|tests-included|91-180,False,False,195
+C1,churn,scalar,order|completed|tests-included|90+,False,False,339
+C1,churn,scalar,order|all|tests-excluded|91-180,False,False,184
+C1,churn,scalar,order|all|tests-excluded|90+,False,False,322
+C1,churn,scalar,order|all|tests-included|91-180,False,False,195
+C1,churn,scalar,order|all|tests-included|90+,False,False,342
+C2,churn,by_region,invoice|completed|tests-excluded|91-180,True,False,"{""North America"": 41, ""EMEA"": 38, ""APAC"": 49, ""LATAM"": 24}"
+C2,churn,by_region,invoice|completed|tests-excluded|90+,False,False,"{""North America"": 76, ""EMEA"": 74, ""APAC"": 81, ""LATAM"": 54}"
+C2,churn,by_region,invoice|completed|tests-included|91-180,False,False,"{""North America"": 43, ""EMEA"": 41, ""APAC"": 50, ""LATAM"": 25}"
+C2,churn,by_region,invoice|completed|tests-included|90+,False,False,"{""North America"": 80, ""EMEA"": 78, ""APAC"": 85, ""LATAM"": 58}"
+C2,churn,by_region,invoice|all|tests-excluded|91-180,False,False,"{""North America"": 38, ""EMEA"": 38, ""APAC"": 49, ""LATAM"": 24}"
+C2,churn,by_region,invoice|all|tests-excluded|90+,False,False,"{""North America"": 73, ""EMEA"": 76, ""APAC"": 80, ""LATAM"": 55}"
+C2,churn,by_region,invoice|all|tests-included|91-180,False,False,"{""North America"": 40, ""EMEA"": 41, ""APAC"": 50, ""LATAM"": 25}"
+C2,churn,by_region,invoice|all|tests-included|90+,False,False,"{""North America"": 77, ""EMEA"": 80, ""APAC"": 84, ""LATAM"": 59}"
+C2,churn,by_region,order|completed|tests-excluded|91-180,False,False,"{""North America"": 45, ""EMEA"": 52, ""APAC"": 52, ""LATAM"": 35}"
+C2,churn,by_region,order|completed|tests-excluded|90+,False,True,"{""North America"": 80, ""EMEA"": 89, ""APAC"": 85, ""LATAM"": 65}"
+C2,churn,by_region,order|completed|tests-included|91-180,False,False,"{""North America"": 48, ""EMEA"": 55, ""APAC"": 54, ""LATAM"": 38}"
+C2,churn,by_region,order|completed|tests-included|90+,False,False,"{""North America"": 85, ""EMEA"": 93, ""APAC"": 90, ""LATAM"": 71}"
+C2,churn,by_region,order|all|tests-excluded|91-180,False,False,"{""North America"": 44, ""EMEA"": 52, ""APAC"": 52, ""LATAM"": 36}"
+C2,churn,by_region,order|all|tests-excluded|90+,False,False,"{""North America"": 79, ""EMEA"": 92, ""APAC"": 84, ""LATAM"": 67}"
+C2,churn,by_region,order|all|tests-included|91-180,False,False,"{""North America"": 47, ""EMEA"": 55, ""APAC"": 54, ""LATAM"": 39}"
+C2,churn,by_region,order|all|tests-included|90+,False,False,"{""North America"": 84, ""EMEA"": 96, ""APAC"": 89, ""LATAM"": 73}"
+C3,churn,scalar,invoice|completed|tests-excluded|91-180,True,False,38
+C3,churn,scalar,invoice|completed|tests-excluded|90+,False,False,74
+C3,churn,scalar,invoice|completed|tests-included|91-180,False,False,41
+C3,churn,scalar,invoice|completed|tests-included|90+,False,False,78
+C3,churn,scalar,invoice|all|tests-excluded|91-180,False,False,38
+C3,churn,scalar,invoice|all|tests-excluded|90+,False,False,76
+C3,churn,scalar,invoice|all|tests-included|91-180,False,False,41
+C3,churn,scalar,invoice|all|tests-included|90+,False,False,80
+C3,churn,scalar,order|completed|tests-excluded|91-180,False,False,52
+C3,churn,scalar,order|completed|tests-excluded|90+,False,True,89
+C3,churn,scalar,order|completed|tests-included|91-180,False,False,55
+C3,churn,scalar,order|completed|tests-included|90+,False,False,93
+C3,churn,scalar,order|all|tests-excluded|91-180,False,False,52
+C3,churn,scalar,order|all|tests-excluded|90+,False,False,92
+C3,churn,scalar,order|all|tests-included|91-180,False,False,55
+C3,churn,scalar,order|all|tests-included|90+,False,False,96
+C4,churn,scalar,invoice|completed|tests-excluded|91-180,True,False,152
+C4,churn,scalar,invoice|completed|tests-excluded|90+,False,False,285
+C4,churn,scalar,invoice|completed|tests-included|91-180,False,False,159
+C4,churn,scalar,invoice|completed|tests-included|90+,False,False,301
+C4,churn,scalar,invoice|all|tests-excluded|91-180,False,False,149
+C4,churn,scalar,invoice|all|tests-excluded|90+,False,False,284
+C4,churn,scalar,invoice|all|tests-included|91-180,False,False,156
+C4,churn,scalar,invoice|all|tests-included|90+,False,False,300
+C4,churn,scalar,order|completed|tests-excluded|91-180,False,False,184
+C4,churn,scalar,order|completed|tests-excluded|90+,False,True,319
+C4,churn,scalar,order|completed|tests-included|91-180,False,False,195
+C4,churn,scalar,order|completed|tests-included|90+,False,False,339
+C4,churn,scalar,order|all|tests-excluded|91-180,False,False,184
+C4,churn,scalar,order|all|tests-excluded|90+,False,False,322
+C4,churn,scalar,order|all|tests-included|91-180,False,False,195
+C4,churn,scalar,order|all|tests-included|90+,False,False,342
+C5,churn,top_region,invoice|completed|tests-excluded|91-180,True,False,"""APAC"""
+C5,churn,top_region,invoice|completed|tests-excluded|90+,False,False,"""APAC"""
+C5,churn,top_region,invoice|completed|tests-included|91-180,False,False,"""APAC"""
+C5,churn,top_region,invoice|completed|tests-included|90+,False,False,"""APAC"""
+C5,churn,top_region,invoice|all|tests-excluded|91-180,False,False,"""APAC"""
+C5,churn,top_region,invoice|all|tests-excluded|90+,False,False,"""APAC"""
+C5,churn,top_region,invoice|all|tests-included|91-180,False,False,"""APAC"""
+C5,churn,top_region,invoice|all|tests-included|90+,False,False,"""APAC"""
+C5,churn,top_region,order|completed|tests-excluded|91-180,False,False,"""EMEA"""
+C5,churn,top_region,order|completed|tests-excluded|90+,False,True,"""EMEA"""
+C5,churn,top_region,order|completed|tests-included|91-180,False,False,"""EMEA"""
+C5,churn,top_region,order|completed|tests-included|90+,False,False,"""EMEA"""
+C5,churn,top_region,order|all|tests-excluded|91-180,False,False,"""EMEA"""
+C5,churn,top_region,order|all|tests-excluded|90+,False,False,"""EMEA"""
+C5,churn,top_region,order|all|tests-included|91-180,False,False,"""EMEA"""
+C5,churn,top_region,order|all|tests-included|90+,False,False,"""EMEA"""
+C6,churn,scalar,invoice|completed|tests-excluded|91-180,True,False,23
+C6,churn,scalar,invoice|completed|tests-excluded|90+,False,False,51
+C6,churn,scalar,invoice|completed|tests-included|91-180,False,False,25
+C6,churn,scalar,invoice|completed|tests-included|90+,False,False,54
+C6,churn,scalar,invoice|all|tests-excluded|91-180,False,False,23
+C6,churn,scalar,invoice|all|tests-excluded|90+,False,False,52
+C6,churn,scalar,invoice|all|tests-included|91-180,False,False,25
+C6,churn,scalar,invoice|all|tests-included|90+,False,False,55
+C6,churn,scalar,order|completed|tests-excluded|91-180,False,False,27
+C6,churn,scalar,order|completed|tests-excluded|90+,False,True,56
+C6,churn,scalar,order|completed|tests-included|91-180,False,False,29
+C6,churn,scalar,order|completed|tests-included|90+,False,False,59
+C6,churn,scalar,order|all|tests-excluded|91-180,False,False,27
+C6,churn,scalar,order|all|tests-excluded|90+,False,False,57
+C6,churn,scalar,order|all|tests-included|91-180,False,False,29
+C6,churn,scalar,order|all|tests-included|90+,False,False,60
+C7,churn,pct,invoice|completed|tests-excluded|91-180,True,False,27.09
+C7,churn,pct,invoice|completed|tests-excluded|90+,False,False,50.8
+C7,churn,pct,invoice|completed|tests-included|91-180,False,False,26.5
+C7,churn,pct,invoice|completed|tests-included|90+,False,False,50.17
+C7,churn,pct,invoice|all|tests-excluded|91-180,False,False,26.56
+C7,churn,pct,invoice|all|tests-excluded|90+,False,False,50.62
+C7,churn,pct,invoice|all|tests-included|91-180,False,False,26.0
+C7,churn,pct,invoice|all|tests-included|90+,False,False,50.0
+C7,churn,pct,order|completed|tests-excluded|91-180,False,False,32.8
+C7,churn,pct,order|completed|tests-excluded|90+,False,True,56.86
+C7,churn,pct,order|completed|tests-included|91-180,False,False,32.5
+C7,churn,pct,order|completed|tests-included|90+,False,False,56.5
+C7,churn,pct,order|all|tests-excluded|91-180,False,False,32.8
+C7,churn,pct,order|all|tests-excluded|90+,False,False,57.4
+C7,churn,pct,order|all|tests-included|91-180,False,False,32.5
+C7,churn,pct,order|all|tests-included|90+,False,False,57.0
+C8,churn,scalar,invoice|completed|tests-excluded|91-180,True,False,49
+C8,churn,scalar,invoice|completed|tests-excluded|90+,False,False,81
+C8,churn,scalar,invoice|completed|tests-included|91-180,False,False,50
+C8,churn,scalar,invoice|completed|tests-included|90+,False,False,85
+C8,churn,scalar,invoice|all|tests-excluded|91-180,False,False,49
+C8,churn,scalar,invoice|all|tests-excluded|90+,False,False,80
+C8,churn,scalar,invoice|all|tests-included|91-180,False,False,50
+C8,churn,scalar,invoice|all|tests-included|90+,False,False,84
+C8,churn,scalar,order|completed|tests-excluded|91-180,False,False,52
+C8,churn,scalar,order|completed|tests-excluded|90+,False,True,85
+C8,churn,scalar,order|completed|tests-included|91-180,False,False,54
+C8,churn,scalar,order|completed|tests-included|90+,False,False,90
+C8,churn,scalar,order|all|tests-excluded|91-180,False,False,52
+C8,churn,scalar,order|all|tests-excluded|90+,False,False,84
+C8,churn,scalar,order|all|tests-included|91-180,False,False,54
+C8,churn,scalar,order|all|tests-included|90+,False,False,89
+E1,enterprise,scalar,invoice|completed|tests-excluded,True,False,113
+E1,enterprise,scalar,invoice|completed|tests-included,False,False,122
+E1,enterprise,scalar,invoice|all|tests-excluded,False,False,131
+E1,enterprise,scalar,invoice|all|tests-included,False,False,143
+E1,enterprise,scalar,order|completed|tests-excluded,False,True,112
+E1,enterprise,scalar,order|completed|tests-included,False,False,121
+E1,enterprise,scalar,order|all|tests-excluded,False,False,130
+E1,enterprise,scalar,order|all|tests-included,False,False,142
+E2,enterprise,by_region,invoice|completed|tests-excluded,True,False,"{""North America"": 29, ""EMEA"": 30, ""APAC"": 26, ""LATAM"": 28}"
+E2,enterprise,by_region,invoice|completed|tests-included,False,False,"{""North America"": 30, ""EMEA"": 34, ""APAC"": 29, ""LATAM"": 29}"
+E2,enterprise,by_region,invoice|all|tests-excluded,False,False,"{""North America"": 33, ""EMEA"": 33, ""APAC"": 31, ""LATAM"": 34}"
+E2,enterprise,by_region,invoice|all|tests-included,False,False,"{""North America"": 34, ""EMEA"": 38, ""APAC"": 35, ""LATAM"": 36}"
+E2,enterprise,by_region,order|completed|tests-excluded,False,True,"{""North America"": 29, ""EMEA"": 30, ""APAC"": 25, ""LATAM"": 28}"
+E2,enterprise,by_region,order|completed|tests-included,False,False,"{""North America"": 30, ""EMEA"": 34, ""APAC"": 28, ""LATAM"": 29}"
+E2,enterprise,by_region,order|all|tests-excluded,False,False,"{""North America"": 33, ""EMEA"": 33, ""APAC"": 30, ""LATAM"": 34}"
+E2,enterprise,by_region,order|all|tests-included,False,False,"{""North America"": 34, ""EMEA"": 38, ""APAC"": 34, ""LATAM"": 36}"
+E3,enterprise,scalar,invoice|completed|tests-excluded,True,False,26
+E3,enterprise,scalar,invoice|completed|tests-included,False,False,29
+E3,enterprise,scalar,invoice|all|tests-excluded,False,False,31
+E3,enterprise,scalar,invoice|all|tests-included,False,False,35
+E3,enterprise,scalar,order|completed|tests-excluded,False,True,25
+E3,enterprise,scalar,order|completed|tests-included,False,False,28
+E3,enterprise,scalar,order|all|tests-excluded,False,False,30
+E3,enterprise,scalar,order|all|tests-included,False,False,34
+E4,enterprise,top_region,invoice|completed|tests-excluded,True,False,"""EMEA"""
+E4,enterprise,top_region,invoice|completed|tests-included,False,False,"""EMEA"""
+E4,enterprise,top_region,invoice|all|tests-excluded,False,False,"""LATAM"""
+E4,enterprise,top_region,invoice|all|tests-included,False,False,"""EMEA"""
+E4,enterprise,top_region,order|completed|tests-excluded,False,True,"""EMEA"""
+E4,enterprise,top_region,order|completed|tests-included,False,False,"""EMEA"""
+E4,enterprise,top_region,order|all|tests-excluded,False,False,"""LATAM"""
+E4,enterprise,top_region,order|all|tests-included,False,False,"""EMEA"""
+E5,enterprise,scalar,invoice|completed|tests-excluded,True,False,76
+E5,enterprise,scalar,invoice|completed|tests-included,False,False,81
+E5,enterprise,scalar,invoice|all|tests-excluded,False,False,86
+E5,enterprise,scalar,invoice|all|tests-included,False,False,93
+E5,enterprise,scalar,order|completed|tests-excluded,False,True,71
+E5,enterprise,scalar,order|completed|tests-included,False,False,75
+E5,enterprise,scalar,order|all|tests-excluded,False,False,78
+E5,enterprise,scalar,order|all|tests-included,False,False,84
+E6,enterprise,scalar,invoice|completed|tests-excluded,True,False,34
+E6,enterprise,scalar,invoice|completed|tests-included,False,False,38
+E6,enterprise,scalar,invoice|all|tests-excluded,False,False,47
+E6,enterprise,scalar,invoice|all|tests-included,False,False,53
+E6,enterprise,scalar,order|completed|tests-excluded,False,True,34
+E6,enterprise,scalar,order|completed|tests-included,False,False,38
+E6,enterprise,scalar,order|all|tests-excluded,False,False,47
+E6,enterprise,scalar,order|all|tests-included,False,False,53
+E7,enterprise,pct,invoice|completed|tests-excluded,True,False,20.14
+E7,enterprise,pct,invoice|completed|tests-included,False,False,20.33
+E7,enterprise,pct,invoice|all|tests-excluded,False,False,23.35
+E7,enterprise,pct,invoice|all|tests-included,False,False,23.83
+E7,enterprise,pct,order|completed|tests-excluded,False,True,19.96
+E7,enterprise,pct,order|completed|tests-included,False,False,20.17
+E7,enterprise,pct,order|all|tests-excluded,False,False,23.17
+E7,enterprise,pct,order|all|tests-included,False,False,23.67
+E8,enterprise,scalar,invoice|completed|tests-excluded,True,False,29
+E8,enterprise,scalar,invoice|completed|tests-included,False,False,30
+E8,enterprise,scalar,invoice|all|tests-excluded,False,False,33
+E8,enterprise,scalar,invoice|all|tests-included,False,False,34
+E8,enterprise,scalar,order|completed|tests-excluded,False,True,29
+E8,enterprise,scalar,order|completed|tests-included,False,False,30
+E8,enterprise,scalar,order|all|tests-excluded,False,False,33
+E8,enterprise,scalar,order|all|tests-included,False,False,34
+R1,revenue,scalar,invoice|completed|tests-excluded,True,False,19129023.0
+R1,revenue,scalar,invoice|completed|tests-included,False,False,20694370.0
+R1,revenue,scalar,invoice|all|tests-excluded,False,False,22075279.0
+R1,revenue,scalar,invoice|all|tests-included,False,False,23772336.0
+R1,revenue,scalar,order|completed|tests-excluded,False,True,18991027.0
+R1,revenue,scalar,order|completed|tests-included,False,False,20556374.0
+R1,revenue,scalar,order|all|tests-excluded,False,False,21930884.0
+R1,revenue,scalar,order|all|tests-included,False,False,23627941.0
+R2,revenue,by_region,invoice|completed|tests-excluded,True,False,"{""North America"": 4972225.0, ""EMEA"": 5084364.0, ""APAC"": 4638139.0, ""LATAM"": 4434295.0}"
+R2,revenue,by_region,invoice|completed|tests-included,False,False,"{""North America"": 5234375.0, ""EMEA"": 5690071.0, ""APAC"": 5093582.0, ""LATAM"": 4676342.0}"
+R2,revenue,by_region,invoice|all|tests-excluded,False,False,"{""North America"": 5775611.0, ""EMEA"": 5815450.0, ""APAC"": 5413043.0, ""LATAM"": 5071175.0}"
+R2,revenue,by_region,invoice|all|tests-included,False,False,"{""North America"": 6044977.0, ""EMEA"": 6478553.0, ""APAC"": 5893526.0, ""LATAM"": 5355280.0}"
+R2,revenue,by_region,order|completed|tests-excluded,False,True,"{""North America"": 4951817.0, ""EMEA"": 5034348.0, ""APAC"": 4576645.0, ""LATAM"": 4428217.0}"
+R2,revenue,by_region,order|completed|tests-included,False,False,"{""North America"": 5213967.0, ""EMEA"": 5640055.0, ""APAC"": 5032088.0, ""LATAM"": 4670264.0}"
+R2,revenue,by_region,order|all|tests-excluded,False,False,"{""North America"": 5751050.0, ""EMEA"": 5765434.0, ""APAC"": 5349303.0, ""LATAM"": 5065097.0}"
+R2,revenue,by_region,order|all|tests-included,False,False,"{""North America"": 6020416.0, ""EMEA"": 6428537.0, ""APAC"": 5829786.0, ""LATAM"": 5349202.0}"
+R3,revenue,scalar,invoice|completed|tests-excluded,True,False,5084364.0
+R3,revenue,scalar,invoice|completed|tests-included,False,False,5690071.0
+R3,revenue,scalar,invoice|all|tests-excluded,False,False,5815450.0
+R3,revenue,scalar,invoice|all|tests-included,False,False,6478553.0
+R3,revenue,scalar,order|completed|tests-excluded,False,True,5034348.0
+R3,revenue,scalar,order|completed|tests-included,False,False,5640055.0
+R3,revenue,scalar,order|all|tests-excluded,False,False,5765434.0
+R3,revenue,scalar,order|all|tests-included,False,False,6428537.0
+R4,revenue,top_region,invoice|completed|tests-excluded,True,False,"""EMEA"""
+R4,revenue,top_region,invoice|completed|tests-included,False,False,"""EMEA"""
+R4,revenue,top_region,invoice|all|tests-excluded,False,False,"""EMEA"""
+R4,revenue,top_region,invoice|all|tests-included,False,False,"""EMEA"""
+R4,revenue,top_region,order|completed|tests-excluded,False,True,"""EMEA"""
+R4,revenue,top_region,order|completed|tests-included,False,False,"""EMEA"""
+R4,revenue,top_region,order|all|tests-excluded,False,False,"""EMEA"""
+R4,revenue,top_region,order|all|tests-included,False,False,"""EMEA"""
+R5,revenue,scalar,invoice|completed|tests-excluded,True,False,9415482.0
+R5,revenue,scalar,invoice|completed|tests-included,False,False,10087296.0
+R5,revenue,scalar,invoice|all|tests-excluded,False,False,11037168.0
+R5,revenue,scalar,invoice|all|tests-included,False,False,11766378.0
+R5,revenue,scalar,order|completed|tests-excluded,False,True,9336474.0
+R5,revenue,scalar,order|completed|tests-included,False,False,10008288.0
+R5,revenue,scalar,order|all|tests-excluded,False,False,10958160.0
+R5,revenue,scalar,order|all|tests-included,False,False,11687370.0
+R6,revenue,scalar,invoice|completed|tests-excluded,True,False,1664691.0
+R6,revenue,scalar,invoice|completed|tests-included,False,False,1873606.0
+R6,revenue,scalar,invoice|all|tests-excluded,False,False,1890110.0
+R6,revenue,scalar,invoice|all|tests-included,False,False,2101281.0
+R6,revenue,scalar,order|completed|tests-excluded,False,True,1502677.0
+R6,revenue,scalar,order|completed|tests-included,False,False,1699902.0
+R6,revenue,scalar,order|all|tests-excluded,False,False,1761323.0
+R6,revenue,scalar,order|all|tests-included,False,False,1960804.0
+R7,revenue,pct,invoice|completed|tests-excluded,True,False,24.25
+R7,revenue,pct,invoice|completed|tests-included,False,False,24.61
+R7,revenue,pct,invoice|all|tests-excluded,False,False,24.52
+R7,revenue,pct,invoice|all|tests-included,False,False,24.79
+R7,revenue,pct,order|completed|tests-excluded,False,True,24.1
+R7,revenue,pct,order|completed|tests-included,False,False,24.48
+R7,revenue,pct,order|all|tests-excluded,False,False,24.39
+R7,revenue,pct,order|all|tests-included,False,False,24.67
+R8,revenue,scalar,invoice|completed|tests-excluded,True,False,19129023.0
+R8,revenue,scalar,invoice|completed|tests-included,False,False,20694370.0
+R8,revenue,scalar,invoice|all|tests-excluded,False,False,22075279.0
+R8,revenue,scalar,invoice|all|tests-included,False,False,23772336.0
+R8,revenue,scalar,order|completed|tests-excluded,False,True,18991027.0
+R8,revenue,scalar,order|completed|tests-included,False,False,20556374.0
+R8,revenue,scalar,order|all|tests-excluded,False,False,21930884.0
+R8,revenue,scalar,order|all|tests-included,False,False,23627941.0
+RR1,recurring,scalar,invoice|completed|tests-excluded|sub+support,True,False,10830779.0
+RR1,recurring,scalar,invoice|completed|tests-excluded|sub,False,False,7507391.0
+RR1,recurring,scalar,invoice|completed|tests-included|sub+support,False,False,11668293.0
+RR1,recurring,scalar,invoice|completed|tests-included|sub,False,False,8203941.0
+RR1,recurring,scalar,invoice|all|tests-excluded|sub+support,False,False,12512203.0
+RR1,recurring,scalar,invoice|all|tests-excluded|sub,False,False,8788606.0
+RR1,recurring,scalar,invoice|all|tests-included|sub+support,False,False,13393891.0
+RR1,recurring,scalar,invoice|all|tests-included|sub,False,False,9523388.0
+RR1,recurring,scalar,order|completed|tests-excluded|sub+support,False,False,10765876.0
+RR1,recurring,scalar,order|completed|tests-excluded|sub,False,True,7447969.0
+RR1,recurring,scalar,order|completed|tests-included|sub+support,False,False,11603390.0
+RR1,recurring,scalar,order|completed|tests-included|sub,False,False,8144519.0
+RR1,recurring,scalar,order|all|tests-excluded|sub+support,False,False,12440901.0
+RR1,recurring,scalar,order|all|tests-excluded|sub,False,False,8725031.0
+RR1,recurring,scalar,order|all|tests-included|sub+support,False,False,13322589.0
+RR1,recurring,scalar,order|all|tests-included|sub,False,False,9459813.0
+RR2,recurring,by_region,invoice|completed|tests-excluded|sub+support,True,False,"{""North America"": 2775334.0, ""EMEA"": 2693735.0, ""APAC"": 2812184.0, ""LATAM"": 2549526.0}"
+RR2,recurring,by_region,invoice|completed|tests-excluded|sub,False,False,"{""North America"": 1920908.0, ""EMEA"": 1883825.0, ""APAC"": 1901059.0, ""LATAM"": 1801599.0}"
+RR2,recurring,by_region,invoice|completed|tests-included|sub+support,False,False,"{""North America"": 2887838.0, ""EMEA"": 3089667.0, ""APAC"": 3034673.0, ""LATAM"": 2656115.0}"
+RR2,recurring,by_region,invoice|completed|tests-included|sub,False,False,"{""North America"": 2028947.0, ""EMEA"": 2207776.0, ""APAC"": 2075988.0, ""LATAM"": 1891230.0}"
+RR2,recurring,by_region,invoice|all|tests-excluded|sub+support,False,False,"{""North America"": 3315681.0, ""EMEA"": 3085172.0, ""APAC"": 3176401.0, ""LATAM"": 2934949.0}"
+RR2,recurring,by_region,invoice|all|tests-excluded|sub,False,False,"{""North America"": 2324309.0, ""EMEA"": 2131677.0, ""APAC"": 2190560.0, ""LATAM"": 2142060.0}"
+RR2,recurring,by_region,invoice|all|tests-included|sub+support,False,False,"{""North America"": 3435401.0, ""EMEA"": 3481104.0, ""APAC"": 3407530.0, ""LATAM"": 3069856.0}"
+RR2,recurring,by_region,invoice|all|tests-included|sub,False,False,"{""North America"": 2439564.0, ""EMEA"": 2455628.0, ""APAC"": 2374129.0, ""LATAM"": 2254067.0}"
+RR2,recurring,by_region,order|completed|tests-excluded|sub+support,False,False,"{""North America"": 2763548.0, ""EMEA"": 2650181.0, ""APAC"": 2805074.0, ""LATAM"": 2547073.0}"
+RR2,recurring,by_region,order|completed|tests-excluded|sub,False,True,"{""North America"": 1909122.0, ""EMEA"": 1845752.0, ""APAC"": 1893949.0, ""LATAM"": 1799146.0}"
+RR2,recurring,by_region,order|completed|tests-included|sub+support,False,False,"{""North America"": 2876052.0, ""EMEA"": 3046113.0, ""APAC"": 3027563.0, ""LATAM"": 2653662.0}"
+RR2,recurring,by_region,order|completed|tests-included|sub,False,False,"{""North America"": 2017161.0, ""EMEA"": 2169703.0, ""APAC"": 2068878.0, ""LATAM"": 1888777.0}"
+RR2,recurring,by_region,order|all|tests-excluded|sub+support,False,False,"{""North America"": 3299742.0, ""EMEA"": 3041618.0, ""APAC"": 3167045.0, ""LATAM"": 2932496.0}"
+RR2,recurring,by_region,order|all|tests-excluded|sub,False,False,"{""North America"": 2308370.0, ""EMEA"": 2093604.0, ""APAC"": 2183450.0, ""LATAM"": 2139607.0}"
+RR2,recurring,by_region,order|all|tests-included|sub+support,False,False,"{""North America"": 3419462.0, ""EMEA"": 3437550.0, ""APAC"": 3398174.0, ""LATAM"": 3067403.0}"
+RR2,recurring,by_region,order|all|tests-included|sub,False,False,"{""North America"": 2423625.0, ""EMEA"": 2417555.0, ""APAC"": 2367019.0, ""LATAM"": 2251614.0}"
+RR3,recurring,scalar,invoice|completed|tests-excluded|sub+support,True,False,2693735.0
+RR3,recurring,scalar,invoice|completed|tests-excluded|sub,False,False,1883825.0
+RR3,recurring,scalar,invoice|completed|tests-included|sub+support,False,False,3089667.0
+RR3,recurring,scalar,invoice|completed|tests-included|sub,False,False,2207776.0
+RR3,recurring,scalar,invoice|all|tests-excluded|sub+support,False,False,3085172.0
+RR3,recurring,scalar,invoice|all|tests-excluded|sub,False,False,2131677.0
+RR3,recurring,scalar,invoice|all|tests-included|sub+support,False,False,3481104.0
+RR3,recurring,scalar,invoice|all|tests-included|sub,False,False,2455628.0
+RR3,recurring,scalar,order|completed|tests-excluded|sub+support,False,False,2650181.0
+RR3,recurring,scalar,order|completed|tests-excluded|sub,False,True,1845752.0
+RR3,recurring,scalar,order|completed|tests-included|sub+support,False,False,3046113.0
+RR3,recurring,scalar,order|completed|tests-included|sub,False,False,2169703.0
+RR3,recurring,scalar,order|all|tests-excluded|sub+support,False,False,3041618.0
+RR3,recurring,scalar,order|all|tests-excluded|sub,False,False,2093604.0
+RR3,recurring,scalar,order|all|tests-included|sub+support,False,False,3437550.0
+RR3,recurring,scalar,order|all|tests-included|sub,False,False,2417555.0
+RR4,recurring,top_region,invoice|completed|tests-excluded|sub+support,True,False,"""APAC"""
+RR4,recurring,top_region,invoice|completed|tests-excluded|sub,False,False,"""North America"""
+RR4,recurring,top_region,invoice|completed|tests-included|sub+support,False,False,"""EMEA"""
+RR4,recurring,top_region,invoice|completed|tests-included|sub,False,False,"""EMEA"""
+RR4,recurring,top_region,invoice|all|tests-excluded|sub+support,False,False,"""North America"""
+RR4,recurring,top_region,invoice|all|tests-excluded|sub,False,False,"""North America"""
+RR4,recurring,top_region,invoice|all|tests-included|sub+support,False,False,"""EMEA"""
+RR4,recurring,top_region,invoice|all|tests-included|sub,False,False,"""EMEA"""
+RR4,recurring,top_region,order|completed|tests-excluded|sub+support,False,False,"""APAC"""
+RR4,recurring,top_region,order|completed|tests-excluded|sub,False,True,"""North America"""
+RR4,recurring,top_region,order|completed|tests-included|sub+support,False,False,"""EMEA"""
+RR4,recurring,top_region,order|completed|tests-included|sub,False,False,"""EMEA"""
+RR4,recurring,top_region,order|all|tests-excluded|sub+support,False,False,"""North America"""
+RR4,recurring,top_region,order|all|tests-excluded|sub,False,False,"""North America"""
+RR4,recurring,top_region,order|all|tests-included|sub+support,False,False,"""EMEA"""
+RR4,recurring,top_region,order|all|tests-included|sub,False,False,"""North America"""
+RR5,recurring,pct,invoice|completed|tests-excluded|sub+support,True,False,56.62
+RR5,recurring,pct,invoice|completed|tests-excluded|sub,False,False,39.25
+RR5,recurring,pct,invoice|completed|tests-included|sub+support,False,False,56.38
+RR5,recurring,pct,invoice|completed|tests-included|sub,False,False,39.64
+RR5,recurring,pct,invoice|all|tests-excluded|sub+support,False,False,56.68
+RR5,recurring,pct,invoice|all|tests-excluded|sub,False,False,39.81
+RR5,recurring,pct,invoice|all|tests-included|sub+support,False,False,56.34
+RR5,recurring,pct,invoice|all|tests-included|sub,False,False,40.06
+RR5,recurring,pct,order|completed|tests-excluded|sub+support,False,False,56.69
+RR5,recurring,pct,order|completed|tests-excluded|sub,False,True,39.22
+RR5,recurring,pct,order|completed|tests-included|sub+support,False,False,56.45
+RR5,recurring,pct,order|completed|tests-included|sub,False,False,39.62
+RR5,recurring,pct,order|all|tests-excluded|sub+support,False,False,56.73
+RR5,recurring,pct,order|all|tests-excluded|sub,False,False,39.78
+RR5,recurring,pct,order|all|tests-included|sub+support,False,False,56.38
+RR5,recurring,pct,order|all|tests-included|sub,False,False,40.04
+RR6,recurring,scalar,invoice|completed|tests-excluded|sub+support,True,False,5579766.0
+RR6,recurring,scalar,invoice|completed|tests-excluded|sub,False,False,3715392.0
+RR6,recurring,scalar,invoice|completed|tests-included|sub+support,False,False,5943708.0
+RR6,recurring,scalar,invoice|completed|tests-included|sub,False,False,4024050.0
+RR6,recurring,scalar,invoice|all|tests-excluded|sub+support,False,False,6610710.0
+RR6,recurring,scalar,invoice|all|tests-excluded|sub,False,False,4485462.0
+RR6,recurring,scalar,invoice|all|tests-included|sub+support,False,False,6974652.0
+RR6,recurring,scalar,invoice|all|tests-included|sub,False,False,4794120.0
+RR6,recurring,scalar,order|completed|tests-excluded|sub+support,False,False,5555142.0
+RR6,recurring,scalar,order|completed|tests-excluded|sub,False,True,3690768.0
+RR6,recurring,scalar,order|completed|tests-included|sub+support,False,False,5919084.0
+RR6,recurring,scalar,order|completed|tests-included|sub,False,False,3999426.0
+RR6,recurring,scalar,order|all|tests-excluded|sub+support,False,False,6586086.0
+RR6,recurring,scalar,order|all|tests-excluded|sub,False,False,4460838.0
+RR6,recurring,scalar,order|all|tests-included|sub+support,False,False,6950028.0
+RR6,recurring,scalar,order|all|tests-included|sub,False,False,4769496.0
+RR7,recurring,scalar,invoice|completed|tests-excluded|sub+support,True,False,1153497.0
+RR7,recurring,scalar,invoice|completed|tests-excluded|sub,False,False,798850.0
+RR7,recurring,scalar,invoice|completed|tests-included|sub+support,False,False,1193692.0
+RR7,recurring,scalar,invoice|completed|tests-included|sub,False,False,829162.0
+RR7,recurring,scalar,invoice|all|tests-excluded|sub+support,False,False,1241355.0
+RR7,recurring,scalar,invoice|all|tests-excluded|sub,False,False,886708.0
+RR7,recurring,scalar,invoice|all|tests-included|sub+support,False,False,1283806.0
+RR7,recurring,scalar,invoice|all|tests-included|sub,False,False,919276.0
+RR7,recurring,scalar,order|completed|tests-excluded|sub+support,False,False,987377.0
+RR7,recurring,scalar,order|completed|tests-excluded|sub,False,True,775295.0
+RR7,recurring,scalar,order|completed|tests-included|sub+support,False,False,1027572.0
+RR7,recurring,scalar,order|completed|tests-included|sub,False,False,805607.0
+RR7,recurring,scalar,order|all|tests-excluded|sub+support,False,False,1135114.0
+RR7,recurring,scalar,order|all|tests-excluded|sub,False,False,867808.0
+RR7,recurring,scalar,order|all|tests-included|sub+support,False,False,1177565.0
+RR7,recurring,scalar,order|all|tests-included|sub,False,False,900376.0
+RR8,recurring,scalar,invoice|completed|tests-excluded|sub+support,True,False,2775334.0
+RR8,recurring,scalar,invoice|completed|tests-excluded|sub,False,False,1920908.0
+RR8,recurring,scalar,invoice|completed|tests-included|sub+support,False,False,2887838.0
+RR8,recurring,scalar,invoice|completed|tests-included|sub,False,False,2028947.0
+RR8,recurring,scalar,invoice|all|tests-excluded|sub+support,False,False,3315681.0
+RR8,recurring,scalar,invoice|all|tests-excluded|sub,False,False,2324309.0
+RR8,recurring,scalar,invoice|all|tests-included|sub+support,False,False,3435401.0
+RR8,recurring,scalar,invoice|all|tests-included|sub,False,False,2439564.0
+RR8,recurring,scalar,order|completed|tests-excluded|sub+support,False,False,2763548.0
+RR8,recurring,scalar,order|completed|tests-excluded|sub,False,True,1909122.0
+RR8,recurring,scalar,order|completed|tests-included|sub+support,False,False,2876052.0
+RR8,recurring,scalar,order|completed|tests-included|sub,False,False,2017161.0
+RR8,recurring,scalar,order|all|tests-excluded|sub+support,False,False,3299742.0
+RR8,recurring,scalar,order|all|tests-excluded|sub,False,False,2308370.0
+RR8,recurring,scalar,order|all|tests-included|sub+support,False,False,3419462.0
+RR8,recurring,scalar,order|all|tests-included|sub,False,False,2423625.0
+F1,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub+support,True,False,16666376.0
+F1,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub,False,False,16666376.0
+F1,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub+support,False,False,17451807.0
+F1,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub,False,False,17451807.0
+F1,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub+support,False,False,18076154.0
+F1,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub,False,False,18076154.0
+F1,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub+support,False,False,18925808.0
+F1,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub,False,False,18925808.0
+F1,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub+support,False,False,19276683.0
+F1,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub,False,False,19276683.0
+F1,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub+support,False,False,20199572.0
+F1,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub,False,False,20199572.0
+F1,fiscal,scalar,invoice|all|tests-included|fy-feb|sub+support,False,False,20806185.0
+F1,fiscal,scalar,invoice|all|tests-included|fy-feb|sub,False,False,20806185.0
+F1,fiscal,scalar,invoice|all|tests-included|fy-jan|sub+support,False,False,21799239.0
+F1,fiscal,scalar,invoice|all|tests-included|fy-jan|sub,False,False,21799239.0
+F1,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub+support,False,False,16722185.0
+F1,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub,False,True,16722185.0
+F1,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub+support,False,False,17404110.0
+F1,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub,False,False,17404110.0
+F1,fiscal,scalar,order|completed|tests-included|fy-feb|sub+support,False,False,18129714.0
+F1,fiscal,scalar,order|completed|tests-included|fy-feb|sub,False,False,18129714.0
+F1,fiscal,scalar,order|completed|tests-included|fy-jan|sub+support,False,False,18878111.0
+F1,fiscal,scalar,order|completed|tests-included|fy-jan|sub,False,False,18878111.0
+F1,fiscal,scalar,order|all|tests-excluded|fy-feb|sub+support,False,False,19313186.0
+F1,fiscal,scalar,order|all|tests-excluded|fy-feb|sub,False,False,19313186.0
+F1,fiscal,scalar,order|all|tests-excluded|fy-jan|sub+support,False,False,20169665.0
+F1,fiscal,scalar,order|all|tests-excluded|fy-jan|sub,False,False,20169665.0
+F1,fiscal,scalar,order|all|tests-included|fy-feb|sub+support,False,False,20840439.0
+F1,fiscal,scalar,order|all|tests-included|fy-feb|sub,False,False,20840439.0
+F1,fiscal,scalar,order|all|tests-included|fy-jan|sub+support,False,False,21763390.0
+F1,fiscal,scalar,order|all|tests-included|fy-jan|sub,False,False,21763390.0
+F2,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub+support,True,False,7981269.0
+F2,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub,False,False,7981269.0
+F2,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub+support,False,False,7033243.0
+F2,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub,False,False,7033243.0
+F2,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub+support,False,False,8544896.0
+F2,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub,False,False,8544896.0
+F2,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub+support,False,False,7696168.0
+F2,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub,False,False,7696168.0
+F2,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub+support,False,False,9236728.0
+F2,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub,False,False,9236728.0
+F2,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub+support,False,False,8223519.0
+F2,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub,False,False,8223519.0
+F2,fiscal,scalar,invoice|all|tests-included|fy-feb|sub+support,False,False,9841845.0
+F2,fiscal,scalar,invoice|all|tests-included|fy-feb|sub,False,False,9841845.0
+F2,fiscal,scalar,invoice|all|tests-included|fy-jan|sub+support,False,False,8904142.0
+F2,fiscal,scalar,invoice|all|tests-included|fy-jan|sub,False,False,8904142.0
+F2,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub+support,False,False,8308388.0
+F2,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub,False,True,8308388.0
+F2,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub+support,False,False,6538613.0
+F2,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub,False,False,6538613.0
+F2,fiscal,scalar,order|completed|tests-included|fy-feb|sub+support,False,False,8879987.0
+F2,fiscal,scalar,order|completed|tests-included|fy-feb|sub,False,False,8879987.0
+F2,fiscal,scalar,order|completed|tests-included|fy-jan|sub+support,False,False,7143910.0
+F2,fiscal,scalar,order|completed|tests-included|fy-jan|sub,False,False,7143910.0
+F2,fiscal,scalar,order|all|tests-excluded|fy-feb|sub+support,False,False,9596858.0
+F2,fiscal,scalar,order|all|tests-excluded|fy-feb|sub,False,False,9596858.0
+F2,fiscal,scalar,order|all|tests-excluded|fy-jan|sub+support,False,False,7638329.0
+F2,fiscal,scalar,order|all|tests-excluded|fy-jan|sub,False,False,7638329.0
+F2,fiscal,scalar,order|all|tests-included|fy-feb|sub+support,False,False,10215695.0
+F2,fiscal,scalar,order|all|tests-included|fy-feb|sub,False,False,10215695.0
+F2,fiscal,scalar,order|all|tests-included|fy-jan|sub+support,False,False,8261324.0
+F2,fiscal,scalar,order|all|tests-included|fy-jan|sub,False,False,8261324.0
+F3,fiscal,by_region,invoice|completed|tests-excluded|fy-feb|sub+support,True,False,"{""North America"": 4659348.0, ""EMEA"": 4143104.0, ""APAC"": 3841251.0, ""LATAM"": 4022673.0}"
+F3,fiscal,by_region,invoice|completed|tests-excluded|fy-feb|sub,False,False,"{""North America"": 4659348.0, ""EMEA"": 4143104.0, ""APAC"": 3841251.0, ""LATAM"": 4022673.0}"
+F3,fiscal,by_region,invoice|completed|tests-excluded|fy-jan|sub+support,False,False,"{""North America"": 4769066.0, ""EMEA"": 4437142.0, ""APAC"": 4031785.0, ""LATAM"": 4213814.0}"
+F3,fiscal,by_region,invoice|completed|tests-excluded|fy-jan|sub,False,False,"{""North America"": 4769066.0, ""EMEA"": 4437142.0, ""APAC"": 4031785.0, ""LATAM"": 4213814.0}"
+F3,fiscal,by_region,invoice|completed|tests-included|fy-feb|sub+support,False,False,"{""North America"": 4837374.0, ""EMEA"": 4748811.0, ""APAC"": 4238190.0, ""LATAM"": 4251779.0}"
+F3,fiscal,by_region,invoice|completed|tests-included|fy-feb|sub,False,False,"{""North America"": 4837374.0, ""EMEA"": 4748811.0, ""APAC"": 4238190.0, ""LATAM"": 4251779.0}"
+F3,fiscal,by_region,invoice|completed|tests-included|fy-jan|sub+support,False,False,"{""North America"": 4977594.0, ""EMEA"": 5042849.0, ""APAC"": 4459764.0, ""LATAM"": 4445601.0}"
+F3,fiscal,by_region,invoice|completed|tests-included|fy-jan|sub,False,False,"{""North America"": 4977594.0, ""EMEA"": 5042849.0, ""APAC"": 4459764.0, ""LATAM"": 4445601.0}"
+F3,fiscal,by_region,invoice|all|tests-excluded|fy-feb|sub+support,False,False,"{""North America"": 5400235.0, ""EMEA"": 4836810.0, ""APAC"": 4471968.0, ""LATAM"": 4567670.0}"
+F3,fiscal,by_region,invoice|all|tests-excluded|fy-feb|sub,False,False,"{""North America"": 5400235.0, ""EMEA"": 4836810.0, ""APAC"": 4471968.0, ""LATAM"": 4567670.0}"
+F3,fiscal,by_region,invoice|all|tests-excluded|fy-jan|sub+support,False,False,"{""North America"": 5557034.0, ""EMEA"": 5168228.0, ""APAC"": 4705143.0, ""LATAM"": 4769167.0}"
+F3,fiscal,by_region,invoice|all|tests-excluded|fy-jan|sub,False,False,"{""North America"": 5557034.0, ""EMEA"": 5168228.0, ""APAC"": 4705143.0, ""LATAM"": 4769167.0}"
+F3,fiscal,by_region,invoice|all|tests-included|fy-feb|sub+support,False,False,"{""North America"": 5585477.0, ""EMEA"": 5499913.0, ""APAC"": 4887903.0, ""LATAM"": 4832892.0}"
+F3,fiscal,by_region,invoice|all|tests-included|fy-feb|sub,False,False,"{""North America"": 5585477.0, ""EMEA"": 5499913.0, ""APAC"": 4887903.0, ""LATAM"": 4832892.0}"
+F3,fiscal,by_region,invoice|all|tests-included|fy-jan|sub+support,False,False,"{""North America"": 5772778.0, ""EMEA"": 5831331.0, ""APAC"": 5152118.0, ""LATAM"": 5043012.0}"
+F3,fiscal,by_region,invoice|all|tests-included|fy-jan|sub,False,False,"{""North America"": 5772778.0, ""EMEA"": 5831331.0, ""APAC"": 5152118.0, ""LATAM"": 5043012.0}"
+F3,fiscal,by_region,order|completed|tests-excluded|fy-feb|sub+support,False,False,"{""North America"": 4650235.0, ""EMEA"": 4190486.0, ""APAC"": 3877806.0, ""LATAM"": 4003658.0}"
+F3,fiscal,by_region,order|completed|tests-excluded|fy-feb|sub,False,True,"{""North America"": 4650235.0, ""EMEA"": 4190486.0, ""APAC"": 3877806.0, ""LATAM"": 4003658.0}"
+F3,fiscal,by_region,order|completed|tests-excluded|fy-jan|sub+support,False,False,"{""North America"": 4776744.0, ""EMEA"": 4398904.0, ""APAC"": 4065616.0, ""LATAM"": 4162846.0}"
+F3,fiscal,by_region,order|completed|tests-excluded|fy-jan|sub,False,False,"{""North America"": 4776744.0, ""EMEA"": 4398904.0, ""APAC"": 4065616.0, ""LATAM"": 4162846.0}"
+F3,fiscal,by_region,order|completed|tests-included|fy-feb|sub+support,False,False,"{""North America"": 4826012.0, ""EMEA"": 4796193.0, ""APAC"": 4274745.0, ""LATAM"": 4232764.0}"
+F3,fiscal,by_region,order|completed|tests-included|fy-feb|sub,False,False,"{""North America"": 4826012.0, ""EMEA"": 4796193.0, ""APAC"": 4274745.0, ""LATAM"": 4232764.0}"
+F3,fiscal,by_region,order|completed|tests-included|fy-jan|sub+support,False,False,"{""North America"": 4985272.0, ""EMEA"": 5004611.0, ""APAC"": 4493595.0, ""LATAM"": 4394633.0}"
+F3,fiscal,by_region,order|completed|tests-included|fy-jan|sub,False,False,"{""North America"": 4985272.0, ""EMEA"": 5004611.0, ""APAC"": 4493595.0, ""LATAM"": 4394633.0}"
+F3,fiscal,by_region,order|all|tests-excluded|fy-feb|sub+support,False,False,"{""North America"": 5391122.0, ""EMEA"": 4845061.0, ""APAC"": 4508523.0, ""LATAM"": 4568480.0}"
+F3,fiscal,by_region,order|all|tests-excluded|fy-feb|sub,False,False,"{""North America"": 5391122.0, ""EMEA"": 4845061.0, ""APAC"": 4508523.0, ""LATAM"": 4568480.0}"
+F3,fiscal,by_region,order|all|tests-excluded|fy-jan|sub+support,False,False,"{""North America"": 5564712.0, ""EMEA"": 5129990.0, ""APAC"": 4728114.0, ""LATAM"": 4746849.0}"
+F3,fiscal,by_region,order|all|tests-excluded|fy-jan|sub,False,False,"{""North America"": 5564712.0, ""EMEA"": 5129990.0, ""APAC"": 4728114.0, ""LATAM"": 4746849.0}"
+F3,fiscal,by_region,order|all|tests-included|fy-feb|sub+support,False,False,"{""North America"": 5574115.0, ""EMEA"": 5508164.0, ""APAC"": 4924458.0, ""LATAM"": 4833702.0}"
+F3,fiscal,by_region,order|all|tests-included|fy-feb|sub,False,False,"{""North America"": 5574115.0, ""EMEA"": 5508164.0, ""APAC"": 4924458.0, ""LATAM"": 4833702.0}"
+F3,fiscal,by_region,order|all|tests-included|fy-jan|sub+support,False,False,"{""North America"": 5780456.0, ""EMEA"": 5793093.0, ""APAC"": 5175089.0, ""LATAM"": 5014752.0}"
+F3,fiscal,by_region,order|all|tests-included|fy-jan|sub,False,False,"{""North America"": 5780456.0, ""EMEA"": 5793093.0, ""APAC"": 5175089.0, ""LATAM"": 5014752.0}"
+F4,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub+support,True,False,4143104.0
+F4,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub,False,False,4143104.0
+F4,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub+support,False,False,4437142.0
+F4,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub,False,False,4437142.0
+F4,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub+support,False,False,4748811.0
+F4,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub,False,False,4748811.0
+F4,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub+support,False,False,5042849.0
+F4,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub,False,False,5042849.0
+F4,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub+support,False,False,4836810.0
+F4,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub,False,False,4836810.0
+F4,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub+support,False,False,5168228.0
+F4,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub,False,False,5168228.0
+F4,fiscal,scalar,invoice|all|tests-included|fy-feb|sub+support,False,False,5499913.0
+F4,fiscal,scalar,invoice|all|tests-included|fy-feb|sub,False,False,5499913.0
+F4,fiscal,scalar,invoice|all|tests-included|fy-jan|sub+support,False,False,5831331.0
+F4,fiscal,scalar,invoice|all|tests-included|fy-jan|sub,False,False,5831331.0
+F4,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub+support,False,False,4190486.0
+F4,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub,False,True,4190486.0
+F4,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub+support,False,False,4398904.0
+F4,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub,False,False,4398904.0
+F4,fiscal,scalar,order|completed|tests-included|fy-feb|sub+support,False,False,4796193.0
+F4,fiscal,scalar,order|completed|tests-included|fy-feb|sub,False,False,4796193.0
+F4,fiscal,scalar,order|completed|tests-included|fy-jan|sub+support,False,False,5004611.0
+F4,fiscal,scalar,order|completed|tests-included|fy-jan|sub,False,False,5004611.0
+F4,fiscal,scalar,order|all|tests-excluded|fy-feb|sub+support,False,False,4845061.0
+F4,fiscal,scalar,order|all|tests-excluded|fy-feb|sub,False,False,4845061.0
+F4,fiscal,scalar,order|all|tests-excluded|fy-jan|sub+support,False,False,5129990.0
+F4,fiscal,scalar,order|all|tests-excluded|fy-jan|sub,False,False,5129990.0
+F4,fiscal,scalar,order|all|tests-included|fy-feb|sub+support,False,False,5508164.0
+F4,fiscal,scalar,order|all|tests-included|fy-feb|sub,False,False,5508164.0
+F4,fiscal,scalar,order|all|tests-included|fy-jan|sub+support,False,False,5793093.0
+F4,fiscal,scalar,order|all|tests-included|fy-jan|sub,False,False,5793093.0
+F5,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub+support,True,False,9302125.0
+F5,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub,False,False,6511098.0
+F5,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub+support,False,False,9768989.0
+F5,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub,False,False,6817553.0
+F5,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub+support,False,False,10072072.0
+F5,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub,False,False,7153049.0
+F5,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub+support,False,False,10572611.0
+F5,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub,False,False,7480211.0
+F5,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub+support,False,False,10824838.0
+F5,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub,False,False,7637306.0
+F5,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub+support,False,False,11366361.0
+F5,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub,False,False,8018420.0
+F5,fiscal,scalar,invoice|all|tests-included|fy-feb|sub+support,False,False,11633017.0
+F5,fiscal,scalar,invoice|all|tests-included|fy-feb|sub,False,False,8317489.0
+F5,fiscal,scalar,invoice|all|tests-included|fy-jan|sub+support,False,False,12214157.0
+F5,fiscal,scalar,invoice|all|tests-included|fy-jan|sub,False,False,8719310.0
+F5,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub+support,False,False,9413348.0
+F5,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub,False,True,6582702.0
+F5,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub+support,False,False,9777289.0
+F5,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub,False,False,6785445.0
+F5,fiscal,scalar,order|completed|tests-included|fy-feb|sub+support,False,False,10181046.0
+F5,fiscal,scalar,order|completed|tests-included|fy-feb|sub,False,False,7224653.0
+F5,fiscal,scalar,order|completed|tests-included|fy-jan|sub+support,False,False,10580911.0
+F5,fiscal,scalar,order|completed|tests-included|fy-jan|sub,False,False,7448103.0
+F5,fiscal,scalar,order|all|tests-excluded|fy-feb|sub+support,False,False,10935426.0
+F5,fiscal,scalar,order|all|tests-excluded|fy-feb|sub,False,False,7708275.0
+F5,fiscal,scalar,order|all|tests-excluded|fy-jan|sub+support,False,False,11392451.0
+F5,fiscal,scalar,order|all|tests-excluded|fy-jan|sub,False,False,8004102.0
+F5,fiscal,scalar,order|all|tests-included|fy-feb|sub+support,False,False,11741356.0
+F5,fiscal,scalar,order|all|tests-included|fy-feb|sub,False,False,8388458.0
+F5,fiscal,scalar,order|all|tests-included|fy-jan|sub+support,False,False,12234305.0
+F5,fiscal,scalar,order|all|tests-included|fy-jan|sub,False,False,8704992.0
+F6,fiscal,top_region,invoice|completed|tests-excluded|fy-feb|sub+support,True,False,"""North America"""
+F6,fiscal,top_region,invoice|completed|tests-excluded|fy-feb|sub,False,False,"""North America"""
+F6,fiscal,top_region,invoice|completed|tests-excluded|fy-jan|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,invoice|completed|tests-excluded|fy-jan|sub,False,False,"""North America"""
+F6,fiscal,top_region,invoice|completed|tests-included|fy-feb|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,invoice|completed|tests-included|fy-feb|sub,False,False,"""North America"""
+F6,fiscal,top_region,invoice|completed|tests-included|fy-jan|sub+support,False,False,"""EMEA"""
+F6,fiscal,top_region,invoice|completed|tests-included|fy-jan|sub,False,False,"""EMEA"""
+F6,fiscal,top_region,invoice|all|tests-excluded|fy-feb|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,invoice|all|tests-excluded|fy-feb|sub,False,False,"""North America"""
+F6,fiscal,top_region,invoice|all|tests-excluded|fy-jan|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,invoice|all|tests-excluded|fy-jan|sub,False,False,"""North America"""
+F6,fiscal,top_region,invoice|all|tests-included|fy-feb|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,invoice|all|tests-included|fy-feb|sub,False,False,"""North America"""
+F6,fiscal,top_region,invoice|all|tests-included|fy-jan|sub+support,False,False,"""EMEA"""
+F6,fiscal,top_region,invoice|all|tests-included|fy-jan|sub,False,False,"""EMEA"""
+F6,fiscal,top_region,order|completed|tests-excluded|fy-feb|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,order|completed|tests-excluded|fy-feb|sub,False,True,"""North America"""
+F6,fiscal,top_region,order|completed|tests-excluded|fy-jan|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,order|completed|tests-excluded|fy-jan|sub,False,False,"""North America"""
+F6,fiscal,top_region,order|completed|tests-included|fy-feb|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,order|completed|tests-included|fy-feb|sub,False,False,"""North America"""
+F6,fiscal,top_region,order|completed|tests-included|fy-jan|sub+support,False,False,"""EMEA"""
+F6,fiscal,top_region,order|completed|tests-included|fy-jan|sub,False,False,"""EMEA"""
+F6,fiscal,top_region,order|all|tests-excluded|fy-feb|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,order|all|tests-excluded|fy-feb|sub,False,False,"""North America"""
+F6,fiscal,top_region,order|all|tests-excluded|fy-jan|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,order|all|tests-excluded|fy-jan|sub,False,False,"""North America"""
+F6,fiscal,top_region,order|all|tests-included|fy-feb|sub+support,False,False,"""North America"""
+F6,fiscal,top_region,order|all|tests-included|fy-feb|sub,False,False,"""North America"""
+F6,fiscal,top_region,order|all|tests-included|fy-jan|sub+support,False,False,"""EMEA"""
+F6,fiscal,top_region,order|all|tests-included|fy-jan|sub,False,False,"""EMEA"""
+F7,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub+support,True,False,3901313.0
+F7,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub,False,False,3901313.0
+F7,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub+support,False,False,3208267.0
+F7,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub,False,False,3208267.0
+F7,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub+support,False,False,4277546.0
+F7,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub,False,False,4277546.0
+F7,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub+support,False,False,3490364.0
+F7,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub,False,False,3490364.0
+F7,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub+support,False,False,4490927.0
+F7,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub,False,False,4490927.0
+F7,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub+support,False,False,3617849.0
+F7,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub,False,False,3617849.0
+F7,fiscal,scalar,invoice|all|tests-included|fy-feb|sub+support,False,False,4877516.0
+F7,fiscal,scalar,invoice|all|tests-included|fy-feb|sub,False,False,4877516.0
+F7,fiscal,scalar,invoice|all|tests-included|fy-jan|sub+support,False,False,3916244.0
+F7,fiscal,scalar,invoice|all|tests-included|fy-jan|sub,False,False,3916244.0
+F7,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub+support,False,False,4090354.0
+F7,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub,False,True,4090354.0
+F7,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub+support,False,False,3170375.0
+F7,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub,False,False,3170375.0
+F7,fiscal,scalar,order|completed|tests-included|fy-feb|sub+support,False,False,4491484.0
+F7,fiscal,scalar,order|completed|tests-included|fy-feb|sub,False,False,4491484.0
+F7,fiscal,scalar,order|completed|tests-included|fy-jan|sub+support,False,False,3492709.0
+F7,fiscal,scalar,order|completed|tests-included|fy-jan|sub,False,False,3492709.0
+F7,fiscal,scalar,order|all|tests-excluded|fy-feb|sub+support,False,False,4739071.0
+F7,fiscal,scalar,order|all|tests-excluded|fy-feb|sub,False,False,4739071.0
+F7,fiscal,scalar,order|all|tests-excluded|fy-jan|sub+support,False,False,3569097.0
+F7,fiscal,scalar,order|all|tests-excluded|fy-jan|sub,False,False,3569097.0
+F7,fiscal,scalar,order|all|tests-included|fy-feb|sub+support,False,False,5153035.0
+F7,fiscal,scalar,order|all|tests-included|fy-feb|sub,False,False,5153035.0
+F7,fiscal,scalar,order|all|tests-included|fy-jan|sub+support,False,False,3901787.0
+F7,fiscal,scalar,order|all|tests-included|fy-jan|sub,False,False,3901787.0
+F8,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub+support,True,False,8187114.0
+F8,fiscal,scalar,invoice|completed|tests-excluded|fy-feb|sub,False,False,8187114.0
+F8,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub+support,False,False,8574066.0
+F8,fiscal,scalar,invoice|completed|tests-excluded|fy-jan|sub,False,False,8574066.0
+F8,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub+support,False,False,8858928.0
+F8,fiscal,scalar,invoice|completed|tests-included|fy-feb|sub,False,False,8858928.0
+F8,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub+support,False,False,9245880.0
+F8,fiscal,scalar,invoice|completed|tests-included|fy-jan|sub,False,False,9245880.0
+F8,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub+support,False,False,9604434.0
+F8,fiscal,scalar,invoice|all|tests-excluded|fy-feb|sub,False,False,9604434.0
+F8,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub+support,False,False,10074570.0
+F8,fiscal,scalar,invoice|all|tests-excluded|fy-jan|sub,False,False,10074570.0
+F8,fiscal,scalar,invoice|all|tests-included|fy-feb|sub+support,False,False,10333644.0
+F8,fiscal,scalar,invoice|all|tests-included|fy-feb|sub,False,False,10333644.0
+F8,fiscal,scalar,invoice|all|tests-included|fy-jan|sub+support,False,False,10803780.0
+F8,fiscal,scalar,invoice|all|tests-included|fy-jan|sub,False,False,10803780.0
+F8,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub+support,False,False,8308164.0
+F8,fiscal,scalar,order|completed|tests-excluded|fy-feb|sub,False,True,8308164.0
+F8,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub+support,False,False,8584908.0
+F8,fiscal,scalar,order|completed|tests-excluded|fy-jan|sub,False,False,8584908.0
+F8,fiscal,scalar,order|completed|tests-included|fy-feb|sub+support,False,False,8979978.0
+F8,fiscal,scalar,order|completed|tests-included|fy-feb|sub,False,False,8979978.0
+F8,fiscal,scalar,order|completed|tests-included|fy-jan|sub+support,False,False,9256722.0
+F8,fiscal,scalar,order|completed|tests-included|fy-jan|sub,False,False,9256722.0
+F8,fiscal,scalar,order|all|tests-excluded|fy-feb|sub+support,False,False,9729114.0
+F8,fiscal,scalar,order|all|tests-excluded|fy-feb|sub,False,False,9729114.0
+F8,fiscal,scalar,order|all|tests-excluded|fy-jan|sub+support,False,False,10103202.0
+F8,fiscal,scalar,order|all|tests-excluded|fy-jan|sub,False,False,10103202.0
+F8,fiscal,scalar,order|all|tests-included|fy-feb|sub+support,False,False,10458324.0
+F8,fiscal,scalar,order|all|tests-included|fy-feb|sub,False,False,10458324.0
+F8,fiscal,scalar,order|all|tests-included|fy-jan|sub+support,False,False,10832412.0
+F8,fiscal,scalar,order|all|tests-included|fy-jan|sub,False,False,10832412.0
