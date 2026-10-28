@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask the Owner prototype</title>
+<meta name="description" content="Concept prototype for Ask the Owner, a proposed Genie feature. Not affiliated with Databricks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#11171C; --surface:#1F272D; --surface2:#182026; --border:#37444F; --border-soft:rgba(255,255,255,.1);
+  --text:#E8ECF0; --muted:#92A4B3; --faint:#5F7281;
+  --blue:#4299E0; --blue-soft:rgba(66,153,224,.12); --bubble:#04355D;
+  --green:#3BA65E; --green-soft:rgba(59,166,94,.15); --amber:#DE9A3A; --amber-soft:rgba(222,154,58,.14);
+  --red:#E65B4D;
+  --g1:#4299E0; --g2:#CA42E0; --g3:#FF5F46;
+  --sys:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  --dm:"DM Sans",var(--sys);
+}
+*{box-sizing:border-box}
+:root{color-scheme:dark}
+*{scrollbar-color:#37444F transparent;scrollbar-width:thin}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#37444F;border-radius:6px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:#4A5967}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--text);font:13px/18px var(--sys);-webkit-font-smoothing:antialiased;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+
+/* ---------- prototype controls (not part of the product) ---------- */
+.pnav{position:fixed;left:12px;bottom:12px;z-index:60;display:flex;align-items:center;gap:8px;background:rgba(24,32,38,.96);border:1px solid var(--border);border-radius:999px;padding:7px;font-family:var(--dm);box-shadow:0 4px 16px rgba(0,0,0,.35)}
+.pbtn{border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:7px 16px;font-size:14px;font-weight:500;color:var(--text)}
+.pbtn.primary{background:#2272B4;border-color:#2272B4;color:#fff}
+.pbtn:disabled{opacity:.4;cursor:default}
+.pstep{font-size:14px;color:var(--muted);min-width:52px;text-align:center}
+
+/* ---------- stage ---------- */
+.stage{flex:1;min-height:0;position:relative}
+.screen{position:absolute;inset:0;display:none}
+.screen.on{display:flex}
+
+/* shared product chrome */
+.topbar{height:44px;flex:none;display:flex;align-items:center;gap:12px;padding:0 12px;border-bottom:1px solid var(--surface)}
+.brand{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px}
+.brand .mark{width:22px;height:22px;border-radius:6px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center}
+.search{flex:0 1 320px;margin:0 auto;height:28px;border:1px solid var(--border);border-radius:4px;color:var(--faint);display:flex;align-items:center;padding:0 10px;gap:8px}
+.avatar{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;flex:none}
+.av-a{background:#2E6E46}.av-m{background:#8A4BB8}.av-s{background:#B86A1E}.av-g{background:var(--surface);border:1px solid var(--border)}
+.nav{width:180px;flex:none;background:var(--surface);padding:8px;overflow:auto}
+.nav .item{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-radius:4px;color:var(--text)}
+.nav .item.on{background:rgba(66,153,224,.12);color:var(--blue);font-weight:600}
+.nav .sec{color:var(--muted);padding:12px 8px 4px;font-size:12px}
+.nav .ic{width:14px;height:14px;border:1.5px solid currentColor;border-radius:3px;opacity:.75;flex:none}
+.pill{border-radius:999px;height:32px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;border:.8px solid var(--border);background:transparent}
+.pill.blue{background:var(--blue);border-color:var(--blue);color:#11171C;font-weight:500}
+.pill.ghost{border-color:var(--border)}
+.pill.sm{height:28px;padding:0 10px}
+.badge{display:inline-flex;align-items:center;gap:4px;background:rgba(232,236,240,.08);border-radius:4px;padding:1px 6px;font-size:12px;color:var(--text);white-space:nowrap}
+.badge.green{background:var(--green-soft);color:#7FD39A}
+.badge.amber{background:var(--amber-soft);color:#F0BE76}
+.badge.blue{background:var(--blue-soft);color:#8ECAFF}
+.badge.new{background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff;font-weight:600;font-size:11px}
+.spark{width:16px;height:16px;flex:none}
+.gborder{border:1px solid transparent;background:linear-gradient(var(--surface2),var(--surface2)) padding-box,linear-gradient(135deg,var(--g1),var(--g2),var(--g3)) border-box;border-radius:8px}
+.hint{animation:pulse 1.6s ease-out infinite;position:relative;z-index:1}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(66,153,224,.7)}70%{box-shadow:0 0 0 10px rgba(66,153,224,0)}100%{box-shadow:0 0 0 0 rgba(66,153,224,0)}}
+
+/* ---------- scene 1: agent workspace ---------- */
+#s1{flex-direction:column}
+.s1body{flex:1;min-height:0;display:flex}
+.s1main{flex:1;min-width:0;display:flex;flex-direction:column}
+.agentbar{height:44px;flex:none;display:flex;align-items:center;gap:10px;padding:0 16px;border-bottom:1px solid var(--surface)}
+.agentbar .title{font-weight:600;font-size:14px}
+.seg{display:flex;gap:2px;background:var(--surface);border-radius:999px;padding:2px;margin:0 auto}
+.seg span{padding:3px 10px;border-radius:999px;color:var(--muted)}
+.seg span.on{background:var(--bg);color:var(--text)}
+.s1split{flex:1;min-height:0;display:flex}
+.chatcol{flex:1;min-width:0;overflow:auto;padding:16px 20px}
+.cfg{width:420px;flex:none;border-left:1px solid var(--surface);overflow:auto;padding:12px 16px 24px}
+.tabs{display:flex;gap:16px;border-bottom:1px solid var(--surface);margin-bottom:12px}
+.tabs span{padding:6px 0;color:var(--muted)}
+.tabs span.on{color:var(--text);font-weight:600;box-shadow:inset 0 -2px 0 var(--blue)}
+.h3{font-size:18px;line-height:24px;font-weight:600;margin:4px 0 2px}
+.sub{color:var(--muted);font-size:12px}
+.instr{margin-top:10px;border:1px solid var(--border);border-radius:4px;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:18px;color:#C9D2DA;white-space:pre-wrap}
+.improve{margin-top:14px;padding:12px}
+.improve .head{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-weight:600}
+.gap{border:1px solid var(--border);border-radius:8px;padding:10px;margin-top:8px;background:var(--bg)}
+.gap .q{font-weight:600}
+.gap .guess{color:var(--muted);margin-top:2px}
+.gap .row{display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.askall{margin:8px 0 2px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+
+/* answer card (shared) */
+.qbubble{display:flex;justify-content:flex-end;margin:4px 0 12px}
+.qbubble div{background:var(--bubble);border-radius:16px;padding:12px 16px;max-width:80%}
+.ans .who{display:flex;align-items:center;gap:6px;color:var(--text);margin-bottom:8px}
+.ans .who .tp{color:var(--muted)}
+.ans p{margin:0 0 10px}
+.result{border:1px solid var(--surface);border-radius:8px;margin:8px 0 12px;overflow:hidden}
+.result .rh{display:flex;align-items:center;gap:8px;padding:8px 12px;color:var(--muted)}
+.result .rh .sc{margin-left:auto;color:var(--blue)}
+.result .chips{display:flex;gap:6px;flex-wrap:wrap;background:var(--surface);margin:0 8px;border-radius:8px;padding:8px}
+.result table{border-collapse:collapse;margin:8px 12px 12px}
+.result th{text-align:left;font-weight:600;padding:6px 12px;border-bottom:1px solid var(--surface)}
+.result td{padding:6px 12px;text-align:right}
+.result td.n{color:var(--faint);text-align:left;padding-left:4px}
+.fb{display:flex;gap:14px;color:var(--muted);margin-top:6px}
+.ansflag{margin:2px 0 10px}
+.empty{max-width:560px;margin:40px auto 0;display:flex;flex-direction:column;gap:10px}
+.empty .etitle{font-size:22px;font-weight:600;text-align:center;font-family:var(--dm)}
+.empty .edesc{color:var(--muted);text-align:center}
+.empty .ebox{border:1px solid var(--border);border-radius:12px;padding:14px;color:var(--faint);display:flex;margin-top:6px}
+.empty .eqs div{padding:10px 4px;border-bottom:1px solid rgba(255,255,255,.06);color:var(--muted)}
+.empty .ansflag{text-align:center}
+
+/* modal + toast */
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}
+.scrim.on{display:flex}
+.modal{width:520px;max-width:100%;max-height:100%;overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.5);padding:20px}
+.modal h2{margin:0 0 4px;font-size:18px;line-height:24px}
+.field{margin-top:14px}
+.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
+.input{border:1px solid var(--border);border-radius:4px;padding:7px 10px;background:var(--bg);display:flex;align-items:center;gap:8px}
+.modal ul{margin:6px 0 0;padding-left:18px;color:var(--text)}
+.modal .foot{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.note{color:var(--muted);font-size:12px;margin-top:10px}
+.toast{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);background:var(--text);color:var(--bg);border-radius:6px;padding:10px 14px;display:none;align-items:center;gap:8px;z-index:30;max-width:calc(100% - 32px);box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.toast.on{display:flex}
+
+/* ---------- scene 2: team chat (neutral, light) ---------- */
+#s2{background:#F4EDE4;align-items:center;justify-content:center;padding:16px;font-family:var(--sys)}
+.tc{width:640px;max-width:100%;background:#fff;color:#1D1C1D;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.18);overflow:hidden}
+.tc .tch{background:#3F0E40;color:#fff;padding:10px 16px;display:flex;align-items:center;gap:8px;font-weight:600}
+.tc .tch small{font-weight:400;opacity:.75}
+.tc .tcb{padding:16px}
+.tc .msg{display:flex;gap:10px}
+.tc .appav{width:36px;height:36px;border-radius:8px;background:#11171C;display:grid;place-items:center;flex:none}
+.tc .nm{font-weight:700}.tc .nm span{font-weight:400;color:#616061;font-size:12px;margin-left:6px}
+.tc .apptag{background:#E8E8E8;color:#616061;font-size:10px;font-weight:700;border-radius:3px;padding:1px 4px;margin-left:4px}
+.tc .body{font-size:15px;line-height:22px;margin-top:2px}
+.tc .att{border-left:4px solid var(--g2);padding:8px 12px;margin-top:10px;background:#FAFAFA;border-radius:0 6px 6px 0}
+.tc .att b{display:block;margin-bottom:2px}
+.tc .att li{margin:2px 0}
+.tc .tcbtn{margin-top:12px;background:#007A5A;color:#fff;border:0;border-radius:6px;padding:8px 14px;font-weight:700;font-size:14px}
+.tc .tcbtn.sec{background:#fff;color:#1D1C1D;border:1px solid #C9C9C9;margin-left:6px}
+.tc .fine{color:#616061;font-size:12px;margin-top:10px}
+
+/* ---------- scenes 3-6: Genie One ---------- */
+.one{font-family:var(--dm);flex-direction:column}
+.onebody{flex:1;min-height:0;display:flex}
+.oneside{width:200px;flex:none;padding:8px;overflow:auto;border-right:1px solid var(--surface)}
+.oneside .item{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-radius:4px}
+.oneside .newchat{color:var(--blue)}
+.oneside .item.on{background:var(--surface)}
+.oneside .label{color:var(--muted);font-size:12px;padding:10px 8px 4px}
+.oneside .chat{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;line-height:28px}
+.thread{flex:1;min-width:0;display:flex;flex-direction:column}
+.threadhead{flex:none;display:flex;align-items:center;gap:8px;padding:10px 20px;border-bottom:1px solid var(--surface);flex-wrap:wrap}
+.threadhead .t{font-weight:600;font-size:14px}
+.progress{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}
+.progress .bar{width:120px;height:4px;background:var(--surface);border-radius:2px;overflow:hidden}
+.progress .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g1),var(--g2));transition:width .4s}
+.msgs{flex:1;min-height:0;overflow:auto;padding:16px 20px 24px;scroll-behavior:smooth}
+.msgs .inner{max-width:720px;margin:0 auto}
+.gmsg{margin:0 0 16px;animation:rise .25s ease-out}
+.gmsg .who{display:flex;align-items:center;gap:6px;margin-bottom:6px;font-weight:600}
+.gmsg .txt{font-size:14px;line-height:21px}
+.gmsg .txt p{margin:0 0 8px}
+.umsg{display:flex;justify-content:flex-end;margin:0 0 16px;animation:rise .25s ease-out}
+.umsg div{background:var(--bubble);border-radius:16px;padding:10px 14px;max-width:80%;font-size:14px;line-height:20px}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{display:inline-flex;gap:4px;padding:6px 0}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.qlabel{font-weight:600;margin-bottom:4px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:8px 0 10px}
+.ccard{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;flex-direction:column}
+.ccard .cn{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;margin-bottom:8px}
+.ccard .cn .bld{width:22px;height:22px;border-radius:4px;background:var(--bg);border:1px solid var(--border);display:grid;place-items:center;font-size:11px;color:var(--muted);flex:none}
+.ccard .fact{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-top:1px solid rgba(255,255,255,.06);font-size:13px}
+.ccard .fact span:first-child{color:var(--muted)}
+.ccard .rule{margin-top:8px;font-size:13px;color:var(--text)}
+.ccard .rule b{color:var(--muted);font-weight:500}
+.ccard .cact{display:flex;gap:6px;margin-top:auto;padding-top:10px}
+.ccard.done{border-color:rgba(59,166,94,.6)}
+.choices{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:6px}
+.choice{border:.8px solid var(--border-soft);background:var(--bg);border-radius:999px;padding:6px 14px;font-size:13px;text-align:left}
+.choice.main{border-color:var(--blue);color:#8ECAFF}
+.choice:disabled{cursor:default;opacity:.45}
+.choice.picked{opacity:1;background:var(--bubble);border-color:var(--bubble);color:var(--text)}
+.restate{border-left:3px solid var(--g2);padding:6px 10px;margin:4px 0 8px;background:rgba(202,66,224,.06);border-radius:0 6px 6px 0}
+.moved{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.summary{padding:14px;margin-top:6px}
+.summary table{width:100%;border-collapse:collapse;font-size:13px}
+.summary th{text-align:left;color:var(--muted);font-weight:500;padding:6px 8px;border-bottom:1px solid var(--border)}
+.summary td{padding:8px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top}
+.summary td.num{white-space:nowrap}
+.summary .foot{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.saved{display:flex;gap:10px;align-items:flex-start;background:var(--green-soft);border:1px solid rgba(59,166,94,.45);border-radius:8px;padding:12px;margin-top:4px}
+.inset{margin-top:10px;border:1px dashed var(--border);border-radius:8px;padding:10px}
+.inset .lab{font-weight:600;margin-bottom:6px}
+.inset .defrow{display:flex;justify-content:space-between;gap:8px;padding:4px 0;flex-wrap:wrap}
+.composer{flex:none;padding:8px 20px 6px}
+.composer .box{max-width:720px;margin:0 auto;background:var(--surface);border:.8px solid var(--border-soft);border-radius:24px;padding:10px 14px;display:flex;align-items:center;gap:8px;color:var(--faint)}
+.composer .disc{text-align:center;color:var(--muted);font-size:12px;margin-top:6px}
+
+/* tracker */
+.tracker{width:280px;flex:none;border-left:1px solid var(--surface);padding:16px;overflow:auto}
+.tracker h4{margin:0 0 12px;font-size:14px}
+.tracker .sub{margin-bottom:12px}
+.metric{background:var(--surface);border-radius:8px;padding:12px;margin-bottom:10px}
+.metric .ml{color:var(--muted);font-size:12px}
+.metric .mv{display:flex;align-items:baseline;gap:8px;margin:2px 0 6px}
+.metric .mv b{font-size:28px;line-height:34px;font-weight:600;font-variant-numeric:tabular-nums}
+.metric .rule{margin:4px 0 8px;line-height:18px}
+.metric .delta{font-size:12px;font-weight:600}
+.tracker .legend{color:var(--muted);font-size:12px;line-height:17px;margin-top:6px}
+
+/* scene 6 */
+.confirmed{display:inline-flex;align-items:center;gap:6px;background:var(--green-soft);color:#9BE0B1;border-radius:4px;padding:3px 8px;font-size:12px;cursor:pointer;border:0}
+.defpop{display:none;margin-top:6px;background:var(--surface);border-radius:8px;padding:10px;font-size:13px}
+.defpop.on{display:block}
+
+/* end card */
+.endcard{position:absolute;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;padding:16px;z-index:40;font-family:var(--dm)}
+.endcard.on{display:flex}
+.endcard .box{max-width:640px;width:100%;text-align:center}
+.endcard h2{font-size:26px;line-height:32px;margin:0 0 18px}
+.endcard .et{font-size:34px;line-height:42px;font-weight:700}
+.endcard .es{font-size:18px;line-height:26px;color:var(--muted);margin-top:6px}
+.endcard .ea{font-size:16px;line-height:22px;margin-top:14px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ba div{border-radius:10px;padding:16px;text-align:left}
+.ba .b{background:var(--surface);border:1px solid var(--border)}
+.ba .a{background:var(--green-soft);border:1px solid rgba(59,166,94,.5)}
+.ba .k{font-size:14px;font-weight:600;color:var(--muted)}
+.ba .n{font-size:30px;line-height:38px;font-weight:700;margin:4px 0}
+.endcard .fine{color:var(--muted);margin-top:16px;font-size:12px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){.nav{display:none}.cfg{width:360px}}
+@media (max-width:900px){
+  .oneside{display:none}
+  .s1split{flex-direction:column;overflow:auto}
+  .chatcol{flex:none;overflow:visible}
+  .cfg{width:auto;border-left:0;border-top:1px solid var(--surface);overflow:visible}
+  .thread{min-height:0}
+  .onebody.track{flex-direction:column}
+  .tracker{width:auto;border-left:0;border-bottom:1px solid var(--surface);padding:8px 12px;order:-1;display:flex;gap:8px;overflow:visible;flex:none}
+  .tracker h4,.tracker .sub,.tracker .legend{display:none}
+  .metric{flex:1;margin:0;padding:8px;min-width:0}
+  .metric .badge{white-space:normal}
+  .metric .mv b{font-size:20px;line-height:24px}
+  .metric .mv{margin:0}
+  .search{display:none}
+  .seg{display:none}
+}
+@media (max-width:600px){
+  .app{padding-bottom:50px}
+  .pnav{left:50%;transform:translateX(-50%);bottom:8px}
+  .endcard{align-items:flex-start;overflow:auto}
+  .endcard h2{font-size:20px;line-height:26px}
+  .msgs{padding:12px 12px 16px}
+  .composer{padding:6px 12px}
+  .threadhead{padding:8px 12px}
+  .progress .bar{width:60px}
+  .chatcol{padding:12px}
+  .cfg{padding:12px}
+  .ba{grid-template-columns:1fr}
+  .ba .n{font-size:32px;line-height:38px}
+  .agentbar .pill.ghost{display:none}
+  .metric .was{display:none}
+  .summary .g{display:none}
+  .summary td,.summary th{padding:6px 4px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="ai" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="20%" stop-color="#4299E0"/><stop offset="50%" stop-color="#CA42E0"/><stop offset="80%" stop-color="#FF5F46"/></linearGradient></defs></svg>
+<div class="app">
+  <div class="stage">
+    <!-- Scene 1: Alex in the agent workspace -->
+    <section class="screen" id="s1" aria-label="Scene 1">
+      <div class="topbar">
+        <div class="brand"><span class="mark"><svg class="spark" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="url(#ai)"/></svg></span>Workspace</div>
+        <div class="search">Search data, notebooks, recents, and more…</div>
+        <span class="avatar av-a" title="Alex">A</span>
+      </div>
+      <div class="s1body">
+        <nav class="nav" aria-label="Workspace navigation">
+          <div class="item"><i class="ic"></i>Home</div><div class="item"><i class="ic"></i>Workspace</div><div class="item"><i class="ic"></i>Catalog</div>
+          <div class="sec">SQL</div>
+          <div class="item"><i class="ic"></i>SQL Editor</div><div class="item"><i class="ic"></i>Dashboards</div><div class="item on"><i class="ic"></i>Genie Agents</div><div class="item"><i class="ic"></i>SQL Warehouses</div>
+        </nav>
+        <div class="s1main">
+          <div class="agentbar">
+            <span class="title">Sales agent</span><span class="badge">Draft</span>
+            <div class="seg"><span class="on">Chat</span><span>Monitor</span><span>Benchmark</span></div>
+            <button class="pill ghost sm">Configure</button><button class="pill blue sm">Share</button>
+          </div>
+          <div class="s1split">
+            <div class="chatcol">
+              <div class="empty">
+                <div class="etitle">Sales agent</div>
+                <div class="edesc">Answers the sales team's questions about customers and pipeline.</div>
+                <div class="ebox">Ask your question…<span style="margin-left:auto">↑</span></div>
+                <div class="ansflag" id="s1flag" hidden><span class="badge amber">● 2 definitions unconfirmed · waiting on Maria</span></div>
+                <div class="eqs">
+                  <div>How many active customers do we have?</div>
+                  <div>Which region lost the most customers last quarter?</div>
+                  <div>Show active customers by segment.</div>
+                  <div>How many customers did we lose last quarter?</div>
+                  <div>What share of last year's customers are still active?</div>
+                </div>
+              </div>
+            </div>
+            <aside class="cfg" aria-label="Configure">
+              <div class="tabs"><span>About</span><span>Sources</span><span class="on">Instructions</span><span>Examples</span></div>
+              <div class="h3">General Instructions</div>
+              <div class="sub">Add general instructions on how you want this Genie Agent to behave.</div>
+              <div class="instr">Business definitions from Sales Ops:
+- Active customer: bought in the last 90 days.
+- Churned customer: a customer we lost.
+- Ignore test accounts.</div>
+              <div class="improve gborder">
+                <div class="head"><svg class="spark" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="url(#ai)"/></svg>Improve with Genie<span class="badge" style="margin-left:auto">3 gaps found</span></div>
+                <div class="askall"><button class="pill blue sm" id="askAll"><span class="badge new">New</span>Ask the owner about all 3</button></div>
+                <div class="gap" data-gap="1"><div class="q">Which date makes a customer active: order date or billing date?</div><div class="guess">Alex's guess: order date</div><div class="row"><button class="pill sm ghost">Keep my guess</button><button class="pill sm ghost askone">Ask the owner</button><span class="status"></span></div></div>
+                <div class="gap" data-gap="2"><div class="q">Do refunded orders and internal test accounts count?</div><div class="guess">Alex's guess: neither counts</div><div class="row"><button class="pill sm ghost">Keep my guess</button><button class="pill sm ghost askone">Ask the owner</button><span class="status"></span></div></div>
+                <div class="gap" data-gap="3"><div class="q">What does "churned" mean: lost last quarter, or not billed in 90 days?</div><div class="guess">Alex's guess: no completed order in 90 days, however long ago</div><div class="row"><button class="pill sm ghost">Keep my guess</button><button class="pill sm ghost askone">Ask the owner</button><span class="status"></span></div></div>
+                
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+      <div class="scrim" id="modal">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
+          <h2 id="mt">Ask the owner</h2>
+          <div class="field"><label>Owner of these definitions</label><div class="input"><span class="avatar av-m">M</span>Maria · Head of Sales Ops<span style="margin-left:auto;color:var(--muted)">▾</span></div></div>
+          <div class="field"><label>Send by</label><div class="input">Slack<span style="margin-left:auto;color:var(--muted)">▾</span></div></div>
+          <div class="field"><label>Note to Maria</label><div class="input">The sales team will use this agent for weekly pipeline reviews.</div></div>
+          <div class="field"><label>Includes 3 questions</label><ul><li>Which date makes a customer active</li><li>Whether refunds and test accounts count</li><li>What "churned" means</li></ul></div>
+          <div class="note">Until Maria confirms, answers that use these definitions are labeled Unconfirmed.</div>
+          <div class="foot"><button class="pill ghost" id="cancel">Cancel</button><button class="pill blue" id="sendBtn">Send to Maria</button></div>
+        </div>
+      </div>
+      <div class="toast" id="toast">✓ Sent to Maria. You'll be notified when she answers.</div>
+    </section>
+
+    <!-- Scene 2: team chat -->
+    <section class="screen" id="s2" aria-label="Scene 2">
+      <div class="tc">
+        <div class="tch"># Direct message</div>
+        <div class="tcb">
+          <div class="msg">
+            <div class="appav"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="url(#ai)"/></svg></div>
+            <div>
+              <div class="nm">Genie<span class="apptag">APP</span><span>6:02 PM</span></div>
+              <div class="body">Hi Maria. <b>Alex (Data team)</b> is building a <b>Sales agent</b> in Genie. Sales reps will use it for questions about active and lost customers, by region, segment and quarter.</div>
+              <div class="att"><b>Alex needs you to settle 2 definitions</b>What Sales Ops counts as an active customer and a lost customer. Every answer the agent gives about them will follow your rules.
+                <ul><li>About 3 minutes</li><li>You'll judge real customers, no SQL</li></ul></div>
+              <button class="tcbtn" id="openGenie">Answer in Genie One</button><button class="tcbtn sec">Not me</button>
+              <div class="fine">Alex's note: "The sales team will use this agent for weekly pipeline reviews."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scenes 3-5: Maria in Genie One -->
+    <section class="screen one" id="s3" aria-label="Scenes 3 to 5">
+      <div class="topbar">
+        <div class="brand"><span class="mark"><svg class="spark" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="url(#ai)"/></svg></span>Genie One</div>
+        <span style="margin-left:auto" class="avatar av-m" title="Maria">M</span>
+      </div>
+      <div class="onebody track">
+        <nav class="oneside" aria-label="Genie One navigation">
+          <div class="item newchat">+ New chat</div><div class="item">Agents</div><div class="item">Discover</div><div class="item">My stuff</div>
+          <div class="label">Today</div>
+          <div class="item on"><span class="chat">Questions from Alex · Sales agent</span></div>
+          <div class="label">Yesterday</div>
+          <div class="item"><span class="chat">Q3 bookings by region</span></div>
+          <div class="item"><span class="chat">Top accounts by renewal date</span></div>
+        </nav>
+        <div class="thread">
+          <div class="threadhead"><span class="t">Questions from Alex · Sales agent</span><span class="badge blue">Ask the Owner</span>
+            <div class="progress"><span id="progTxt">0 of 3 answered</span><span class="bar"><i id="progBar"></i></span></div></div>
+          <div class="msgs" id="msgs"><div class="inner" id="inner"></div></div>
+          <div class="composer"><div class="box">Reply to Genie, or type your own answer…<span style="margin-left:auto">↑</span></div><div class="disc">Always review the accuracy of responses.</div></div>
+        </div>
+        <aside class="tracker" aria-label="Definitions in the Sales agent">
+          <h4>Definitions in the Sales agent</h4>
+          <div class="metric" id="mActive"><div class="ml">Active customer</div><div class="rule"></div><div class="st"></div></div>
+          <div class="metric" id="mChurn"><div class="ml">Lost last quarter</div><div class="rule"></div><div class="st"></div></div>
+          <div class="legend">Every answer that uses these definitions follows them. Nothing is saved until you confirm.</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Scene 6: Sam asks -->
+    <section class="screen one" id="s6" aria-label="Scene 6">
+      <div class="topbar">
+        <div class="brand"><span class="mark"><svg class="spark" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="url(#ai)"/></svg></span>Genie One</div>
+        <span style="margin-left:auto" class="avatar av-s" title="Sam">S</span>
+      </div>
+      <div class="onebody">
+        <nav class="oneside" aria-label="Genie One navigation">
+          <div class="item newchat">+ New chat</div><div class="item">Agents</div><div class="item">Discover</div><div class="item">My stuff</div>
+          <div class="label">Today</div>
+          <div class="item on"><span class="chat">Lost customers by region</span></div>
+        </nav>
+        <div class="thread">
+          <div class="threadhead"><span class="t">Sales agent</span><span class="badge">Reviewable</span></div>
+          <div class="msgs"><div class="inner">
+            <div class="umsg"><div>Which region lost the most customers last quarter?</div></div>
+            <div class="gmsg" id="s6ans">
+              <div class="who"><svg class="spark" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="url(#ai)"/></svg>Genie <span class="sub" style="font-weight:400">Thought process ›</span></div>
+              <div class="txt"><p><b>APAC</b> lost the most customers last quarter. A customer counts as lost if its last completed order was billed 91 to 180 days ago, not counting refunds or internal test accounts.</p></div>
+              <button class="confirmed" id="confBadge">✓ Uses definitions confirmed by Maria, Head of Sales Ops · <span class="dshort"></span></button>
+              <div class="defpop" id="defpop"><b>Lost last quarter</b> (in Maria's words): last completed order billed 91 to 180 days ago. Refunds and internal test accounts don't count. Confirmed <span class="dlong"></span>.</div>
+              <div class="result">
+                <div class="rh">▦ Result table (4 rows)<span class="sc">Show code</span></div>
+                <div class="chips"><span class="badge">status: completed</span><span class="badge">is_internal: false</span><span class="badge">last billed: 91–180 days ago</span></div>
+                <table><tr><th></th><th>region</th><th>customers_lost</th></tr><tr><td class="n">1</td><td>APAC</td><td>49</td></tr><tr><td class="n">2</td><td>North America</td><td>41</td></tr><tr><td class="n">3</td><td>EMEA</td><td>38</td></tr><tr><td class="n">4</td><td>LATAM</td><td>24</td></tr></table>
+              </div>
+              <div class="fb"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 10v11H3V10h4zm0 0l4-8a3 3 0 013 3v4h5.5a2 2 0 012 2.3l-1.4 8A2 2 0 0118.1 21H7"/></svg><svg style="transform:rotate(180deg)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 10v11H3V10h4zm0 0l4-8a3 3 0 013 3v4h5.5a2 2 0 012 2.3l-1.4 8A2 2 0 0118.1 21H7"/></svg><span>Request review</span></div>
+            </div>
+          </div></div>
+          <div class="composer"><div class="box">Ask your question…<span style="margin-left:auto">↑</span></div><div class="disc">Always review the accuracy of responses.</div></div>
+        </div>
+      </div>
+      <div class="endcard" id="endcard">
+        <div class="box">
+          <div class="et">Ask the Owner</div>
+          <div class="es">Databricks APM Prototype</div>
+          <div class="ea">Anish Goel</div>
+          <div style="margin-top:22px"><button class="pill ghost" id="again">Watch again</button></div>
+        </div>
+      </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="pnav" role="navigation" aria-label="Prototype controls">
+  <button class="pbtn" id="back" aria-label="Back">‹</button>
+  <span class="pstep" id="pstep">1 / 12</span>
+  <button class="pbtn primary" id="next">Next</button>
+  <button class="pbtn" id="restart" title="Restart" aria-label="Restart">↺</button>
+</div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const SPARK = '<svg class="spark" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="url(#ai)"/></svg>';
+  const NOW = new Date();
+  const DS = NOW.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  const DL = NOW.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  const NAMES = {acme:'Acme Corp 19', wayne:'Wayne Holdings 82', test:'Internal Test 39', hooli:'Hooli Corp 294', umbrella:'Umbrella Foods 84'};
+  const MASK  = {acme:'Customer A', wayne:'Customer B', test:'Test account C', hooli:'Customer D', umbrella:'Customer E'};
+  let masked = false;
+  const nm = k => `<span data-c="${k}">${(masked?MASK:NAMES)[k]}</span>`;
+  function applyMask(){ document.querySelectorAll('[data-c]').forEach(e => e.textContent = (masked?MASK:NAMES)[e.dataset.c]); }
+
+  const STEPS = [
+    {screen:'s1', scene:1, cap:"Alex, a data analyst, is building a Sales agent. Genie found 3 details in the definitions he'd have to guess.", hint:'#askAll'},
+    {screen:'s1', scene:1, cap:"Instead of guessing, Alex sends the 3 questions to Maria, who owns the Sales definitions.", hint:'#sendBtn'},
+    {screen:'s1', scene:1, cap:"Until Maria answers, the agent labels these answers Unconfirmed.", hint:'#next'},
+    {screen:'s2', scene:2, cap:"Maria, Head of Sales Ops, gets one message: who's asking, why, and how long it takes.", hint:'#openGenie'},
+    {screen:'s3', scene:3, cap:"Genie explains what Alex is building and what the agent answers today.", hint:'#startBtn'},
+    {screen:'s3', scene:4, cap:"Question 1: Maria judges a real customer. No SQL, no rules in the abstract.", hint:'#q1main'},
+    {screen:'s3', scene:4, cap:"Question 2: two quick checks. Alex guessed right here, so the numbers don't move.", hint:'.q2ok:not(:disabled)'},
+    {screen:'s3', scene:4, cap:"Question 3: what \"lost last quarter\" means.", hint:'#q3main'},
+    {screen:'s3', scene:5, cap:"Maria reviews both definitions in plain English before anything is saved.", hint:'#confirmBtn'},
+    {screen:'s3', scene:5, cap:"Saved with her name and the date. Alex is notified, and every agent that uses these definitions follows them.", hint:'#next'},
+    {screen:'s6', scene:6, cap:"Sam, a sales rep, asks a new question. The agent applies Maria's definitions and shows who confirmed them.", hint:'#next'},
+    {screen:'s6', scene:6, cap:"Before and after.", hint:'#again'},
+  ];
+  let step = 0, busy = false, instant = false, q2 = {wayne:false, test:false};
+
+  const sleep = ms => instant ? Promise.resolve() : new Promise(r => setTimeout(r, ms));
+  const inner = $('#inner'), msgs = $('#msgs');
+  function scrollDown(){ msgs.scrollTop = msgs.scrollHeight; }
+
+  async function genie(html, delay=700){
+    const el = document.createElement('div'); el.className='gmsg';
+    el.innerHTML = `<div class="who">${SPARK}Genie</div><div class="txt"></div>`;
+    inner.appendChild(el);
+    if(!instant){ el.querySelector('.txt').innerHTML='<span class="typing"><i></i><i></i><i></i></span>'; scrollDown(); await sleep(delay); }
+    el.querySelector('.txt').innerHTML = html; applyMask(); scrollDown(); return el;
+  }
+  function maria(text){ const el=document.createElement('div'); el.className='umsg'; el.innerHTML=`<div>${text}</div>`; inner.appendChild(el); scrollDown(); }
+  function lockChoices(group, picked){ document.querySelectorAll(`[data-g="${group}"]`).forEach(b=>{b.disabled=true; if(b===picked) b.classList.add('picked');}); }
+  function progress(n){ $('#progTxt').textContent = `${n} of 3 answered`; $('#progBar').style.width = (n/3*100)+'%'; }
+
+  const RULES = {
+    activeGuess: "Ordered in the last 90 days. Refunds and test accounts don't count.",
+    activeMine: "Billed for a completed order in the last 90 days. Refunds and test accounts don't count.",
+    churnGuess: "No completed order in the last 90 days, however long ago.",
+    churnDate: "No completed order billed in the last 90 days, however long ago.",
+    churnMine: "Last completed order billed 91 to 180 days ago. Same exclusions."
+  };
+  function setDef(id, rule, status){
+    const m=$(id); m.querySelector('.rule').textContent = RULES[rule];
+    const map={guess:'<span class="badge amber">Alex\'s guess</span>', answered:'<span class="badge blue">Your answer · not saved yet</span>', partial:'<span class="badge blue">Date changed by your answer</span>', confirmed:`<span class="badge green">✓ Confirmed by you · ${DS}</span>`};
+    m.querySelector('.st').innerHTML = map[status];
+  }
+
+  // ---------- step actions (each brings the UI from step i-1 to step i) ----------
+  const ACT = {
+    1: async () => { $('#modal').classList.add('on'); },
+    2: async () => {
+      $('#modal').classList.remove('on');
+      document.querySelectorAll('.gap .status').forEach(s=>s.innerHTML='<span class="badge amber">Waiting on Maria</span>');
+      document.querySelectorAll('.gap .row .pill').forEach(b=>b.disabled=true);
+      $('#s1flag').hidden=false;
+      const t=$('#toast'); t.classList.add('on'); if(!instant) setTimeout(()=>t.classList.remove('on'),3200); else t.classList.remove('on');
+    },
+    3: async () => {},
+    4: async () => {
+      inner.innerHTML=''; progress(0);
+      await genie(`<p>Hi Maria. <b>Alex</b> is building the <b>Sales agent</b> your team will use for questions about active and lost customers.</p>
+        <p>Right now it uses Alex's best guesses for two of your definitions, <b>active customer</b> and <b>lost last quarter</b>. Every answer that uses them, by region, segment or quarter, inherits those guesses.</p>
+        <p>You own these definitions, so Alex asked you to settle 3 details. I'll show you real customers and you tell me whether they count. The definitions on the right update as you go.</p>
+        <div class="choices"><button class="choice main" id="startBtn" data-g="start">Start (3 questions)</button><button class="choice off" data-g="start" data-off="notme">Not me, ask someone else</button></div>`, 900);
+    },
+    5: async () => {
+      lockChoices('start', $('#startBtn')); maria('Start');
+      await genie(`<div class="qlabel">Which date makes a customer active?</div>
+        <p>Some orders are billed days or weeks after they're placed. Should "active" go by when a customer <b>ordered</b> or when they were <b>billed</b>?</p>
+        <div class="cards"><div class="ccard"><div class="cn"><span class="bld">▦</span>${nm('acme')}</div>
+          <div class="fact"><span>Ordered</span><span>94 days ago</span></div>
+          <div class="fact"><span>Billed</span><span>81 days ago</span></div>
+          <div class="fact"><span>Order status</span><span>Completed</span></div></div></div>
+        <p>Is ${nm('acme')} an active customer, meaning it bought in the last 90 days?</p>
+        <div class="choices"><button class="choice main" id="q1main" data-g="q1">Yes, the billing date counts</button><button class="choice off" data-g="q1" data-off="order">No, the order date counts</button><button class="choice off" data-g="q1" data-off="unsure">I'm not sure</button></div>`);
+    },
+    6: async () => {
+      lockChoices('q1', $('#q1main')); maria('Yes, the billing date counts'); progress(1);
+      await genie(`<div class="restate">Got it: a customer is <b>active if it was billed for a completed order in the last 90 days</b>.</div>
+        <p>Alex's guess used the order date, so customers like ${nm('acme')}, billed recently for an older order, were left out. Lost customers are measured the same way, so this applies to both definitions.</p>`);
+      setDef('#mActive','activeMine','answered'); setDef('#mChurn','churnDate','partial');
+      await sleep(900);
+      await genie(`<div class="qlabel">Two quick checks on Alex's guesses</div>
+        <p>Alex already made two calls. Tell me if they match how Sales Ops counts.</p>
+        <div class="cards">
+          <div class="ccard" id="cWayne"><div class="cn"><span class="bld">▦</span>${nm('wayne')}</div>
+            <div class="fact"><span>Last order</span><span>Refunded · billed 76 days ago</span></div>
+            <div class="fact"><span>Last completed order</span><span>Billed 111 days ago</span></div>
+            <div class="rule"><b>Alex's rule:</b> not active, because refunded orders don't count.</div>
+            <div class="cact"><button class="choice main q2ok" data-g="q2w" data-k="wayne">Correct</button><button class="choice off" data-g="q2w" data-off="refund">Wrong</button></div></div>
+          <div class="ccard" id="cTest"><div class="cn"><span class="bld">▦</span>${nm('test')}</div>
+            <div class="fact"><span>Account type</span><span>Our own test account</span></div>
+            <div class="fact"><span>Last completed order</span><span>Billed 16 days ago</span></div>
+            <div class="rule"><b>Alex's rule:</b> never counted as a customer.</div>
+            <div class="cact"><button class="choice main q2ok" data-g="q2t" data-k="test">Correct</button><button class="choice off" data-g="q2t" data-off="tests">Wrong</button></div></div>
+        </div>`);
+    },
+    7: async () => {
+      if(instant){ q2={wayne:true,test:true}; lockChoices('q2w',document.querySelector('[data-k="wayne"]')); lockChoices('q2t',document.querySelector('[data-k="test"]')); $('#cWayne').classList.add('done'); $('#cTest').classList.add('done'); }
+      maria('Both correct'); progress(2);
+      await genie(`<div class="restate">Both confirmed: <b>refunded orders and internal test accounts don't count</b>.</div>
+        <p>Alex guessed right here, and now it's your rule instead of a guess.</p>`);
+      await sleep(900);
+      await genie(`<div class="qlabel">What does "lost last quarter" mean?</div>
+        <p>Reps will ask how many customers we lost last quarter. Alex's rule counts anyone not billed in 90 days, however long ago they left. Which of these did we lose <b>last quarter</b>?</p>
+        <div class="cards">
+          <div class="ccard"><div class="cn"><span class="bld">▦</span>${nm('hooli')}</div><div class="fact"><span>Last billed</span><span>120 days ago (about 4 months)</span></div></div>
+          <div class="ccard"><div class="cn"><span class="bld">▦</span>${nm('umbrella')}</div><div class="fact"><span>Last billed</span><span>281 days ago (about 9 months)</span></div></div>
+        </div>
+        <div class="choices"><button class="choice main" id="q3main" data-g="q3">Only ${nm('hooli')}: last billed 91 to 180 days ago</button><button class="choice off" data-g="q3" data-off="both">Both: anyone not billed in 90 days</button><button class="choice off" data-g="q3" data-off="else">Something else (type it)</button></div>`);
+    },
+    8: async () => {
+      lockChoices('q3', $('#q3main')); maria(`Only ${(masked?MASK:NAMES).hooli}: last billed 91 to 180 days ago`); progress(3);
+      await genie(`<div class="restate">Got it: a customer was <b>lost last quarter if its last completed order was billed 91 to 180 days ago</b>.</div>
+        <p>${nm('umbrella')} left before that, so it no longer counts as lost last quarter.</p>`);
+      setDef('#mChurn','churnMine','answered');
+      await sleep(900);
+      await genie(`<p>Here's what the Sales agent will use. Nothing is saved until you confirm.</p>
+        <div class="summary gborder"><table>
+          <tr><th>Definition</th><th>In your words</th><th class="g">Alex's guess</th></tr>
+          <tr><td><b>Active customer</b></td><td>Billed for a completed order in the last 90 days. Refunds and internal test accounts don't count.</td><td class="g">Ordered in the last 90 days</td></tr>
+          <tr><td><b>Lost last quarter</b></td><td>Last completed order billed 91 to 180 days ago. Same exclusions.</td><td class="g">No completed order in 90 days, however long ago</td></tr>
+        </table>
+        <div class="foot"><button class="pill blue" id="confirmBtn">Confirm both</button><button class="pill ghost off" data-off="change">Change an answer</button></div></div>`);
+    },
+    9: async () => {
+      $('#confirmBtn').disabled=true; maria('Confirm both');
+      setDef('#mActive','activeMine','confirmed'); setDef('#mChurn','churnMine','confirmed');
+      await genie(`<div class="saved"><span style="color:#7FD39A;font-size:18px">✓</span><div><b>Saved. Confirmed by Maria, Head of Sales Ops, on ${DL}.</b><br>I've let Alex know. Every agent that uses these definitions now follows your answers. You won't be asked again unless someone changes them.</div></div>
+        <div class="inset"><div class="lab">What Alex now sees in Instructions</div>
+          <div class="defrow"><span>Active customer</span><span class="badge green">✓ Confirmed by Maria · ${DS}</span></div>
+          <div class="defrow"><span>Lost last quarter</span><span class="badge green">✓ Confirmed by Maria · ${DS}</span></div></div>`);
+    },
+    10: async () => {},
+    11: async () => { $('#endcard').classList.add('on'); },
+  };
+
+  const OFF = {
+    notme:"No problem. Who owns these definitions? I'll send it to them and let Alex know. (In this prototype, continue with Start.)",
+    order:"Then Alex's guess stands. (In this prototype, continue with the billing date, which matches Sales Ops' rule in the mock data.)",
+    unsure:"That's fine. I'll keep Alex's guess, mark it Unconfirmed, and ask who on your team would know. (In this prototype, continue with the billing date.)",
+    refund:"Thanks. Should a refunded order still make a customer active? Tell me how it should work. (In this prototype, continue with Correct.)",
+    tests:"Thanks. Should our own test accounts count as customers? Tell me how it should work. (In this prototype, continue with Correct.)",
+    both:"Then anyone not billed in 90 days counts as lost last quarter, however long ago they left. (In this prototype, continue with the 91 to 180 day window.)",
+    else:"Type your rule and I'll restate it as a yes or no about these two customers before saving. (In this prototype, continue with the first option.)",
+    change:"Pick the answer to change and I'll ask that question again. (In this prototype, continue with Confirm both.)"
+  };
+
+  // ---------- rendering ----------
+  function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on', s.id===id)); }
+  function decorate(){
+    const s = STEPS[step];
+    $('#pstep').textContent = `${step+1} / ${STEPS.length}`;
+    $('#back').disabled = step===0 || busy;
+    $('#next').disabled = step===STEPS.length-1 || busy;
+    document.querySelectorAll('.hint').forEach(e=>e.classList.remove('hint'));
+    if(!busy){ const h=document.querySelector(s.hint); if(h){ h.classList.add('hint'); const r=h.getBoundingClientRect(); if(h.id!=='next' && (r.bottom>innerHeight||r.top<0)) h.scrollIntoView({block:'center',behavior:instant?'auto':'smooth'}); } }
+    showScreen(s.screen);
+  }
+  async function go(to){
+    if(busy || to<0 || to>=STEPS.length) return;
+    if(to===step+1){
+      busy=true; step=to; decorate();
+      if(to===7) { /* handled by q2 clicks */ }
+      await ACT[to]?.(); busy=false; decorate(); return;
+    }
+    // jump (Back or Restart): rebuild instantly
+    reset(); instant=true;
+    for(let i=1;i<=to;i++){ step=i; await ACT[i]?.(); }
+    instant=false; step=to; decorate(); scrollDown();
+  }
+  function reset(){
+    step=0; q2={wayne:false,test:false}; inner.innerHTML=''; progress(0);
+    $('#modal').classList.remove('on'); $('#toast').classList.remove('on'); $('#endcard').classList.remove('on'); $('#s1flag').hidden=true;
+    document.querySelectorAll('.gap .status').forEach(s=>s.innerHTML=''); document.querySelectorAll('.gap .row .pill').forEach(b=>b.disabled=false);
+    setDef('#mActive','activeGuess','guess'); setDef('#mChurn','churnGuess','guess');
+    $('#defpop').classList.remove('on');
+  }
+
+  // primary path: Next does what the highlighted button does
+  function next(){
+    if(busy) return;
+    if(step===6){ // finish both quick checks
+      ['wayne','test'].forEach(k=>{ if(!q2[k]) clickQ2(document.querySelector(`[data-k="${k}"]`), true); });
+      return;
+    }
+    go(step+1);
+  }
+  function clickQ2(btn, fromNext){
+    const k=btn.dataset.k; if(q2[k]) return; q2[k]=true;
+    lockChoices(btn.dataset.g, btn); (k==='wayne'?$('#cWayne'):$('#cTest')).classList.add('done');
+    decorate();
+    if(q2.wayne && q2.test) go(7);
+  }
+
+  document.addEventListener('click', async e => {
+    const b = e.target.closest('button'); if(!b || b.disabled) return;
+    if(b.id==='askAll'||b.classList.contains('askone')) return step===0 && go(1);
+    if(b.id==='sendBtn') return step===1 && go(2);
+    if(b.id==='cancel') return step===1 && go(0);
+    if(b.id==='openGenie') return step===3 && go(4);
+    if(b.id==='startBtn') return step===4 && go(5);
+    if(b.id==='q1main') return step===5 && go(6);
+    if(b.classList.contains('q2ok')) return step===6 && clickQ2(b);
+    if(b.id==='q3main') return step===7 && go(8);
+    if(b.id==='confirmBtn') return step===8 && go(9);
+    if(b.id==='again') return go(0);
+    if(b.id==='confBadge') return $('#defpop').classList.toggle('on');
+    if(b.dataset.off && OFF[b.dataset.off] && !busy){ busy=true; decorate(); await genie(`<p>${OFF[b.dataset.off]}</p>`, 500); busy=false; decorate(); }
+  });
+  $('#next').onclick = next;
+  $('#back').onclick = () => go(step-1);
+  $('#restart').onclick = () => go(0);
+  document.addEventListener('keydown', e => { if(e.key==='m'){ masked=!masked; applyMask(); } });
+  document.addEventListener('keydown', e => { if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') go(step-1); });
+
+  document.querySelectorAll('.dshort').forEach(e=>e.textContent=DS); document.querySelectorAll('.dlong').forEach(e=>e.textContent=DL);
+  reset(); decorate();
+  window.__proto = { go, get step(){ return step; }, get busy(){ return busy; } };
+})();
+</script>
+</body>
+</html>
