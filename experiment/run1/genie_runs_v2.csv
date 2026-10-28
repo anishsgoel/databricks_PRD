@@ -1,0 +1,74 @@
+agent,question_id,question,run,answer,predicted,truth,status,conversation_id,response_text,sql,sql_description,result_columns,result_rows,row_count,asked_clarification,error
+V2,A1,How many active customers do we have?,1,227.0,227,261,COMPLETED,01f1d15b30e118648e752109fb910c2c,There are **227 active customers** who have completed at least one order in the last 90 days and are not marked as internal accounts. This count is based on completed orders and excludes test accounts.,"SELECT COUNT(DISTINCT o.customer_id) AS active_customer_count
+FROM `workspace`.`sales`.`orders` o
+JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+WHERE o.status = 'completed'
+  AND c.is_internal = false
+  AND o.order_date >= DATE_ADD(CURRENT_DATE(), -90)","You want to see the number of unique active customers, defined as customers who have placed at least one completed order in the last 90 days, excluding internal test accounts.","[""active_customer_count""]","[[""227""]]",1,False,None
+V2,A2,How many active customers are in EMEA?,1,68.0,68,83,COMPLETED,01f1d15b49c716d4818fa9518553ab73,"There are **68 active customers** in the EMEA region, based on completed orders in the last 90 days and excluding internal customers.","SELECT COUNT(DISTINCT customers.customer_id) AS active_customers_emaa
+FROM workspace.sales.customers
+JOIN workspace.sales.orders ON customers.customer_id = orders.customer_id
+WHERE customers.region = 'EMEA'
+  AND customers.is_internal = false
+  AND orders.status = 'completed'
+  AND orders.order_date >= DATE_ADD(CURRENT_DATE(), -90)",You want to see the number of active customers in the EMEA region.,"[""active_customers_emaa""]","[[""68""]]",1,False,None
+V2,C1,How many churned customers do we have?,1,319.0,319,152,COMPLETED,01f1d15b5b441a9d8b9d86b1e7da0d7e,"Would you prefer to define churned customers using a different time window than the last 90 days, such as 60 or 120 days?
+There are **319 churned customers**, defined as customers with past completed orders but none in the last 90 days, excluding internal accounts.","WITH completed_orders AS (
+  SELECT o.customer_id, o.order_date
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed' AND c.is_internal = false
+),
+last_90_days AS (
+  SELECT DISTINCT customer_id
+  FROM completed_orders
+  WHERE order_date >= DATE_ADD(CURRENT_DATE(), -90)
+),
+historical AS (
+  SELECT DISTINCT customer_id
+  FROM completed_orders
+  WHERE order_date < DATE_ADD(CURRENT_DATE(), -90)
+)
+SELECT COUNT(*) AS churned_customers
+FROM historical
+WHERE customer_id NOT IN (SELECT customer_id FROM last_90_days)","You want to know the number of customers who have made purchases in the past but have not made any completed purchases in the last 90 days, excluding internal test accounts.","[""churned_customers""]","[[""319""]]",1,False,None
+V2,C3,How many customers in EMEA have churned?,1,89.0,89,38,COMPLETED,01f1d15b7063161fb0bf7fb2671039ef,"There are **89 churned customers** in the EMEA region, based on completed orders and excluding internal accounts. This count reflects customers who have not made a completed purchase in the last 90 days.","WITH completed_orders AS (
+  SELECT o.customer_id, o.order_date
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed' AND c.region = 'EMEA' AND c.is_internal = false
+),
+churned_customers AS (
+  SELECT customer_id
+  FROM completed_orders
+  GROUP BY customer_id
+  HAVING MAX(order_date) < DATE_SUB(CURRENT_DATE(), 90)
+)
+SELECT COUNT(*) AS churned_customers
+FROM churned_customers","You want to know the number of customers in the EMEA region who have churned, meaning they had completed orders in the past but none in the last 90 days.","[""churned_customers""]","[[""89""]]",1,False,None
+V2,E1,How many enterprise accounts do we have?,1,125.0,112 or 125,113,COMPLETED,01f1d15b81cd1a22811eec76cf7d4c80,"There are **125 enterprise accounts** based on customers who spent at least $50,000 per year on completed orders, excluding internal customers. This count is directly supported by the data provided.","SELECT COUNT(DISTINCT enterprise.customer_id) AS enterprise_account_count
+FROM (
+  SELECT c.customer_id, DATE_TRUNC('YEAR', o.order_date) AS order_year, SUM(o.amount_usd) AS yearly_spend
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE c.is_internal = false AND o.status = 'completed' AND o.order_date IS NOT NULL AND o.amount_usd IS NOT NULL
+  GROUP BY c.customer_id, DATE_TRUNC('YEAR', o.order_date)
+  HAVING SUM(o.amount_usd) >= 50000
+) enterprise","You want to know the total number of unique enterprise accounts, defined as customers who have spent at least $50,000 in completed orders within any calendar year, excluding internal test accounts.","[""enterprise_account_count""]","[[""125""]]",1,False,None
+V2,E3,How many enterprise accounts are in APAC?,1,30.0,25 or 30,26,COMPLETED,01f1d15b915b1f59898d128ee4aa0af1,"There are **30 enterprise accounts** in the APAC region, based on customers who spent at least $50,000 per year across completed orders and excluding internal customers.
+Would you prefer to see enterprise accounts based on spending over a rolling 12-month period instead of calendar years?","WITH yearly_spend AS (
+  SELECT 
+    c.customer_id,
+    DATE_TRUNC('YEAR', o.order_date) AS year,
+    SUM(o.amount_usd) AS total_spend
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE c.region = 'APAC'
+    AND c.is_internal = false
+    AND o.status = 'completed'
+    AND o.order_date IS NOT NULL
+  GROUP BY c.customer_id, DATE_TRUNC('YEAR', o.order_date)
+)
+SELECT COUNT(DISTINCT customer_id) AS enterprise_accounts
+FROM yearly_spend
+WHERE total_spend >= 50000","You want to know the number of enterprise accounts in the APAC region. An enterprise account is defined as a customer who has spent at least $50,000 in completed orders within a single year. The count excludes internal test accounts and only includes customers with completed orders that have a valid order date.","[""enterprise_accounts""]","[[""30""]]",1,False,None

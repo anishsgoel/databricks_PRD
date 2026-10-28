@@ -1,0 +1,502 @@
+agent,question_id,question,run,status,conversation_id,response_text,sql,sql_description,result_columns,result_rows,row_count,asked_clarification,error,correct,detail,uses_segments_view,uses_invoice_date,uses_order_date,filters_completed,excludes_internal,window_days,distinct_customers,final_correct,failure_code,review_note
+A,A1,How many active customers do we have?,1,COMPLETED,01f1d153c80c1834bcc3d4773a125dda,"There are **261 active customers** based on completed orders invoiced in the last 90 days, excluding internal accounts. This count reflects customers who meet the business definition of ""active customer.""","SELECT COUNT(DISTINCT o.customer_id) AS active_customer_count
+FROM `workspace`.`sales`.`orders` o
+JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+WHERE o.status = 'completed'
+  AND c.is_internal = false
+  AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)","You want to know the number of active customers, defined as customers who have had at least one completed order invoiced in the last 90 days, excluding internal test accounts.","[""active_customer_count""]","[[""261""]]",1.0,False,,True,got [261.0],False,True,False,True,True,['90'],True,True,NONE,
+A,A2,How many active customers are in EMEA?,1,COMPLETED,01f1d153d9931c1e9f8a45e6adaa95f6,"There are **83 active customers** in the EMEA region, based on completed orders invoiced in the last 90 days and excluding internal accounts. This count reflects customers who meet the business definition of ""active customer.""","SELECT COUNT(DISTINCT c.customer_id) AS active_customers_emaa
+FROM `workspace`.`sales`.`customers` c
+JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+WHERE c.region = 'EMEA'
+  AND c.is_internal = false
+  AND o.status = 'completed'
+  AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+  AND o.invoice_date IS NOT NULL;",You want to know the number of unique active customers in the EMEA region.,"[""active_customers_emaa""]","[[""83""]]",1.0,False,,True,got [83.0],False,True,False,True,True,['90'],True,True,NONE,
+A,A3,Show active customers by region.,1,COMPLETED,01f1d153eb04129aa4c48187da567881,"There are **83 active customers** in EMEA, **62** in North America, **60** in LATAM, and **56** in APAC. EMEA has the highest number of active customers, while APAC has the lowest among the listed regions.","SELECT c.region, COUNT(DISTINCT c.customer_id) AS active_customers
+FROM `workspace`.`sales`.`orders` o
+JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+WHERE o.status = 'completed'
+  AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+  AND c.is_internal = false
+  AND c.region IS NOT NULL
+GROUP BY c.region
+ORDER BY active_customers DESC;",You want to see the number of active customers broken down by their region.,"[""region"", ""active_customers""]","[[""EMEA"", ""83""], [""North America"", ""62""], [""LATAM"", ""60""], [""APAC"", ""56""]]",4.0,False,,True,"got {'EMEA': 83.0, 'North America': 62.0, 'LATAM': 60.0, 'APAC': 56.0}",False,True,False,True,True,['90'],True,True,NONE,
+A,A4,How many customers in North America are currently active?,1,COMPLETED,01f1d153fc771a1586cb4ee46ca25140,"There are **62 active customers** in North America, based on completed orders invoiced in the last 90 days and excluding internal accounts. This count reflects customers who meet the business definition of ""active customer"" for the region specified.","SELECT COUNT(DISTINCT c.customer_id) AS active_customers_na
+FROM `workspace`.`sales`.`customers` c
+JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+WHERE c.region = 'North America'
+  AND c.is_internal = false
+  AND o.status = 'completed'
+  AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)","You want to know the number of unique customers in North America who have had at least one completed order invoiced in the last 90 days, excluding internal test accounts.","[""active_customers_na""]","[[""62""]]",1.0,False,,True,got [62.0],False,True,False,True,True,['90'],True,True,NONE,
+A,A5,What percentage of our customers are active?,1,COMPLETED,01f1d1540dfc1e6ca0ca2a9faa1ea0c8,"The percentage of customers who are considered **active** is **46.52%**. This calculation is based on customers with at least one completed order invoiced in the last 90 days, excluding internal accounts.","WITH non_internal_customers AS (
+  SELECT `customer_id`
+  FROM `workspace`.`sales`.`customers`
+  WHERE `is_internal` = FALSE
+),
+active_customers AS (
+  SELECT DISTINCT o.`customer_id`
+  FROM `workspace`.`sales`.`orders` o
+  JOIN non_internal_customers c ON o.`customer_id` = c.`customer_id`
+  WHERE o.`status` = 'completed'
+    AND o.`invoice_date` >= DATE_ADD(CURRENT_DATE(), -90)
+)
+SELECT 
+  try_divide(100.0 * COUNT(ac.`customer_id`),COUNT(nic.`customer_id`)) AS percent_active_customers
+FROM non_internal_customers nic
+LEFT JOIN active_customers ac ON nic.`customer_id` = ac.`customer_id`;","You want to see the percentage of customers who are active, where active means having at least one completed order invoiced in the last 90 days, excluding internal test accounts.","[""percent_active_customers""]","[[""46.52406417112299""]]",1.0,False,,True,got [46.52406417112299],False,True,False,False,True,['90'],True,True,NONE,
+A,A6,List the active customers in LATAM.,1,COMPLETED,01f1d1541f811cf6996df6795e887361,"There are **60 active customers** in LATAM who have completed orders invoiced in the last 90 days. Examples include:
+- **Tyrell Holdings 534**
+- **Acme Systems 595**
+- **Globex Partners 516**
+- **Soylent Systems 206**
+- **Soylent Systems 559**
+
+Most customer names feature well-known business groupings such as Acme, Globex, Soylent, and Tyrell, indicating a diverse mix of active accounts in the region.","SELECT DISTINCT c.customer_id, c.customer_name
+FROM `workspace`.`sales`.`customers` c
+JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+WHERE c.region = 'LATAM'
+  AND c.is_internal = FALSE
+  AND o.status = 'completed'
+  AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+  AND c.customer_name IS NOT NULL
+  AND c.region IS NOT NULL","You want to see the list of unique active customers located in the LATAM region. Active customers are defined as those who have had at least one completed order invoiced within the last 90 days, excluding any internal test accounts.","[""customer_id"", ""customer_name""]","[[""534"", ""Tyrell Holdings 534""], [""595"", ""Acme Systems 595""], [""516"", ""Globex Partners 516""], [""206"", ""Soylent Systems 206""], [""559"", ""Soylent Systems 559""], [""512"", ""Initech Logistics 512""], [""451"", ""Tyrell Holdings 451""], [""521"", ""Vandelay Corp 521""], [""578"", ""Globex Partners 578""], [""225"", ""Wayne Foods 225""], [""202"", ""Acme Group 202""], [""546"", ""Umbrella Logistics 546""], [""557"", ""Acme Holdings 557""], [""152"", ""Cyberdyne Foods 152""], [""460"", ""Cyberdyne Corp 460""], [""465"", ""Wayne Labs 465""], [""474"", ""Umbrella Group 474""], [""157"", ""Initech Labs 157""], [""545"", ""Wayne Labs 545""], [""576"", ""Cyberdyne Labs 576""], [""543"", ""Tyrell Holdings 543""], [""156"", ""Initech Labs 156""], [""192"", ""Wayne Group 192""], [""581"", ""Initech Group 581""], [""583"", ""Umbrella Foods 583""], [""515"", ""Globex Foods 515""], [""553"", ""Globex Labs 553""], [""568"", ""Globex Labs 568""], [""593"", ""Soylent Systems 593""], [""483"", ""Acme Foods 483""], [""174"", ""Globex Partners 174""], [""440"", ""Tyrell Partners 440""], [""394"", ""Hooli Corp 394""], [""431"", ""Tyrell Group 431""], [""396"", ""Hooli Partners 396""], [""290"", ""Hooli Partners 290""], [""228"", ""Vandelay Partners 228""], [""381"", ""Umbrella Systems 381""], [""413"", ""Umbrella Corp 413""], [""108"", ""Wonka Partners 108""], [""300"", ""Wonka Systems 300""], [""438"", ""Umbrella Logistics 438""], [""292"", ""Acme Partners 292""], [""97"", ""Umbrella Systems 97""], [""240"", ""Soylent Corp 240""], [""146"", ""Tyrell Corp 146""], [""352"", ""Cyberdyne Labs 352""], [""48"", ""Soylent Holdings 48""], [""327"", ""Wonka Logistics 327""], [""301"", ""Wonka Group 301""], [""302"", ""Initech Partners 302""], [""308"", ""Cyberdyne Systems 308""], [""43"", ""Wayne Foods 43""], [""13"", ""Cyberdyne Systems 13""], [""312"", ""Tyrell Labs 312""], [""3"", ""Hooli Holdings 3""], [""7"", ""Cyberdyne Systems 7""], [""46"", ""Umbrella Holdings 46""], [""372"", ""Acme Labs 372""], [""309"", ""Initech Foods 309""]]",60.0,False,,True,60 rows,False,True,False,True,True,['90'],True,True,NONE,
+A,A7,How many active customers are billed in Germany?,1,COMPLETED,01f1d15430ec1f9ba428066c672cc703,"There are **29 active customers** billed in Germany, based on completed orders invoiced in the last 90 days and excluding internal accounts. This count is based on the most recent available data.","SELECT COUNT(DISTINCT c.customer_id) AS active_customers_germany
+FROM `workspace`.`sales`.`customers` c
+JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+WHERE c.billing_country = 'Germany'
+  AND c.is_internal = false
+  AND o.status = 'completed'
+  AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+  AND o.invoice_date IS NOT NULL",You want to know the number of unique active customers who have been billed in Germany.,"[""active_customers_germany""]","[[""29""]]",1.0,False,,True,got [29.0],False,True,False,True,True,['90'],True,True,NONE,
+A,C1,How many churned customers do we have?,1,COMPLETED,01f1d154443c10d9965e994bb1452fc7,"There are **152 churned customers** based on completed orders invoiced between 91 and 180 days ago, with no completed orders invoiced in the last 90 days, and excluding internal accounts. This count is directly supported by the data provided.","WITH completed_orders AS (
+  SELECT o.customer_id, o.invoice_date
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed' AND c.is_internal = false
+),
+churned_candidates AS (
+  SELECT customer_id
+  FROM completed_orders
+  WHERE invoice_date BETWEEN DATE_ADD(CURRENT_DATE(), -180) AND DATE_ADD(CURRENT_DATE(), -91)
+  GROUP BY customer_id
+),
+recent_active AS (
+  SELECT customer_id
+  FROM completed_orders
+  WHERE invoice_date BETWEEN DATE_ADD(CURRENT_DATE(), -90) AND CURRENT_DATE()
+  GROUP BY customer_id
+)
+SELECT COUNT(*) AS churned_customer_count
+FROM churned_candidates
+WHERE customer_id NOT IN (SELECT customer_id FROM recent_active)","You want to know the number of customers who had at least one completed order invoiced between 91 and 180 days ago but did not have any completed orders invoiced in the last 90 days, excluding internal test accounts.","[""churned_customer_count""]","[[""152""]]",1.0,False,,True,got [152.0],False,True,False,True,True,"['180', '90', '91']",False,True,NONE,
+A,C2,Show churned customers by region.,1,COMPLETED,01f1d15457a1139e85dfa296668448f1,"The number of **churned customers** by region is as follows:
+- **North America:** 41
+- **LATAM:** 24
+- **EMEA:** 38
+- **APAC:** 49
+
+APAC has the highest number of churned customers, while LATAM has the lowest among the listed regions.","WITH churned_candidates AS (
+  SELECT c.customer_id, c.region
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o
+    ON c.customer_id = o.customer_id
+  WHERE c.is_internal = FALSE
+    AND o.status = 'completed'
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -180)
+    AND o.invoice_date < DATE_ADD(CURRENT_DATE(), -90)
+),
+active_customers AS (
+  SELECT DISTINCT c.customer_id
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o
+    ON c.customer_id = o.customer_id
+  WHERE c.is_internal = FALSE
+    AND o.status = 'completed'
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+)
+SELECT cc.region, COUNT(DISTINCT cc.customer_id) AS churned_customers
+FROM churned_candidates cc
+LEFT JOIN active_customers ac
+  ON cc.customer_id = ac.customer_id
+WHERE ac.customer_id IS NULL
+GROUP BY cc.region",You want to see the number of churned customers broken down by their region.,"[""region"", ""churned_customers""]","[[""North America"", ""41""], [""LATAM"", ""24""], [""EMEA"", ""38""], [""APAC"", ""49""]]",4.0,False,,True,"got {'North America': 41.0, 'LATAM': 24.0, 'EMEA': 38.0, 'APAC': 49.0}",False,True,False,True,True,"['180', '90']",True,True,NONE,
+A,C3,How many customers in EMEA have churned?,1,COMPLETED,01f1d154691412d7b7183399e558f763,"There are **38 churned customers** in the EMEA region, based on completed orders invoiced between 91 and 180 days ago and no completed orders in the last 90 days. This count excludes internal accounts and only considers customers who meet the defined churn criteria.","WITH churn_window AS (
+  SELECT c.customer_id
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE c.region = 'EMEA'
+    AND c.is_internal = false
+    AND o.status = 'completed'
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -180)
+    AND o.invoice_date < DATE_ADD(CURRENT_DATE(), -90)
+  GROUP BY c.customer_id
+),
+active_window AS (
+  SELECT c.customer_id
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE c.region = 'EMEA'
+    AND c.is_internal = false
+    AND o.status = 'completed'
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+  GROUP BY c.customer_id
+)
+SELECT COUNT(*) AS churned_customers
+FROM churn_window
+WHERE customer_id NOT IN (SELECT customer_id FROM active_window)","You want to know the number of customers in the EMEA region who have churned, meaning they had a completed order invoiced between 91 and 180 days ago but no completed orders invoiced in the last 90 days, excluding internal test accounts.","[""churned_customers""]","[[""38""]]",1.0,False,,True,got [38.0],False,True,False,True,True,"['180', '90']",False,True,NONE,
+A,C4,How many customers have we lost recently?,1,COMPLETED,01f1d1547c6811318108f00837e0db2f,"The number of customers who have churned recently is **152**. This count includes customers who had a completed order invoiced between 91 and 180 days ago, but none in the last 90 days, and excludes internal accounts.","WITH completed_orders AS (
+  SELECT o.customer_id, o.invoice_date
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed' AND c.is_internal = false
+),
+churned_customers AS (
+  SELECT c.customer_id
+  FROM `workspace`.`sales`.`customers` c
+  WHERE c.is_internal = false
+    AND EXISTS (
+      SELECT 1 FROM completed_orders co
+      WHERE co.customer_id = c.customer_id
+        AND co.invoice_date BETWEEN date_sub(CURRENT_DATE, 180) AND date_sub(CURRENT_DATE, 91)
+    )
+    AND NOT EXISTS (
+      SELECT 1 FROM completed_orders co2
+      WHERE co2.customer_id = c.customer_id
+        AND co2.invoice_date BETWEEN date_sub(CURRENT_DATE, 90) AND CURRENT_DATE
+    )
+)
+SELECT COUNT(DISTINCT customer_id) AS churned_customer_count
+FROM churned_customers;","You want to know the number of customers who have churned recently, meaning those who had a completed order invoiced between 91 and 180 days ago but no completed orders invoiced in the last 90 days, excluding internal test accounts.","[""churned_customer_count""]","[[""152""]]",1.0,False,,True,got [152.0],False,True,False,True,True,"['180', '90', '91']",True,True,NONE,
+A,C5,Which region has the most churned customers?,1,COMPLETED,01f1d1548fb91e458f6df09ec83a5078,"The region with the **most churned customers** is **APAC**, with a total of **49 churned customers**. This is based on the latest available data and matches the criteria for churned customers as defined by Sales Ops.","WITH churned_customers AS (
+  SELECT c.customer_id, c.region
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE c.is_internal = false
+    AND o.status = 'completed'
+    AND o.invoice_date IS NOT NULL
+    AND c.region IS NOT NULL
+    AND o.invoice_date BETWEEN DATE_ADD(CURRENT_DATE(), -180) AND DATE_ADD(CURRENT_DATE(), -91)
+    AND NOT EXISTS (
+      SELECT 1
+      FROM `workspace`.`sales`.`orders` o2
+      WHERE o2.customer_id = c.customer_id
+        AND o2.status = 'completed'
+        AND o2.invoice_date BETWEEN DATE_ADD(CURRENT_DATE(), -90) AND CURRENT_DATE()
+    )
+  GROUP BY c.customer_id, c.region
+)
+SELECT region, COUNT(DISTINCT customer_id) AS churned_count
+FROM churned_customers
+GROUP BY region
+HAVING churned_count = (
+  SELECT MAX(churned_count)
+  FROM (
+    SELECT COUNT(DISTINCT customer_id) AS churned_count
+    FROM churned_customers
+    GROUP BY region
+  ) t
+)",You're asking which region has the highest number of churned customers.,"[""region"", ""churned_count""]","[[""APAC"", ""49""]]",1.0,False,,True,"first row ['APAC', '49']",False,True,False,True,True,"['180', '90', '91']",True,True,NONE,
+A,C6,How many large companies have churned?,1,COMPLETED,01f1d154a4e31eb686ab86d8621cb675,"There are **63 large companies** that have churned, based on the criteria applied in the query. This count reflects large customers who had completed orders invoiced between 91 and 180 days ago, with no completed orders invoiced in the last 90 days.","WITH churned_customers AS (
+  SELECT c.customer_id
+  FROM `workspace`.`sales`.`customers` c
+  LEFT JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE c.company_size = 'Large' AND c.is_internal = false
+    AND o.status = 'completed' AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -180) AND o.invoice_date < DATE_ADD(CURRENT_DATE(), -90)
+  GROUP BY c.customer_id
+  HAVING SUM(CASE WHEN o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90) THEN 1 ELSE 0 END) = 0
+)
+SELECT COUNT(*) AS num_large_churned_companies
+FROM churned_customers;","You want to know the number of large companies that have churned, meaning they had at least one completed order invoiced between 91 and 180 days ago but no completed orders invoiced in the last 90 days, excluding internal test accounts.","[""num_large_churned_companies""]","[[""63""]]",1.0,False,,False,got [63.0],False,True,False,True,True,"['180', '90']",False,False,CHURN_LOGIC,"Recent-order check sits after a WHERE that only keeps 91-180 day orders, so it can never fail; counts every large customer with an order 91-180 days ago (63 vs 23). Same definition applied correctly in C1/C4."
+A,E1,How many enterprise accounts do we have?,1,COMPLETED,01f1d154b6551f2c8e3f166d72951a4a,"There are **113 enterprise accounts** based on customers with completed orders invoiced in the last 365 days totaling at least $50,000, excluding internal test accounts.","SELECT COUNT(*) AS enterprise_account_count
+FROM (
+  SELECT o.customer_id
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed'
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -365)
+    AND c.is_internal = FALSE
+  GROUP BY o.customer_id
+  HAVING SUM(o.amount_usd) >= 50000
+) t","You want to know the total number of enterprise accounts, defined as customers who have completed orders invoiced in the last 365 days with a total amount of at least $50,000, excluding internal test accounts.","[""enterprise_account_count""]","[[""113""]]",1.0,False,,True,got [113.0],False,True,False,True,True,['365'],False,True,NONE,
+A,E2,Show enterprise accounts by region.,1,COMPLETED,01f1d154c7be1580b5065a609f933987,"The data shows the number of enterprise accounts by region. The highest count is in **EMEA** with 30 accounts, followed by **North America** (29), **LATAM** (28), and **APAC** (26).","WITH enterprise_accounts AS (
+  SELECT c.customer_id, c.region
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE c.is_internal = FALSE
+    AND o.status = 'completed'
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -365)
+  GROUP BY c.customer_id, c.region
+  HAVING SUM(o.amount_usd) >= 50000
+)
+SELECT region, COUNT(DISTINCT customer_id) AS enterprise_account_count
+FROM enterprise_accounts
+WHERE region IS NOT NULL
+GROUP BY region
+ORDER BY enterprise_account_count DESC;","You want to see the number of enterprise accounts broken down by region. An enterprise account is defined as a customer who is not an internal account and has completed orders invoiced in the last 365 days totaling at least $50,000. The results exclude customers without a specified region and are ordered by the count of enterprise accounts in each region, from highest to lowest.","[""region"", ""enterprise_account_count""]","[[""EMEA"", ""30""], [""North America"", ""29""], [""LATAM"", ""28""], [""APAC"", ""26""]]",4.0,False,,True,"got {'EMEA': 30.0, 'North America': 29.0, 'LATAM': 28.0, 'APAC': 26.0}",False,True,False,True,True,['365'],True,True,NONE,
+A,E3,How many enterprise accounts are in APAC?,1,COMPLETED,01f1d154d9391e0290927cefcc8e4916,"There are **26 enterprise accounts** in the APAC region based on completed orders invoiced in the last 365 days totaling at least $50,000. All accounts meet the enterprise criteria and are not internal test accounts.","SELECT COUNT(DISTINCT c.customer_id) AS enterprise_account_count
+FROM `workspace`.`sales`.`customers` c
+JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+WHERE c.region = 'APAC'
+  AND c.is_internal = FALSE
+  AND o.status = 'completed'
+  AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -365)
+GROUP BY c.customer_id
+HAVING SUM(o.amount_usd) >= 50000","You want to know the number of unique enterprise accounts in the APAC region. An enterprise account is defined as a customer who is not an internal account, has completed orders invoiced in the last 365 days, and whose total invoiced amount in that period is at least $50,000.","[""enterprise_account_count""]","[[""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""]]",26.0,False,,False,"got [1.0, 1.0, 1.0, 1.0]",False,True,False,True,True,['365'],True,True,NONE (GRAIN display bug),Text answer 26 is right; SQL groups by customer so the table shows 26 rows of 1. Definition followed.
+A,E4,Which region has the most enterprise accounts?,1,COMPLETED,01f1d154e8c91f39a24daea4fc846b6e,"The region with the most enterprise accounts is **EMEA**, with **30 enterprise accounts**.","WITH enterprise_accounts AS (SELECT c.region, c.customer_id FROM `workspace`.`sales`.`customers` c JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id WHERE c.is_internal = false AND o.status = 'completed' AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -365) AND c.region IS NOT NULL GROUP BY c.region, c.customer_id HAVING SUM(o.amount_usd) >= 50000), region_counts AS (SELECT region, COUNT(DISTINCT customer_id) AS enterprise_count FROM enterprise_accounts GROUP BY region), ranked_regions AS (SELECT region, enterprise_count, RANK() OVER (ORDER BY enterprise_count DESC) AS rnk FROM region_counts) SELECT region, enterprise_count FROM ranked_regions WHERE rnk = 1","You want to find which region has the highest number of enterprise accounts, where enterprise accounts are customers with completed orders invoiced in the last 365 days totaling at least $50,000, excluding internal test accounts and customers without a region.","[""region"", ""enterprise_count""]","[[""EMEA"", ""30""]]",1.0,False,,True,"first row ['EMEA', '30']",False,True,False,True,True,['365'],True,True,NONE,
+A,E5,How many enterprise accounts are currently active?,1,COMPLETED,01f1d15501b913d69d2ab38b9f95536b,"There are **76 enterprise accounts** that are currently active, based on customers with at least $50,000 in completed orders invoiced in the last 365 days and at least one completed order invoiced in the last 90 days. This count excludes internal test accounts.","WITH enterprise_accounts AS (
+  SELECT o.customer_id
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed'
+    AND c.is_internal = false
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -365)
+  GROUP BY o.customer_id
+  HAVING SUM(o.amount_usd) >= 50000
+), active_accounts AS (
+  SELECT o.customer_id
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed'
+    AND c.is_internal = false
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+  GROUP BY o.customer_id
+)
+SELECT COUNT(*) AS num_active_enterprise_accounts
+FROM enterprise_accounts ea
+JOIN active_accounts aa ON ea.customer_id = aa.customer_id",You want to know the number of enterprise accounts that are currently active.,"[""num_active_enterprise_accounts""]","[[""76""]]",1.0,False,,True,got [76.0],False,True,False,True,True,"['365', '90']",False,True,NONE,
+A,E6,How many mid-market companies are enterprise accounts?,1,COMPLETED,01f1d15515021e44bda0295f40787a0f,"There are **34 mid-market companies** that qualify as enterprise accounts based on completed orders invoiced in the last 365 days totaling at least $50,000. All companies in the sample meet the enterprise account criteria.","SELECT COUNT(DISTINCT c.customer_id) AS mid_market_enterprise_count
+FROM `workspace`.`sales`.`customers` c
+JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+WHERE c.company_size = 'Mid-market'
+  AND c.is_internal = false
+  AND o.status = 'completed'
+  AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -365)
+GROUP BY c.customer_id
+HAVING SUM(o.amount_usd) >= 50000","You want to know the number of unique mid-market companies that qualify as enterprise accounts, meaning they have completed orders invoiced in the last 365 days totaling at least $50,000, excluding internal test accounts.","[""mid_market_enterprise_count""]","[[""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""]]",34.0,False,,False,"got [1.0, 1.0, 1.0, 1.0]",False,True,False,True,True,['365'],True,True,NONE (GRAIN display bug),Text answer 34 is right; table shows 34 rows of 1. Definition followed.
+A,X1,How many customers are neither active nor churned?,1,COMPLETED,01f1d15526741c948edf40154dcf0d3b,"There are **148 customers** who are neither active nor churned, based on the current business definitions and excluding internal accounts. This count reflects customers who do not have any completed orders invoiced in the last 180 days.","WITH active_customers AS (
+  SELECT DISTINCT o.customer_id
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed'
+    AND c.is_internal = false
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+),
+churned_customers AS (
+  SELECT DISTINCT o.customer_id
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed'
+    AND c.is_internal = false
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -180)
+    AND o.invoice_date < DATE_ADD(CURRENT_DATE(), -90)
+    AND o.customer_id NOT IN (SELECT customer_id FROM active_customers)
+)
+SELECT COUNT(*) AS num_customers
+FROM `workspace`.`sales`.`customers` c
+WHERE c.is_internal = false
+  AND c.customer_id NOT IN (SELECT customer_id FROM active_customers)
+  AND c.customer_id NOT IN (SELECT customer_id FROM churned_customers)","You want to know the number of customers who are neither active nor churned, excluding internal test accounts.","[""num_customers""]","[[""148""]]",1.0,False,,True,got [148.0],False,True,False,True,True,"['180', '90']",True,True,NONE,
+A,A1,How many active customers do we have?,2,COMPLETED,01f1d15537f4110d809cafea33e0fccf,"There are **261 active customers** based on completed orders invoiced in the last 90 days, excluding internal accounts. This count reflects customers who meet the business definition of ""active customer.""","SELECT COUNT(DISTINCT customers.customer_id) AS active_customer_count
+FROM workspace.sales.orders
+JOIN workspace.sales.customers ON orders.customer_id = customers.customer_id
+WHERE orders.status = 'completed'
+  AND customers.is_internal = false
+  AND orders.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+  AND orders.invoice_date IS NOT NULL;","You want to know the number of active customers, defined as customers who have at least one completed order invoiced in the last 90 days, excluding internal test accounts.","[""active_customer_count""]","[[""261""]]",1.0,False,,True,got [261.0],False,True,False,True,True,['90'],True,True,NONE,
+A,A5,What percentage of our customers are active?,2,COMPLETED,01f1d15549631a798cab212cb43ac341,The percentage of customers who are **active** is **46.52%**. This calculation excludes internal accounts and is based on customers with at least one completed order invoiced in the last 90 days.,"WITH active_customers AS (
+  SELECT DISTINCT o.customer_id
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.customer_id = c.customer_id
+  WHERE o.status = 'completed'
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -90)
+    AND c.is_internal = FALSE
+)
+SELECT 
+  try_divide(100.0 * COUNT(DISTINCT ac.customer_id),COUNT(DISTINCT c.customer_id)) AS percent_active_customers
+FROM active_customers ac
+RIGHT JOIN `workspace`.`sales`.`customers` c ON ac.customer_id = c.customer_id
+WHERE c.is_internal = FALSE;","You want to know what percentage of your customers are considered active, where active means they have at least one completed order invoiced in the last 90 days, excluding internal test accounts.","[""percent_active_customers""]","[[""46.52406417112299""]]",1.0,False,,True,got [46.52406417112299],False,True,False,True,True,['90'],True,True,NONE,
+A,C1,How many churned customers do we have?,2,COMPLETED,01f1d1555ad519139e39c2abc16723b4,"There are **152 churned customers** based on the criteria of having a completed order invoiced between 91 and 180 days ago, with no completed order invoiced in the last 90 days. This count excludes internal test accounts and only considers completed orders.","WITH completed_orders AS (
+  SELECT o.`customer_id`, o.`invoice_date`
+  FROM `workspace`.`sales`.`orders` o
+  JOIN `workspace`.`sales`.`customers` c ON o.`customer_id` = c.`customer_id`
+  WHERE o.`status` = 'completed' AND c.`is_internal` = false
+)
+, churned_candidates AS (
+  SELECT DISTINCT co.`customer_id`
+  FROM completed_orders co
+  WHERE co.`invoice_date` >= DATE_ADD(CURRENT_DATE(), -180)
+    AND co.`invoice_date` < DATE_ADD(CURRENT_DATE(), -90)
+)
+, recent_active AS (
+  SELECT DISTINCT co.`customer_id`
+  FROM completed_orders co
+  WHERE co.`invoice_date` >= DATE_ADD(CURRENT_DATE(), -90)
+)
+SELECT COUNT(*) AS churned_customer_count
+FROM churned_candidates
+WHERE churned_candidates.`customer_id` NOT IN (SELECT `customer_id` FROM recent_active)","You want to know the number of customers who had at least one completed order invoiced between 91 and 180 days ago but did not have any completed orders invoiced in the last 90 days, excluding internal test accounts.","[""churned_customer_count""]","[[""152""]]",1.0,False,,True,got [152.0],False,True,False,False,True,"['180', '90']",True,True,NONE,
+A,C4,How many customers have we lost recently?,2,COMPLETED,01f1d1556a6d14c6a1f9455b6e9d22c5,"A total of **152 customers** have been lost recently, meaning they had a completed order invoiced between 91 and 180 days ago but none in the last 90 days.","WITH churn_window AS (
+  SELECT c.customer_id
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE o.status = 'completed'
+    AND o.invoice_date BETWEEN date_sub(CURRENT_DATE, 180) AND date_sub(CURRENT_DATE, 91)
+    AND c.is_internal = false
+  GROUP BY c.customer_id
+),
+active_window AS (
+  SELECT c.customer_id
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE o.status = 'completed'
+    AND o.invoice_date BETWEEN date_sub(CURRENT_DATE, 90) AND CURRENT_DATE
+    AND c.is_internal = false
+  GROUP BY c.customer_id
+)
+SELECT COUNT(*) AS churned_customers
+FROM churn_window
+WHERE customer_id NOT IN (SELECT customer_id FROM active_window)","You want to know the number of customers who had completed orders invoiced between 91 and 180 days ago but did not have any completed orders invoiced in the last 90 days, excluding internal test accounts.","[""churned_customers""]","[[""152""]]",1.0,False,,True,got [152.0],False,True,False,True,True,"['180', '90', '91']",False,True,NONE,
+A,E1,How many enterprise accounts do we have?,2,COMPLETED,01f1d1557be216bc963a95ef75a5ac5e,"There are **113 enterprise accounts** based on customers with completed orders totaling at least $50,000 invoiced in the last 365 days, excluding internal accounts. This count is directly supported by the data provided.","SELECT COUNT(*) AS enterprise_account_count
+FROM (
+  SELECT c.customer_id
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE o.status = 'completed'
+    AND o.invoice_date >= DATE_ADD(CURRENT_DATE(), -365)
+    AND c.is_internal = FALSE
+  GROUP BY c.customer_id
+  HAVING SUM(o.amount_usd) >= 50000
+)","You want to know the total number of enterprise accounts, defined as customers who have completed orders invoiced in the last 365 days with total invoiced amounts of at least $50,000, excluding internal test accounts.","[""enterprise_account_count""]","[[""113""]]",1.0,False,,True,got [113.0],False,True,False,True,True,['365'],False,True,NONE,
+B,A1,How many active customers do we have?,1,COMPLETED,01f1d1558b781925b313fdcef7810a7c,"There are **261 active customers** according to the customer_segments table, where the is_active flag is set to true.",SELECT COUNT(*) AS active_customer_count FROM `workspace`.`sales`.`customer_segments` WHERE `is_active` = TRUE;,You want to know the total number of active customers.,"[""active_customer_count""]","[[""261""]]",1.0,False,,True,got [261.0],True,False,False,False,False,[],False,True,NONE,
+B,A2,How many active customers are in EMEA?,1,COMPLETED,01f1d1559b1d1d86a143738915bceada,"There are **83 active customers** in the EMEA region, based on the current data. This count is specific to customers marked as active and located in EMEA.","SELECT COUNT(*) AS active_customers_emaa
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `is_active` = TRUE AND `region` = 'EMEA' AND `region` IS NOT NULL AND `is_active` IS NOT NULL;",You want to see the total number of active customers in the EMEA region.,"[""active_customers_emaa""]","[[""83""]]",1.0,False,,True,got [83.0],True,False,False,False,False,[],False,True,NONE,
+B,A3,Show active customers by region.,1,COMPLETED,01f1d155ac921012ba21dcf844bcd0ea,"There are **active customers** in all four regions, with the highest count in **EMEA (83)** and the lowest in **APAC (56)**. The other regions are **North America (62)** and **LATAM (60)**. EMEA leads in active customer numbers, while APAC has the fewest.","SELECT `region`, COUNT(*) AS active_customer_count FROM `workspace`.`sales`.`customer_segments` WHERE `is_active` = true AND `region` IS NOT NULL GROUP BY `region` ORDER BY active_customer_count DESC;","You want to see the number of active customers broken down by region, excluding any customers without a specified region.","[""region"", ""active_customer_count""]","[[""EMEA"", ""83""], [""North America"", ""62""], [""LATAM"", ""60""], [""APAC"", ""56""]]",4.0,False,,True,"got {'EMEA': 83.0, 'North America': 62.0, 'LATAM': 60.0, 'APAC': 56.0}",True,False,False,False,False,[],False,True,NONE,
+B,A4,How many customers in North America are currently active?,1,COMPLETED,01f1d155be0410d58ecdac96ca29b77c,There are **62 customers** in North America who are currently marked as active in the data. This count is based on the `is_active` flag for the region 'North America'.,"SELECT COUNT(*) AS active_customers_na
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `region` = 'North America' AND `is_active` = true AND `region` IS NOT NULL AND `is_active` IS NOT NULL;",You want to see the number of customers in North America who are currently active.,"[""active_customers_na""]","[[""62""]]",1.0,False,,True,got [62.0],True,False,False,False,False,[],False,True,NONE,
+B,A5,What percentage of our customers are active?,1,COMPLETED,01f1d155cf751f29b53c1201e0566d5c,The percentage of customers who are marked as active in the customer_segments table is **43.5%**.,"SELECT try_divide(100.0 * SUM(CASE WHEN `is_active` = true THEN 1 ELSE 0 END),COUNT(*)) AS percent_active_customers FROM `workspace`.`sales`.`customer_segments` WHERE `is_active` IS NOT NULL;",You want to know what percentage of your customers are currently active.,"[""percent_active_customers""]","[[""43.50000000000000""]]",1.0,False,,False,got [43.5],True,False,False,False,False,[],False,False,DENOM,"Divides by all 600 rows including 39 internal test accounts (43.5% vs 46.5%). The confirmed flags define the segment, not who counts as a customer."
+B,A6,List the active customers in LATAM.,1,COMPLETED,01f1d155df091c9e96d76c4f02fb6ba6,"There are **60 active customers** in the LATAM region. Examples include:
+- **Tyrell Holdings 534** (Mexico, Small)
+- **Wayne Labs 545** (Brazil, Mid-market)
+- **Acme Holdings 557** (Chile, Mid-market)
+- **Umbrella Logistics 546** (Mexico, Large)
+- **Globex Labs 553** (Mexico, Large)
+
+Most active customers are located in Mexico, Brazil, and Chile, with a mix of small, mid-market, and large company sizes.","SELECT `customer_id`, `customer_name`, `region`, `billing_country`, `company_size`
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `is_active` = TRUE AND `region` = 'LATAM'
+AND `customer_id` IS NOT NULL AND `customer_name` IS NOT NULL","You want to see a list of active customers located in the LATAM region, including their customer ID, name, region, billing country, and company size.","[""customer_id"", ""customer_name"", ""region"", ""billing_country"", ""company_size""]","[[""534"", ""Tyrell Holdings 534"", ""LATAM"", ""Mexico"", ""Small""], [""543"", ""Tyrell Holdings 543"", ""LATAM"", ""Mexico"", ""Large""], [""545"", ""Wayne Labs 545"", ""LATAM"", ""Brazil"", ""Mid-market""], [""546"", ""Umbrella Logistics 546"", ""LATAM"", ""Mexico"", ""Large""], [""553"", ""Globex Labs 553"", ""LATAM"", ""Mexico"", ""Large""], [""557"", ""Acme Holdings 557"", ""LATAM"", ""Chile"", ""Mid-market""], [""559"", ""Soylent Systems 559"", ""LATAM"", ""Mexico"", ""Mid-market""], [""568"", ""Globex Labs 568"", ""LATAM"", ""Mexico"", ""Small""], [""576"", ""Cyberdyne Labs 576"", ""LATAM"", ""Brazil"", ""Mid-market""], [""578"", ""Globex Partners 578"", ""LATAM"", ""Brazil"", ""Small""], [""581"", ""Initech Group 581"", ""LATAM"", ""Chile"", ""Small""], [""583"", ""Umbrella Foods 583"", ""LATAM"", ""Mexico"", ""Mid-market""], [""593"", ""Soylent Systems 593"", ""LATAM"", ""Brazil"", ""Large""], [""595"", ""Acme Systems 595"", ""LATAM"", ""Chile"", ""Small""], [""451"", ""Tyrell Holdings 451"", ""LATAM"", ""Chile"", ""Small""], [""460"", ""Cyberdyne Corp 460"", ""LATAM"", ""Mexico"", ""Mid-market""], [""465"", ""Wayne Labs 465"", ""LATAM"", ""Chile"", ""Small""], [""474"", ""Umbrella Group 474"", ""LATAM"", ""Mexico"", ""Small""], [""483"", ""Acme Foods 483"", ""LATAM"", ""Mexico"", ""Small""], [""512"", ""Initech Logistics 512"", ""LATAM"", ""Brazil"", ""Small""], [""515"", ""Globex Foods 515"", ""LATAM"", ""Brazil"", ""Large""], [""516"", ""Globex Partners 516"", ""LATAM"", ""Chile"", ""Small""], [""521"", ""Vandelay Corp 521"", ""LATAM"", ""Mexico"", ""Mid-market""], [""152"", ""Cyberdyne Foods 152"", ""LATAM"", ""Brazil"", ""Large""], [""156"", ""Initech Labs 156"", ""LATAM"", ""Mexico"", ""Large""], [""157"", ""Initech Labs 157"", ""LATAM"", ""Mexico"", ""Small""], [""174"", ""Globex Partners 174"", ""LATAM"", ""Mexico"", ""Mid-market""], [""192"", ""Wayne Group 192"", ""LATAM"", ""Mexico"", ""Mid-market""], [""202"", ""Acme Group 202"", ""LATAM"", ""Chile"", ""Mid-market""], [""206"", ""Soylent Systems 206"", ""LATAM"", ""Brazil"", ""Small""], [""225"", ""Wayne Foods 225"", ""LATAM"", ""Mexico"", ""Small""], [""228"", ""Vandelay Partners 228"", ""LATAM"", ""Mexico"", ""Small""], [""240"", ""Soylent Corp 240"", ""LATAM"", ""Chile"", ""Mid-market""], [""290"", ""Hooli Partners 290"", ""LATAM"", ""Mexico"", ""Small""], [""292"", ""Acme Partners 292"", ""LATAM"", ""Brazil"", ""Mid-market""], [""300"", ""Wonka Systems 300"", ""LATAM"", ""Chile"", ""Large""], [""381"", ""Umbrella Systems 381"", ""LATAM"", ""Mexico"", ""Large""], [""394"", ""Hooli Corp 394"", ""LATAM"", ""Mexico"", ""Mid-market""], [""396"", ""Hooli Partners 396"", ""LATAM"", ""Brazil"", ""Small""], [""413"", ""Umbrella Corp 413"", ""LATAM"", ""Chile"", ""Small""], [""431"", ""Tyrell Group 431"", ""LATAM"", ""Brazil"", ""Large""], [""438"", ""Umbrella Logistics 438"", ""LATAM"", ""Mexico"", ""Small""], [""440"", ""Tyrell Partners 440"", ""LATAM"", ""Brazil"", ""Large""], [""97"", ""Umbrella Systems 97"", ""LATAM"", ""Chile"", ""Mid-market""], [""108"", ""Wonka Partners 108"", ""LATAM"", ""Mexico"", ""Small""], [""146"", ""Tyrell Corp 146"", ""LATAM"", ""Chile"", ""Mid-market""], [""301"", ""Wonka Group 301"", ""LATAM"", ""Chile"", ""Small""], [""302"", ""Initech Partners 302"", ""LATAM"", ""Mexico"", ""Large""], [""308"", ""Cyberdyne Systems 308"", ""LATAM"", ""Chile"", ""Mid-market""], [""309"", ""Initech Foods 309"", ""LATAM"", ""Brazil"", ""Mid-market""], [""312"", ""Tyrell Labs 312"", ""LATAM"", ""Chile"", ""Small""], [""327"", ""Wonka Logistics 327"", ""LATAM"", ""Brazil"", ""Mid-market""], [""352"", ""Cyberdyne Labs 352"", ""LATAM"", ""Mexico"", ""Small""], [""372"", ""Acme Labs 372"", ""LATAM"", ""Mexico"", ""Small""], [""3"", ""Hooli Holdings 3"", ""LATAM"", ""Chile"", ""Small""], [""7"", ""Cyberdyne Systems 7"", ""LATAM"", ""Mexico"", ""Large""], [""13"", ""Cyberdyne Systems 13"", ""LATAM"", ""Chile"", ""Large""], [""43"", ""Wayne Foods 43"", ""LATAM"", ""Brazil"", ""Large""], [""46"", ""Umbrella Holdings 46"", ""LATAM"", ""Chile"", ""Mid-market""], [""48"", ""Soylent Holdings 48"", ""LATAM"", ""Chile"", ""Large""]]",60.0,False,,True,60 rows,True,False,False,False,False,[],False,True,NONE,
+B,A7,How many active customers are billed in Germany?,1,COMPLETED,01f1d155eeb415689e75da083c9d94a1,There are **29 active customers** who are billed in **Germany** according to the current data.,"SELECT COUNT(*) AS active_customers_in_germany
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `is_active` = TRUE
+  AND `billing_country` = 'Germany'
+  AND `billing_country` IS NOT NULL;",You want to see the number of active customers who are billed in Germany.,"[""active_customers_in_germany""]","[[""29""]]",1.0,False,,True,got [29.0],True,False,False,False,False,[],False,True,NONE,
+B,C1,How many churned customers do we have?,1,COMPLETED,01f1d156001d1ea0bd4dc6e44f43bd64,There are **152 churned customers** according to the data in the customer_segments table. This count is based on customers where the is_churned flag is set to true.,SELECT COUNT(*) AS churned_customers_count FROM `workspace`.`sales`.`customer_segments` WHERE `is_churned` = true;,You want to know the total number of customers who have churned.,"[""churned_customers_count""]","[[""152""]]",1.0,False,,True,got [152.0],True,False,False,False,False,[],False,True,NONE,
+B,C2,Show churned customers by region.,1,COMPLETED,01f1d1560fbc1a05ac101881bdfcd679,"There are **churned customers** in each region, with the highest number in **APAC (49)** and the lowest in **LATAM (24)**. The other regions have **41** in North America and **38** in EMEA. APAC stands out as the region with the most churned customers.","SELECT `region`, COUNT(*) AS churned_customers
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `is_churned` = true AND `region` IS NOT NULL
+GROUP BY `region`",You want to see the number of churned customers broken down by region.,"[""region"", ""churned_customers""]","[[""LATAM"", ""24""], [""North America"", ""41""], [""EMEA"", ""38""], [""APAC"", ""49""]]",4.0,False,,True,"got {'LATAM': 24.0, 'North America': 41.0, 'EMEA': 38.0, 'APAC': 49.0}",True,False,False,False,False,[],False,True,NONE,
+B,C3,How many customers in EMEA have churned?,1,COMPLETED,01f1d1561f521e0bae77727074978642,"There are **38 customers** in the EMEA region who have churned, based on the current data.","SELECT COUNT(DISTINCT `customer_id`) AS churned_customers_emaa
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `region` = 'EMEA' AND `is_churned` = true;",You want to know the number of unique customers in the EMEA region who have churned.,"[""churned_customers_emaa""]","[[""38""]]",1.0,False,,True,got [38.0],True,False,False,False,False,[],True,True,NONE,
+B,C4,How many customers have we lost recently?,1,COMPLETED,01f1d15630c118a791ba7f86a9541da4,"The number of customers marked as churned in the data is **152**.
+Would you prefer to see the number of churned customers for a different recent time period, such as the last 7 days or the last 60 days?",SELECT COUNT(*) AS churned_customers_recent FROM `workspace`.`sales`.`customer_segments` WHERE `is_churned` = true;,"You want to know the number of customers who have churned recently, specifically those marked as churned in the customer segments data.","[""churned_customers_recent""]","[[""152""]]",1.0,False,,True,got [152.0],True,False,False,False,False,[],False,True,NONE,
+B,C5,Which region has the most churned customers?,1,COMPLETED,01f1d156423d1e5098175127c20c08f3,"The region with the most churned customers is **APAC**, with a total of **49** churned customers. This result is based on the current data and ranking by churned customer count.","WITH region_churned AS (
+  SELECT 
+    `region`, 
+    COUNT(*) AS churned_count, 
+    RANK() OVER (ORDER BY COUNT(*) DESC) AS rank
+  FROM `workspace`.`sales`.`customer_segments`
+  WHERE `is_churned` = TRUE AND `region` IS NOT NULL
+  GROUP BY `region`
+)
+SELECT `region`, churned_count
+FROM region_churned
+WHERE rank = 1;",You want to find the region with the highest number of churned customers.,"[""region"", ""churned_count""]","[[""APAC"", ""49""]]",1.0,False,,True,"first row ['APAC', '49']",True,False,False,False,False,[],False,True,NONE,
+B,C6,How many large companies have churned?,1,COMPLETED,01f1d15653a81d4c90436f45a6a6467b,There are **23 large companies** with the status **churned** according to the customer segments data. This count is based on companies where the company size is 'Large' and the churned flag is true.,"SELECT COUNT(*) AS num_churned_large_companies
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `company_size` = 'Large'
+  AND `is_churned` = true
+  AND `company_size` IS NOT NULL
+  AND `is_churned` IS NOT NULL;",You want to know the number of large companies that have churned.,"[""num_churned_large_companies""]","[[""23""]]",1.0,False,,True,got [23.0],True,False,False,False,False,[],False,True,NONE,
+B,E1,How many enterprise accounts do we have?,1,COMPLETED,01f1d1566553117ea800f6c1c1282ee0,There are **113 enterprise accounts** according to the customer_segments table. This count is based on accounts where the is_enterprise flag is set to true.,SELECT COUNT(*) AS enterprise_account_count FROM `workspace`.`sales`.`customer_segments` WHERE `is_enterprise` = true;,You want to know the total number of enterprise accounts.,"[""enterprise_account_count""]","[[""113""]]",1.0,False,,True,got [113.0],True,False,False,False,False,[],False,True,NONE,
+B,E2,Show enterprise accounts by region.,1,COMPLETED,01f1d15676c7169a9ee8036bc8ec54e2,"Enterprise accounts are distributed across several regions, including APAC, EMEA, LATAM, and North America. Examples of enterprise accounts by region include:
+- **APAC**: Acme Foods 289, Cyberdyne Foods 216, Hooli Holdings 591, Stark Labs 155, Umbrella Group 456
+- **EMEA**: Acme Labs 217, Globex Corp 448, Stark Partners 188, Tyrell Labs 523, Wonka Corp 277
+- **LATAM**: Acme Holdings 557, Cyberdyne Corp 460, Soylent Holdings 48, Tyrell Corp 146, Umbrella Holdings 46
+- **North America**: Acme Foods 113, Cyberdyne Group 2, Globex Foods 297, Initech Corp 311, Tyrell Group 299","SELECT `region`, `customer_id`, `customer_name` FROM `workspace`.`sales`.`customer_segments` WHERE `is_enterprise` = TRUE AND `region` IS NOT NULL AND `is_enterprise` IS NOT NULL ORDER BY `region`, `customer_name`","You want to see a list of enterprise accounts broken down by region, including the customer ID and name for each account.","[""region"", ""customer_id"", ""customer_name""]","[[""APAC"", ""289"", ""Acme Foods 289""], [""APAC"", ""365"", ""Acme Labs 365""], [""APAC"", ""166"", ""Acme Systems 166""], [""APAC"", ""216"", ""Cyberdyne Foods 216""], [""APAC"", ""390"", ""Cyberdyne Foods 390""], [""APAC"", ""296"", ""Cyberdyne Partners 296""], [""APAC"", ""80"", ""Globex Foods 80""], [""APAC"", ""53"", ""Globex Partners 53""], [""APAC"", ""591"", ""Hooli Holdings 591""], [""APAC"", ""586"", ""Hooli Labs 586""], [""APAC"", ""341"", ""Hooli Partners 341""], [""APAC"", ""68"", ""Initech Logistics 68""], [""APAC"", ""24"", ""Soylent Group 24""], [""APAC"", ""65"", ""Soylent Systems 65""], [""APAC"", ""406"", ""Stark Corp 406""], [""APAC"", ""31"", ""Stark Group 31""], [""APAC"", ""155"", ""Stark Labs 155""], [""APAC"", ""452"", ""Tyrell Holdings 452""], [""APAC"", ""235"", ""Tyrell Systems 235""], [""APAC"", ""151"", ""Umbrella Foods 151""], [""APAC"", ""84"", ""Umbrella Foods 84""], [""APAC"", ""456"", ""Umbrella Group 456""], [""APAC"", ""279"", ""Umbrella Logistics 279""], [""APAC"", ""320"", ""Vandelay Foods 320""], [""APAC"", ""61"", ""Wayne Labs 61""], [""APAC"", ""597"", ""Wayne Partners 597""], [""EMEA"", ""217"", ""Acme Labs 217""], [""EMEA"", ""488"", ""Cyberdyne Group 488""], [""EMEA"", ""237"", ""Cyberdyne Holdings 237""], [""EMEA"", ""448"", ""Globex Corp 448""], [""EMEA"", ""220"", ""Globex Foods 220""], [""EMEA"", ""232"", ""Globex Labs 232""], [""EMEA"", ""418"", ""Hooli Foods 418""], [""EMEA"", ""109"", ""Hooli Holdings 109""], [""EMEA"", ""224"", ""Initech Partners 224""], [""EMEA"", ""195"", ""Soylent Systems 195""], [""EMEA"", ""28"", ""Stark Group 28""], [""EMEA"", ""83"", ""Stark Labs 83""], [""EMEA"", ""188"", ""Stark Partners 188""], [""EMEA"", ""226"", ""Tyrell Foods 226""], [""EMEA"", ""482"", ""Tyrell Foods 482""], [""EMEA"", ""127"", ""Tyrell Group 127""], [""EMEA"", ""371"", ""Tyrell Group 371""], [""EMEA"", ""523"", ""Tyrell Labs 523""], [""EMEA"", ""370"", ""Umbrella Group 370""], [""EMEA"", ""199"", ""Umbrella Logistics 199""], [""EMEA"", ""93"", ""Umbrella Logistics 93""], [""EMEA"", ""129"", ""Vandelay Holdings 129""], [""EMEA"", ""424"", ""Vandelay Labs 424""], [""EMEA"", ""38"", ""Vandelay Systems 38""], [""EMEA"", ""30"", ""Wayne Foods 30""], [""EMEA"", ""12"", ""Wonka Corp 12""], [""EMEA"", ""277"", ""Wonka Corp 277""], [""EMEA"", ""87"", ""Wonka Corp 87""], [""EMEA"", ""283"", ""Wonka Foods 283""], [""EMEA"", ""355"", ""Wonka Holdings 355""], [""LATAM"", ""557"", ""Acme Holdings 557""], [""LATAM"", ""369"", ""Acme Partners 369""], [""LATAM"", ""460"", ""Cyberdyne Corp 460""], [""LATAM"", ""152"", ""Cyberdyne Foods 152""], [""LATAM"", ""13"", ""Cyberdyne Systems 13""], [""LATAM"", ""7"", ""Cyberdyne Systems 7""], [""LATAM"", ""553"", ""Globex Labs 553""], [""LATAM"", ""560"", ""Globex Logistics 560""], [""LATAM"", ""70"", ""Globex Systems 70""], [""LATAM"", ""156"", ""Initech Labs 156""], [""LATAM"", ""302"", ""Initech Partners 302""], [""LATAM"", ""48"", ""Soylent Holdings 48""], [""LATAM"", ""470"", ""Soylent Partners 470""], [""LATAM"", ""593"", ""Soylent Systems 593""], [""LATAM"", ""146"", ""Tyrell Corp 146""], [""LATAM"", ""431"", ""Tyrell Group 431""], [""LATAM"", ""543"", ""Tyrell Holdings 543""], [""LATAM"", ""440"", ""Tyrell Partners 440""], [""LATAM"", ""447"", ""Tyrell Systems 447""], [""LATAM"", ""46"", ""Umbrella Holdings 46""], [""LATAM"", ""546"", ""Umbrella Logistics 546""], [""LATAM"", ""381"", ""Umbrella Systems 381""], [""LATAM"", ""97"", ""Umbrella Systems 97""], [""LATAM"", ""521"", ""Vandelay Corp 521""], [""LATAM"", ""363"", ""Vandelay Partners 363""], [""LATAM"", ""489"", ""Vandelay Systems 489""], [""LATAM"", ""43"", ""Wayne Foods 43""], [""LATAM"", ""300"", ""Wonka Systems 300""], [""North America"", ""113"", ""Acme Foods 113""], [""North America"", ""571"", ""Acme Holdings 571""], [""North America"", ""265"", ""Acme Systems 265""], [""North America"", ""2"", ""Cyberdyne Group 2""], [""North America"", ""105"", ""Cyberdyne Systems 105""], [""North America"", ""297"", ""Globex Foods 297""], [""North America"", ""506"", ""Globex Group 506""], [""North America"", ""562"", ""Globex Group 562""], [""North America"", ""324"", ""Globex Holdings 324""], [""North America"", ""336"", ""Hooli Foods 336""], [""North America"", ""468"", ""Hooli Labs 468""], [""North America"", ""588"", ""Hooli Logistics 588""], [""North America"", ""311"", ""Initech Corp 311""], [""North America"", ""423"", ""Initech Foods 423""], [""North America"", ""570"", ""Initech Group 570""], [""North America"", ""163"", ""Initech Labs 163""], [""North America"", ""211"", ""Stark Group 211""], [""North America"", ""299"", ""Tyrell Group 299""], [""North America"", ""288"", ""Tyrell Holdings 288""], [""North America"", ""599"", ""Tyrell Labs 599""], [""North America"", ""64"", ""Tyrell Labs 64""], [""North America"", ""9"", ""Tyrell Labs 9""], [""North America"", ""525"", ""Tyrell Systems 525""], [""North America"", ""117"", ""Umbrella Foods 117""], [""North America"", ""147"", ""Umbrella Holdings 147""], [""North America"", ""443"", ""Umbrella Labs 443""], [""North America"", ""207"", ""Vandelay Logistics 207""], [""North America"", ""544"", ""Vandelay Partners 544""], [""North America"", ""459"", ""Wayne Corp 459""]]",113.0,False,,False,"got {'APAC': 597.0, 'EMEA': 355.0, 'LATAM': 300.0, 'North America': 459.0}",True,False,False,False,False,[],False,True,NONE,"Returned the 113 enterprise accounts listed by region (a valid reading of ""show ... by region""). Scorer misread IDs as counts."
+B,E3,How many enterprise accounts are in APAC?,1,COMPLETED,01f1d1568a171467b7d3b57d3e2d8d56,"There are **26 enterprise accounts** in the APAC region, based on the customer_segments table.","SELECT COUNT(*) AS enterprise_account_count
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `is_enterprise` = TRUE AND `region` = 'APAC'",You want to know the total number of enterprise accounts located in the APAC region.,"[""enterprise_account_count""]","[[""26""]]",1.0,False,,True,got [26.0],True,False,False,False,False,[],False,True,NONE,
+B,E4,Which region has the most enterprise accounts?,1,COMPLETED,01f1d15699ac1205ac336b562744d069,"The region with the most enterprise accounts is **EMEA**, with **30** enterprise accounts. This is based on the ranking of regions by enterprise account count in the data provided.","WITH region_enterprise_counts AS (
+  SELECT `region`, COUNT(*) AS enterprise_count,
+         RANK() OVER (ORDER BY COUNT(*) DESC) AS rank
+  FROM `workspace`.`sales`.`customer_segments`
+  WHERE `is_enterprise` = true AND `region` IS NOT NULL
+  GROUP BY `region`
+)
+SELECT `region`, enterprise_count
+FROM region_enterprise_counts
+WHERE rank = 1;",You want to find the region that has the highest number of enterprise accounts.,"[""region"", ""enterprise_count""]","[[""EMEA"", ""30""]]",1.0,False,,True,"first row ['EMEA', '30']",True,False,False,False,False,[],False,True,NONE,
+B,E5,How many enterprise accounts are currently active?,1,COMPLETED,01f1d156a93f1366a3cbd71098df5a75,There are **76 enterprise accounts** that are currently marked as active in the customer_segments table. This count is based on accounts where **is_enterprise = TRUE** and **is_active = TRUE**.,"SELECT COUNT(*) AS active_enterprise_accounts
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `is_enterprise` = TRUE AND `is_active` = TRUE;",You want to know the total number of enterprise accounts that are currently active.,"[""active_enterprise_accounts""]","[[""76""]]",1.0,False,,True,got [76.0],True,False,False,False,False,[],False,True,NONE,
+B,E6,How many mid-market companies are enterprise accounts?,1,COMPLETED,01f1d156bac61187ab567665b7916d23,There are **34 mid-market companies** that are classified as enterprise accounts according to the customer_segments table.,"SELECT COUNT(*) AS mid_market_enterprise_count
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `company_size` = 'Mid-market'
+  AND `is_enterprise` = true
+  AND `company_size` IS NOT NULL
+  AND `is_enterprise` IS NOT NULL",You want to know the number of mid-market companies that are classified as enterprise accounts.,"[""mid_market_enterprise_count""]","[[""34""]]",1.0,False,,True,got [34.0],True,False,False,False,False,[],False,True,NONE,
+B,X1,How many customers are neither active nor churned?,1,COMPLETED,01f1d156cc3f18dc8c755b76732a62ce,"There are **187 customers** who are neither active nor churned, based on the current data from the customer_segments table.","SELECT COUNT(*) AS num_customers
+FROM `workspace`.`sales`.`customer_segments`
+WHERE `is_active` = FALSE AND `is_churned` = FALSE AND `is_active` IS NOT NULL AND `is_churned` IS NOT NULL;",You want to know the number of customers who are neither active nor churned.,"[""num_customers""]","[[""187""]]",1.0,False,,False,got [187.0],True,False,False,False,False,[],False,False,INTERNAL,Counts the 39 internal test accounts as neither active nor churned (187 vs 148). Same root cause as A5.
+V,A1,How many active customers do we have?,1,COMPLETED,01f1d156ddba1123a23679fc671029eb,There are **258 active customers** who have made a purchase in the last 90 days.,"SELECT COUNT(DISTINCT orders.customer_id) AS active_customer_count
+FROM workspace.sales.orders AS orders
+WHERE orders.order_date IS NOT NULL
+  AND orders.customer_id IS NOT NULL
+  AND orders.order_date >= CURRENT_DATE() - INTERVAL 90 DAYS","You want to know the number of unique customers who have placed orders in the last 90 days, which defines them as active customers.","[""active_customer_count""]","[[""258""]]",1.0,False,,False,got [258.0],False,False,True,False,False,['90'],True,False,DATE+STATUS+INTERNAL,"Order date, any status, internal included. 258 vs 261: looks right, built on wrong logic."
+V,A2,How many active customers are in EMEA?,1,COMPLETED,01f1d156ef311da98a651e43fd542dd5,"There are **73 active customers** in the EMEA region, based on purchases made in the last 90 days. This count reflects the current number of customers meeting the active criteria for EMEA.","SELECT COUNT(DISTINCT c.customer_id) AS active_customers_emea FROM `workspace`.`sales`.`customers` c JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id WHERE c.region = 'EMEA' AND o.order_date >= DATE_ADD(DAY, -90, CURRENT_DATE)",You want to see the number of unique active customers in the EMEA region.,"[""active_customers_emea""]","[[""73""]]",1.0,False,,False,got [73.0],False,False,True,False,False,['90'],True,False,DATE+STATUS+INTERNAL,73 vs 83 (-12%).
+V,C1,How many churned customers do we have?,1,COMPLETED,01f1d15704581529b8454b7085ee9a03,There are **342 churned customers** who previously made purchases but have not bought anything in the last 90 days. This count is based on customers with past orders who are not currently active.,"WITH active_customers AS (
+  SELECT DISTINCT `customer_id`
+  FROM `workspace`.`sales`.`orders`
+  WHERE `order_date` >= DATE_ADD(CURRENT_DATE(), -90)
+),
+all_customers_with_orders AS (
+  SELECT DISTINCT `customer_id`
+  FROM `workspace`.`sales`.`orders`
+)
+SELECT COUNT(*) AS churned_customer_count
+FROM `workspace`.`sales`.`customers`
+WHERE `customer_id` IN (SELECT `customer_id` FROM all_customers_with_orders)
+  AND `customer_id` NOT IN (SELECT `customer_id` FROM active_customers)","You want to know the number of customers who have made purchases in the past but have not bought anything in the last 90 days, which identifies them as churned customers.","[""churned_customer_count""]","[[""342""]]",1.0,False,,False,got [342.0],False,False,True,False,False,['90'],True,False,CHURN_LOGIC+DATE+STATUS+INTERNAL,"""Hasn't bought recently"" read as anyone with any past order and none in 90 days, no lookback window. 342 vs 152 (+125%)."
+V,C3,How many customers in EMEA have churned?,1,COMPLETED,01f1d15715cd1465a4e7f08a98733877,"There are **96 churned customers** in the EMEA region, based on customers who have not made a purchase in the last 90 days.","SELECT COUNT(*) AS churned_customers
+FROM workspace.sales.customers c
+WHERE c.region = 'EMEA'
+  AND c.customer_id NOT IN (
+    SELECT o.customer_id
+    FROM workspace.sales.orders o
+    WHERE o.order_date >= DATE_ADD(CURRENT_DATE(), -90)
+  )","You want to know the number of customers in the EMEA region who have churned, meaning they have not placed any orders in the last 90 days.","[""churned_customers""]","[[""96""]]",1.0,False,,False,got [96.0],False,False,True,False,False,['90'],False,False,CHURN_LOGIC+DATE+STATUS+INTERNAL,"Counts every EMEA customer with no order in 90 days, including ones who never ordered. 96 vs 38 (+153%)."
+V,E1,How many enterprise accounts do we have?,1,COMPLETED,01f1d15729181d77830965dd02ee63ee,"We currently have **168 enterprise accounts**, defined as customers who spend at least $50,000 per year. All accounts in the data meet this threshold, and there are no variations in the count across the sample. This indicates a consistent application of the enterprise account criteria.","SELECT COUNT(DISTINCT c.customer_id) AS enterprise_account_count
+FROM `workspace`.`sales`.`customers` c
+JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+WHERE o.invoice_date IS NOT NULL AND o.amount_usd IS NOT NULL
+GROUP BY c.customer_id
+HAVING SUM(o.amount_usd) >= 50000","You want to know the total number of unique enterprise accounts, defined as customers who have spent at least $50,000 in total on invoiced orders.","[""enterprise_account_count""]","[[""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""], [""1""]]",168.0,False,,False,"got [1.0, 1.0, 1.0, 1.0]",False,True,False,False,False,[],True,False,WINDOW+STATUS+INTERNAL+GRAIN,"""A year"" read as all time. 168 vs 113 (+49%). Text claims ""all accounts in the data meet this threshold."""
+V,E3,How many enterprise accounts are in APAC?,1,COMPLETED,01f1d1573a8b194c906f64788040b87a,"There are **38 enterprise accounts** in the APAC region, where each account has spent at least $50,000 in a year.","WITH yearly_spend AS (
+  SELECT 
+    c.customer_id,
+    c.customer_name,
+    DATE_TRUNC('YEAR', o.order_date) AS order_year,
+    SUM(o.amount_usd) AS total_spend
+  FROM `workspace`.`sales`.`customers` c
+  JOIN `workspace`.`sales`.`orders` o ON c.customer_id = o.customer_id
+  WHERE c.region = 'APAC'
+  GROUP BY c.customer_id, c.customer_name, DATE_TRUNC('YEAR', o.order_date)
+)
+SELECT COUNT(DISTINCT customer_id) AS enterprise_accounts_apac
+FROM yearly_spend
+WHERE total_spend >= 50000","You want to know the number of enterprise accounts in the APAC region. An enterprise account is defined as a customer who spends at least $50,000 in a year. The query calculates the total spending per customer per year in APAC and counts how many customers meet or exceed this spending threshold in any year.","[""enterprise_accounts_apac""]","[[""38""]]",1.0,False,,False,got [38.0],False,False,True,False,False,[],True,False,WINDOW+DATE+STATUS+INTERNAL,"""A year"" read as any calendar year, order date. 38 vs 26 (+46%)."
